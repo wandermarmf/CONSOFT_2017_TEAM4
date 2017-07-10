@@ -5,15 +5,115 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">WebSiteName</a>
+                <a class="navbar-brand" th:href="@{/}">Gestão de Conferência</a>
             </div>
+
+
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Page 1</a></li>
-                <li><a href="#">Page 2</a></li>
-                <li><a href="#">Page 3</a></li>
+                <li><a th:href="@{/}">Home</a></li>
+
+                <!-- USUARIO -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Usuário
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Dados do usuário</a></li>
+                        <li><a href="#">Visualizar emails</a></li>
+                        <li><a href="#">Inscrever na conferência</a></li>
+                        <li><a href="#">Solicitar Confirmação de inscrição</a></li>
+                    </ul>
+                </li>
+
+                <!-- CONFERENCIA -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Conferência
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Consultar Conferência</a></li>
+                        <li><a href="#">Cadastrar Conferência</a></li>
+                        <li><a href="#">Visualizar Conferência</a></li>
+                        <li><a href="#">Sessão da Conferência</a></li>
+                        <li><a href="#">Eventos/Produtos da Conferência</a></li>
+                        <li><a href="#">Cadastrar intervalos de Desconto</a></li>
+                        <li><a href="#">Consultar Participantes/Usuarios</a></li>
+                        <li><a href="#">Cadastrar Participante</a></li>
+                        <li><a href="#">Fazer Inscrição de Participante</a></li>
+                        <li><a href="#">Enviar Email</a></li>
+                    </ul>
+                </li>
+
+
+                <!-- COMITÊ-->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Comitê
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Cadastrar Programa de Comitê</a></li>
+                        <li><a href="#">Cadastrar Membros do Comitê</a></li>
+                        <li><a href="#">Cadastrar Meta-Revisor</a></li>
+                        <li><a href="#">Cadastrar Revisor</a></li>
+                        <li><a href="#">Cadastrar Apresentador</a></li>
+                        <li><a href="#">Cadastrar Tópicos do Revisor</a></li>
+                        <li><a href="#">Consultar Membros do Comitê</a></li>
+                        <li><a href="#">Consultar Autores/Co-Autores</a></li>
+                        <li><a href="#">Consultar Revisores</a></li>
+                    </ul>
+                </li>
+
+
+                <!-- PUBLICACOES -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Publicações
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Enviar/Submeter Trabalho</a></li>
+                        <li><a href="#">Consultar Submissoes</a></li>
+                        <li><a href="#">Consultar Revisões</a></li>
+                        <li><a href="#">Atribuir Revisor</a></li>
+                        <li><a href="#">Atribuir meta-revisor</a></li>
+                        <li><a href="#">Definir Sessao para Submissão</a></li>
+                        <li><a href="#">Indicar co-autor</a></li>
+                        <li><a href="#">Convidar Apresentador</a></li>
+                    </ul>
+                </li>
+
+
+                <!-- FORUM-->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Fórum
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Cadastrar Fórum da Conferência</a></li>
+                        <li><a href="#">Consultar Fórum</a></li>
+                        <li><a href="#">Visualizar Fórum</a></li>
+                        <li><a href="#">Enviar mensagem ao Fórum</a></li>
+                        <li><a href="#">Enviar votação ao Fórum</a></li>
+                    </ul>
+                </li>
+
+                <!-- ADMINISTRACAO-->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administração
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Imprimir faturas</a></li>
+                        <li><a href="#">Registrar Pagamentos</a></li>
+                        <li><a href="#">Estatisticas por topico</a></li>
+                        <li><a href="#">Estatisticas por tipo de submissão</a></li>
+                        <li><a th:href="@{/admin/tipo-fase}">Cadastrar tipo de fase</a></li>
+                        <li><a href="#">Cadastrar tipo de submissão</a></li>
+                        <li><a href="#">Cadastrar tipo de tópicos</a></li>
+                        <li><a href="#">Cadastrar tipo de arquivo</a></li>
+                        <li><a href="#">Cadastrar opções de pagamento</a></li>
+                        <li><a href="#">Cadastrar grupo de participantes</a></li>
+                        <li><a href="#">Cadastrar categoria de preço</a></li>
+                        <li><a href="#">Cadastrar tipo evento/produto</a></li>
+                        <li><a href="#">Cadastrar grupo de desconto</a></li>
+                    </ul>
+                </li>
+
             </ul>
         </div>
     </nav>
-    
+
 </header><!-- Header /end -->
