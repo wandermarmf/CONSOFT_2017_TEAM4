@@ -12,8 +12,10 @@ public class TipoSubmissao {
    @Column(unique=true)
    private String tipoSubmissao;
 
+   /*
    @ManyToMany
    private ArrayList<Conferencia> conferenciaArrayList;
+
 
 	public ArrayList<Conferencia> getConferenciaArrayList() {
 		return conferenciaArrayList;
@@ -22,6 +24,7 @@ public class TipoSubmissao {
 	public void setConferenciaArrayList(ArrayList<Conferencia> conferenciaArrayList) {
 		this.conferenciaArrayList = conferenciaArrayList;
 	}
+	*/
 
 	public Integer getId() {
 	return id;

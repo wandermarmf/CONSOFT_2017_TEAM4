@@ -35,6 +35,7 @@ public class Conferencia {
 	   @Column(nullable = false)
 	   private String moedaConferencia;
 
+	   /*
 	   @ManyToMany
 	   private ArrayList<Topico> topicoArrayList;
 
@@ -83,6 +84,7 @@ public class Conferencia {
 	   private ....
 	    */
 
+	   /*
 	   @ManyToMany
 	   private ArrayList<TipoSubmissao> tipoSubmissaoArrayList;
 

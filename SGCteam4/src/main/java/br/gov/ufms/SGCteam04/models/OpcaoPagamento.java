@@ -16,6 +16,7 @@ public class OpcaoPagamento {
     @Column(unique = true)
     private String descricao;
 
+    /*
     @ManyToMany
     private ArrayList<Conferencia> conferenciaArrayList;
 
@@ -26,6 +27,7 @@ public class OpcaoPagamento {
     public void setConferenciaArrayList(ArrayList<Conferencia> conferenciaArrayList) {
         this.conferenciaArrayList = conferenciaArrayList;
     }
+    */
 
     public Integer getId() {
         return id;

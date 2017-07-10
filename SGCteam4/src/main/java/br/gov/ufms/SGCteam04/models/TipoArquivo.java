@@ -12,6 +12,7 @@ public class TipoArquivo {
 	@Column(unique = true)
 	private String tipoArquivo;
 
+	/*
 	@ManyToMany
 	private ArrayList<Conferencia> conferenciaArrayList;
 
@@ -22,7 +23,7 @@ public class TipoArquivo {
 	public void setConferenciaArrayList(ArrayList<Conferencia> conferenciaArrayList) {
 		this.conferenciaArrayList = conferenciaArrayList;
 	}
-
+	*/
 	public Integer getId() {
 		return id;
 	}
