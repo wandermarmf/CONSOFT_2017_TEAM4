@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layouts/main">
+<head>
+    <meta charset="UTF-8"/>
+    <title>SGC - Tipo de uma Evento/Produto</title>
+</head>
+<body>
+
+<div id="integrantes" layout:fragment="content">
+    <div class="container">
+
+        <h1>Adicionar tipo de evento/produto</h1>
+
+        <!-- mensagem de erro -->
+
+
+        <div th:if="${response != null}">
+            <p class="alert alert-success" th:if="${response == 'success'}">Tipo de evento/produto adicionado ! </p>
+            <p class="alert alert-danger" th:if="${response != 'success'}"> <span th:text="${response}">Erro</span></p>
+
+        </div>
+
+        <!-- ******* -->
+
+
+        <form method="post" th:action="@{/admin/tipo-evento-produto}">
+            <div class="input-group">
+                <label for="nome">Nome</label>
+                <!-- TODO validacao tipo evento produto -->
+                <input type="text" required="required" class="form-control" name="nome" id="nome"/>
+            </div>
+            <div class="input-group">
+                <label for="informacao">Informação</label>
+                <textarea  id="informacao" name="informacao" required="required"></textarea>
+            </div>
+            <div class="input-group">
+                <label for="modoSelecao">Modo de Seleção</label>
+                <input type="text" name="modoSelecao" id="modoSelecao" required="required"/>
+            </div>
+            <div class="input-group">
+                <label for="ordemSelecao">Ordem de Seleção</label>
+                <input type="number" required="required" name="ordemSelecao" id="ordemSelecao"/>
+            </div>
+            <button type="submit" class="btn btn-info">Enviar</button>
+        </form>
+    </div>
+
+</div>
+
+
+</body>
+</html>

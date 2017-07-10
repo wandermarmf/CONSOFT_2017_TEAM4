@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layouts/main">
+<head>
+    <meta charset="UTF-8"/>
+    <title>SGC - Tipo de uma fase</title>
+</head>
+<body>
+
+<div id="integrantes" layout:fragment="content">
+    <div class="container">
+
+        <h1>Adicionar grupo participante</h1>
+
+        <!-- mensagem de erro -->
+
+
+        <div th:if="${response != null}">
+            <p class="alert alert-success" th:if="${response == 'success'}">Grupo participante adicionado ! </p>
+            <p class="alert alert-danger" th:if="${response != 'success'}"> <span th:text="${response}">Erro</span></p>
+
+        </div>
+
+        <!-- ******* -->
+
+
+        <form method="post" th:action="@{/admin/grupo-participante}">
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <!-- TODO validar grupo participante -->
+                <input type="text" required="required" class="form-control" name="nome" id="nome"/>
+            </div>
+            <button type="submit" class="btn btn-info">Enviar</button>
+        </form>
+    </div>
+
+</div>
+
+
+</body>
+</html>
