@@ -1,6 +1,7 @@
 package br.gov.ufms.SGCteam04.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 public class Topico {
@@ -9,6 +10,18 @@ public class Topico {
 	private Integer id;
 	@Column(unique = true)
 	private String topico;
+
+	@ManyToMany
+	private ArrayList<Conferencia> conferenciaArrayList;
+
+
+	public ArrayList<Conferencia> getConferenciaArrayList() {
+		return conferenciaArrayList;
+	}
+
+	public void setConferenciaArrayList(ArrayList<Conferencia> conferenciaArrayList) {
+		this.conferenciaArrayList = conferenciaArrayList;
+	}
 
 	public Integer getId() {
 		return id;

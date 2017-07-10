@@ -1,19 +1,31 @@
 package br.gov.ufms.SGCteam04.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 public class TipoSubmissao {
 
-	   @Id
-	   @GeneratedValue(strategy = GenerationType.AUTO)
-	   private Integer id;
-	   @Column(unique=true)
-	   private String tipoSubmissao;
-	   
-	   public Integer getId() {
-		return id;
+   @Id
+   @GeneratedValue(strategy = GenerationType.AUTO)
+   private Integer id;
+   @Column(unique=true)
+   private String tipoSubmissao;
+
+   @ManyToMany
+   private ArrayList<Conferencia> conferenciaArrayList;
+
+	public ArrayList<Conferencia> getConferenciaArrayList() {
+		return conferenciaArrayList;
 	}
+
+	public void setConferenciaArrayList(ArrayList<Conferencia> conferenciaArrayList) {
+		this.conferenciaArrayList = conferenciaArrayList;
+	}
+
+	public Integer getId() {
+	return id;
+}
 
 	public void setId(Integer id) {
 		this.id = id;

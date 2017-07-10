@@ -1,6 +1,7 @@
 package br.gov.ufms.SGCteam04.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 public class TipoArquivo {
@@ -11,6 +12,16 @@ public class TipoArquivo {
 	@Column(unique = true)
 	private String tipoArquivo;
 
+	@ManyToMany
+	private ArrayList<Conferencia> conferenciaArrayList;
+
+	public ArrayList<Conferencia> getConferenciaArrayList() {
+		return conferenciaArrayList;
+	}
+
+	public void setConferenciaArrayList(ArrayList<Conferencia> conferenciaArrayList) {
+		this.conferenciaArrayList = conferenciaArrayList;
+	}
 
 	public Integer getId() {
 		return id;

@@ -83,10 +83,10 @@ public class Conferencia {
 	   private ....
 	    */
 
-	   @OneToMany
+	   @ManyToMany
 	   private ArrayList<TipoSubmissao> tipoSubmissaoArrayList;
 
-	   @OneToMany
+	   @ManyToMany
 	   private ArrayList<TipoArquivo> tipoArquivoArrayList;
 
 	   /*
