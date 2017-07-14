@@ -1,0 +1,41 @@
+public String convertDateToString(Date dt) {
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String dateToString = df.format(dt);
+        return dateToString;
+    }
+
+public String convertDateToString(Date dt, String pattern) {
+            DateFormat df = new SimpleDateFormat(pattern);
+            String dateToString = df.format(dt);
+            return dateToString;
+        }
+        
+        
+ binder.registerCustomEditor(Date.class, new PropertyEditorSupport() {
+    public void setAsText(String value) {
+        try {
+            setValue(new SimpleDateFormat("dd/MM/yyyy").parse(value));
+        } catch(ParseException e) {
+            setValue(null);
+        }
+    }
+
+    public String getAsText() {
+        return new SimpleDateFormat("dd/MM/yyyy").format((Date) getValue());
+    }        
+
+});
+
+
+@InitBinder
+private void dateBinder(WebDataBinder binder) {
+            //The date format to parse or output your dates
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            //Create a new CustomDateEditor
+    CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
+            //Register it as custom editor for the Date type
+    binder.registerCustomEditor(Date.class, editor);
+}
+
+
+
