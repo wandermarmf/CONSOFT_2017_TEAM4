@@ -6,7 +6,6 @@ import java.util.Date;
 /**
  * Created by Marco Cardoso on 7/13/2017.
  */
-@Entity
 public class ConferenciaFase {
 
     @Id

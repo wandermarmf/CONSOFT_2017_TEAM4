@@ -12,28 +12,63 @@
 <div id="integrantes" layout:fragment="content">
     <div class="container">
 
-        <h1>Adicionar opção de pagamento</h1>
+        <div class="row">
+            <div class="col-md-6">
 
-        <!-- mensagem de erro -->
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Descricao</th>
+                        <th></th><!-- remove icon table header-->
+                        <th></th><!-- edit link table header-->
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item : ${itens}" >
+                        <td th:text="${item.descricao}"></td>
+
+                        <td>
+                            <form th:method="delete" th:action="@{/admin/opcao-pagamento}">
+                                <input type="hidden" th:value="${item.id}" name="id"/>
+                                <button type="submit"><span><i class=" fa fa-times"></i></span></button>
+                            </form>
+                        </td>
+                        <td>
+                            <a >Edit</a>
+                        </td>
 
 
-        <div th:if="${response != null}">
-            <p class="alert alert-success" th:if="${response == 'success'}">Opção de pagamento adicionada ! </p>
-            <p class="alert alert-danger" th:if="${response != 'success'}"> <span th:text="${response}">Erro</span></p>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4">
+                <h1>Adicionar opção de pagamento</h1>
 
+                <!-- mensagem de erro -->
+
+
+                <div th:if="${response != null}">
+                    <p class="alert alert-success" th:if="${response == 'success'}">Opção de pagamento adicionada ! </p>
+                    <p class="alert alert-danger" th:if="${response != 'success'}"> <span th:text="${response}">Erro</span></p>
+
+                </div>
+
+                <!-- ******* -->
+
+
+                <form method="post" th:action="@{/admin/opcao-pagamento}">
+                    <div class="form-group">
+                        <label for="descricao">Descricao</label>
+                        <!-- TODO validar opção de pagamento -->
+                        <input type="text" required="required" class="form-control" name="descricao" id="descricao"/>
+                    </div>
+                    <button type="submit" class="btn btn-info">Enviar</button>
+                </form>
+            </div>
         </div>
 
-        <!-- ******* -->
 
-
-        <form method="post" th:action="@{/admin/opcao-pagamento}">
-            <div class="form-group">
-                <label for="descricao">Descricao</label>
-                <!-- TODO validar opção de pagamento -->
-                <input type="text" required="required" class="form-control" name="descricao" id="descricao"/>
-            </div>
-            <button type="submit" class="btn btn-info">Enviar</button>
-        </form>
     </div>
 
 </div>

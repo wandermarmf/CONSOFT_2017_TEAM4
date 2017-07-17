@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
+import java.util.List;
+
 /**
  * Created by Marco Cardoso on 7/9/2017.
  */
@@ -43,43 +46,7 @@ public class AdminController {
     @Autowired
     GrupoDescontoRepository grupoDescontoRepository;
 
-    @Autowired
-    OpcaoPagamentoRepository opcaoPagamentoRepository;
 
-
-    /*
-        ADICIONAR OPCAO DE PAGAMENTO
-     */
-    @GetMapping("/opcao-pagamento")
-    private String opcaoPagamento()
-    {
-        return "restrito/admin/opcao-pagamento";
-    }
-
-    @PostMapping("/opcao-pagamento")
-    private String opcaoPagamentoPost(
-            Model model,
-            @RequestParam(value = "descricao",required = true)String descricao
-    )
-    {
-        try {
-            OpcaoPagamento opcaoPagamento = new OpcaoPagamento();
-            opcaoPagamento.setDescricao(descricao);
-            opcaoPagamentoRepository.save(opcaoPagamento);
-            model.addAttribute("response","success");
-        }
-        catch(DataIntegrityViolationException d)
-        {
-            d.printStackTrace();
-            model.addAttribute("response","Já existe uma opcao de pagamento com esta descricao !");
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-            model.addAttribute("response","Um erro ocorreu !");
-        }
-        return "restrito/admin/opcao-pagamento";
-    }
 
 
     /*
@@ -91,17 +58,18 @@ public class AdminController {
         return "restrito/admin/grupo-desconto";
     }
 
+
+
     @PostMapping("/grupo-desconto")
     private String grupoDescontoPost(
+            @Valid GrupoDesconto grupoDesconto,
             Model model,
             @RequestParam(value = "descricao",required = true)String descricao,
             @RequestParam(value = "valor",required = true) Double valor
     )
     {
         try {
-            GrupoDesconto grupoDesconto = new GrupoDesconto();
-            grupoDesconto.setNome(descricao);
-            grupoDesconto.setValor(valor);
+
             grupoDescontoRepository.save(grupoDesconto);
             model.addAttribute("response","success");
         }
