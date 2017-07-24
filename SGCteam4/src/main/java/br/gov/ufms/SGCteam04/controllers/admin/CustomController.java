@@ -47,7 +47,7 @@ public abstract class CustomController {
         }
         catch(Exception e)
         {
-            response = "Ocorreu um erro!";
+            response = "Ocorreu um erro:" + e.getMessage();
         }
         
         model.addAttribute("response",response);

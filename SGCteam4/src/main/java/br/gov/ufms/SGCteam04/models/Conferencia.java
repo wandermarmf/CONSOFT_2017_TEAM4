@@ -1,13 +1,10 @@
 package br.gov.ufms.SGCteam04.models;
 
-import java.util.ArrayList;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 @Entity
 public class Conferencia {
@@ -16,10 +13,10 @@ public class Conferencia {
 	   @GeneratedValue(strategy = GenerationType.AUTO)
 	   private Integer id;
 
-	   @Column(unique=true,nullable = false)
+	   @Column(unique=true, nullable = false)
 	   private String nomeAbreviado;
 
-	   @Column(unique = true,nullable = false)
+	   @Column(unique = true, nullable = false)
 	   private String nomeConferencia;
 
 	   @Column(nullable = false)

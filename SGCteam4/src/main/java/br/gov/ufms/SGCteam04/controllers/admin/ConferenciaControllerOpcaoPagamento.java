@@ -15,16 +15,16 @@ import br.gov.ufms.SGCteam04.models.Conferencia;
 import br.gov.ufms.SGCteam04.repositories.ConferenciaRepository;
 
 @Controller
-@RequestMapping("/admin/conferencia")
-public class ConferenciaController extends CustomController{
+@RequestMapping("/admin/conferencia-opcao-pagamento")
+public class ConferenciaControllerOpcaoPagamento extends CustomController{
 
     @Autowired
     ConferenciaRepository conferenciaRepository;
     
-    public ConferenciaController() {
-    	viewModel = "restrito/admin/conferencia";
-    	titleForm = "Cadastro de Conferência";
-    	titleList = "Listagem de Conferência";
+    public ConferenciaControllerOpcaoPagamento() {
+    	viewModel = "restrito/admin/conferencia-opcao-pagamento";
+    	titleForm = "Cadastro de Conferência Opção de Pagameno";
+    	titleList = "Listagem de Conferência Opção de Pagameno";
     	statusEdicao = "";
     }
     
