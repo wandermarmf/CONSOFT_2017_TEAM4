@@ -5,7 +5,7 @@
       layout:decorator="layouts/main">
 <head>
     <meta charset="UTF-8"/>
-    <title>SGC - Tipo de uma Evento/Produto</title>
+    <title>SGC</title>
 </head>
 <body>
 
@@ -54,6 +54,7 @@
 						<th>Informação</th>
 						<th>Seleção</th>
 						<th>Ordem</th>
+						<th>Editar</th>
 						<th>Apagar</th>
 					</tr>
 				</thead>
@@ -64,8 +65,8 @@
 						<td th:text="${objFor.informacao}"></td>
 						<td th:text="${objFor.modoSelecao}"></td>
 						<td th:text="${objFor.ordemSelecao}"></td>
-						<td> <a th:href="@{/admin/topico/editar(filterid=${objFor.id})}">Editar</a></td>
-						<td> <a th:href="@{/admin/topico/apagar(filterid=${objFor.id})}">Apagar</a></td>
+						<td> <a th:href="@{/admin/tipo-evento-produto/editar(filterid=${objFor.id})}">Editar</a></td>
+						<td> <a th:href="@{/admin/tipo-evento-produto/apagar(filterid=${objFor.id})}">Apagar</a></td>
 					</tr>
 				</tbody>
 				
@@ -78,31 +79,5 @@
 	</div>
 
 </div>
-
-        <form method="post" th:action="@{/admin/tipo-evento-produto}">
-            <div class="input-group">
-                <label for="nome">Nome</label>
-                <!-- TODO validacao tipo evento produto -->
-                <input type="text" required="required" class="form-control" name="nome" id="nome"/>
-            </div>
-            <div class="input-group">
-                <label for="informacao">Informação</label>
-                <textarea  id="informacao" name="informacao" required="required"></textarea>
-            </div>
-            <div class="input-group">
-                <label for="modoSelecao">Modo de Seleção</label>
-                <input type="text" name="modoSelecao" id="modoSelecao" required="required"/>
-            </div>
-            <div class="input-group">
-                <label for="ordemSelecao">Ordem de Seleção</label>
-                <input type="number" required="required" name="ordemSelecao" id="ordemSelecao"/>
-            </div>
-            <button type="submit" class="btn btn-info">Enviar</button>
-        </form>
-    </div>
-
-</div>
-
-
 </body>
 </html>
