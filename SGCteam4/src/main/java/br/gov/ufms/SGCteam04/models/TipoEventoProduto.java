@@ -1,8 +1,10 @@
 package br.gov.ufms.SGCteam04.models;
 
-import javax.persistence.*;
-
-import br.gov.ufms.SGCteam04.controllers.admin.CustomController;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class TipoEventoProduto {

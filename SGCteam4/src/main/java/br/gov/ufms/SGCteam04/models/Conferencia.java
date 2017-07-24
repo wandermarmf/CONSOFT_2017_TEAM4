@@ -1,7 +1,13 @@
 package br.gov.ufms.SGCteam04.models;
 
-import javax.persistence.*;
 import java.util.ArrayList;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Conferencia {
@@ -30,7 +36,7 @@ public class Conferencia {
 	   private String cidadeEmissaoFatura;
 
 	   @Column(nullable = false)
-	   private Double valorTaxaEmissaoFatura;
+	   private Double valorTaxaInscricao;
 
 	   @Column(nullable = false)
 	   private String moedaConferencia;
@@ -38,9 +44,12 @@ public class Conferencia {
 	   /*
 	   @ManyToMany
 	   private ArrayList<Topico> topicoArrayList;
+		*/
 
+	   /*
 	   @ManyToMany
 	   private ArrayList<OpcaoPagamento> opcaoPagamentoArrayList;
+		*/
 
 	   /*
 	   TODO criar entidade e repositorio da sessao
@@ -99,8 +108,105 @@ public class Conferencia {
 
 
 
-	   public Conferencia() {
+	public Conferencia() {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNomeAbreviado() {
+		return nomeAbreviado;
+	}
+
+	public void setNomeAbreviado(String nomeAbreviado) {
+		this.nomeAbreviado = nomeAbreviado;
+	}
+
+	public String getNomeConferencia() {
+		return nomeConferencia;
+	}
+
+	public void setNomeConferencia(String nomeConferencia) {
+		this.nomeConferencia = nomeConferencia;
+	}
+
+	public String getSubTitulo() {
+		return subTitulo;
+	}
+
+	public void setSubTitulo(String subTitulo) {
+		this.subTitulo = subTitulo;
+	}
+
+	public String getSubTituloSecundario() {
+		return subTituloSecundario;
+	}
+
+	public void setSubTituloSecundario(String subTituloSecundario) {
+		this.subTituloSecundario = subTituloSecundario;
+	}
+
+	public String getPaginaWeb() {
+		return paginaWeb;
+	}
+
+	public void setPaginaWeb(String paginaWeb) {
+		this.paginaWeb = paginaWeb;
+	}
+
+	public String getCidadeConferencia() {
+		return cidadeConferencia;
+	}
+
+	public void setCidadeConferencia(String cidadeConferencia) {
+		this.cidadeConferencia = cidadeConferencia;
+	}
+
+	public String getCidadeEmissaoFatura() {
+		return cidadeEmissaoFatura;
+	}
+
+	public void setCidadeEmissaoFatura(String cidadeEmissaoFatura) {
+		this.cidadeEmissaoFatura = cidadeEmissaoFatura;
+	}
+
+	public Double getValorTaxaInscricao() {
+		return valorTaxaInscricao;
+	}
+
+	public void setValorTaxaInscricao(Double valorTaxaInscricao) {
+		this.valorTaxaInscricao = valorTaxaInscricao;
+	}
+
+	public String getMoedaConferencia() {
+		return moedaConferencia;
+	}
+
+	public void setMoedaConferencia(String moedaConferencia) {
+		this.moedaConferencia = moedaConferencia;
+	}
+/*
+	public ArrayList<Topico> getTopicoArrayList() {
+		return topicoArrayList;
+	}
+
+	public void setTopicoArrayList(ArrayList<Topico> topicoArrayList) {
+		this.topicoArrayList = topicoArrayList;
+	}
+
+	public ArrayList<OpcaoPagamento> getOpcaoPagamentoArrayList() {
+		return opcaoPagamentoArrayList;
+	}
+
+	public void setOpcaoPagamentoArrayList(ArrayList<OpcaoPagamento> opcaoPagamentoArrayList) {
+		this.opcaoPagamentoArrayList = opcaoPagamentoArrayList;
+	}
+
+	*/   
 }

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layouts/main">
+<head>
+    <meta charset="UTF-8"/>
+    <title>SGC</title>
+</head>
+<body>
+<div id="integrantes" layout:fragment="content">
+    <div class="container">
+
+        <h1 th:text="${titleForm}"></h1>
+         <h3 th:text="${statusEdicao}" th:if="${statusEdicao != null}"></h3>
+
+        <!-- mensagem de erro -->
+        <div th:if="${response == null}">
+            <p th:if="${statusEdicao != null}" class="alert alert-success" th:text="${statusEdicao}"></p>
+		</div>
+		
+        <div th:if="${response != null}">
+            <p class="alert alert-success" th:if="${response == 'success'}">Registro salvo ! </p>
+            <p class="alert alert-danger" th:if="${response != 'success'}"> <span th:text="${response}">Erro</span></p>
+        </div>
+
+        <form method="post" th:action="@{/admin/topico}" th:object="${obj}">
+            <div class="form-group">
+                <label for="nomeConferencia">Nome da Conferência</label>
+                <input type="text" required="required" class="form-control" name="nomeConferencia" id="nomeConferencia" th:field="*{nomeConferencia}" />
+                <label for="nomeAbreviado">Nome da Conferência abreviado</label>
+                <input type="text" required="required" class="form-control" name="nomeAbreviado" id="nomeAbreviado" th:field="*{nomeAbreviado}" />
+                <label for="subTitulo">Subtitulo</label>
+                <input type="text" required="required" class="form-control" name="subTitulo" id="subTitulo" th:field="*{subTitulo}" />
+                <label for="subTituloSecundario">Subtitulo secundário</label>
+                <input type="text" required="required" class="form-control" name="subTituloSecundario" id="subTituloSecundario" th:field="*{subTituloSecundario}" />
+                <label for="paginaWeb">Página Web</label>
+                <input type="text" required="required" class="form-control" name="paginaWeb" id="paginaWeb" th:field="*{paginaWeb}" />
+                <label for="cidadeConferencia">Cidade da Conferência</label>
+                <input type="text" required="required" class="form-control" name="cidadeConferencia" id="cidadeConferencia" th:field="*{cidadeConferencia}" />
+                <label for="cidadeEmissaoFatura">Cidade para Emissão da Fatura</label>
+                <input type="text" required="required" class="form-control" name="cidadeEmissaoFatura" id="cidadeEmissaoFatura" th:field="*{cidadeEmissaoFatura}" />
+                <label for="valorTaxaEmissaoFatura">Valor da Taxa de Inscrição</label>
+                <input type="text" required="required" class="form-control" name="valorTaxaInscricao" id="valorTaxaInscricao" th:field="*{valorTaxaInscricao}" />
+                <label for="moedaConferencia">Moeda utilizada</label>
+                <input type="text" required="required" class="form-control" name="moedaConferencia" id="moedaConferencia" th:field="*{moedaConferencia}" />
+                <label for=""></label>
+                <input type="text" required="required" class="form-control" name="nomeAbreviado" id="nomeAbreviado" th:field="*{}" />
+
+                <input type="hidden" name="id" id="id" th:field="*{id}"/>
+            </div>
+            <button type="submit" class="btn btn-info">Enviar</button>
+        </form>
+    </div>
+	<b></b>
+	    
+    <div class="container" th:if="${listObjs != null}">
+		<b></b>
+        <h1 th:text="${titleList}"></h1>
+		<b></b>
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>topico</th>
+						<th>Editar</th>
+						<th>Apagar</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="objFor: ${listObjs}">
+						<td th:text="${objFor.id}"></td>
+						<td th:text="${objFor.descricao}"></td>
+						<td> <a th:href="@{/admin/topico/editar(filterid=${objFor.id})}">Editar</a></td>
+						<td> <a th:href="@{/admin/topico/apagar(filterid=${objFor.id})}">Apagar</a></td>
+					</tr>
+				</tbody>
+				
+			</table>
+			
+	        <div th:if="${deletereg != null}">
+    	        <p class="alert alert-danger" th:if="${deletereg == 'ok'}"> <span>Registro apagado</span></p>
+        	</div>
+	</div>
+</div>
+</body>
+</html>

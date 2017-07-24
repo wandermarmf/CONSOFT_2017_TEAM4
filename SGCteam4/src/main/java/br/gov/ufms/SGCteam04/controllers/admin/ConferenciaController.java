@@ -11,67 +11,63 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.gov.ufms.SGCteam04.models.TipoEventoProduto;
-import br.gov.ufms.SGCteam04.repositories.TipoEventoProdutoRepository;
+import br.gov.ufms.SGCteam04.models.Conferencia;
+import br.gov.ufms.SGCteam04.repositories.ConferenciaRepository;
 
-/**
- * Created by Marco Cardoso on 7/17/2017.
- */
 @Controller
-@RequestMapping("/admin/tipo-evento-produto")
-public class TipoEventoProdutoController extends CustomController {
+@RequestMapping("/admin/Conferencia")
+public class ConferenciaController extends CustomController{
 
     @Autowired
-    TipoEventoProdutoRepository tipoEventoProdutoRepository;
-
-    public TipoEventoProdutoController() {
-    	viewModel = "restrito/admin/tipo-evento-produto";
-    	titleForm = "Cadastro de Tipo de Evento / Produtos";
-    	titleList = "Listagem de Tipo de Evento / Produtos";
+    ConferenciaRepository conferenciaRepository;
+    
+    public ConferenciaController() {
+    	viewModel = "restrito/admin/Conferencia";
+    	titleForm = "Cadastro de Conferência";
+    	titleList = "Listagem de Conferência";
     	statusEdicao = "";
     }
     
 	@Override
-    protected TipoEventoProduto getObj() {
-		return new TipoEventoProduto();
+    protected Conferencia getObj() {
+		return new Conferencia();
 	}
 	
 	@SuppressWarnings({ "hiding", "unchecked" })
 	@Override
-	protected <TipoEventoProduto> Iterable<TipoEventoProduto> getObjList(){
-		return (Iterable<TipoEventoProduto>) tipoEventoProdutoRepository.findAll();
+	protected <Conferencia> Iterable<Conferencia> getObjList(){
+		return (Iterable<Conferencia>) conferenciaRepository.findAll();
 	}
 	
 	@Override
 	protected void saveObj(Object obj) {
-		tipoEventoProdutoRepository.save((TipoEventoProduto)obj);
+		conferenciaRepository.save((Conferencia)obj);
 	}
 	
 	@Override
 	protected Object findObj(Integer id) {
-		return tipoEventoProdutoRepository.findOne(id);
+		return conferenciaRepository.findOne(id);
 	}
 	
 	@Override
 	protected boolean deleteObj(Integer id) {
 		// Procura o objeto no banco de dados
-    	TipoEventoProduto obj = tipoEventoProdutoRepository.findOne(id);
+    	Conferencia obj = conferenciaRepository.findOne(id);
     	
     	// Se não conseguir encontrar o objeto exibe uma mensagem de erro
     	if (obj == null) {
     		return false;
     	}
     	else {
-    		tipoEventoProdutoRepository.delete(obj);
+    		conferenciaRepository.delete(obj);
     		return true;
     	}
 	}
 
 	@PostMapping
-	private ModelAndView doPostView(@Valid @ModelAttribute("obj") TipoEventoProduto obj, 
+	private ModelAndView doPostView(@Valid @ModelAttribute("obj") Conferencia obj, 
 			      BindingResult result, Model model) {
 		 
 		return doPostMappingSave(obj, result, model);
 	}
-	
 }
