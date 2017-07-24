@@ -12,13 +12,21 @@ public class TipoFase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
 
     @NotEmpty
     @Column(unique=true)
     private String descricao;
 
-    public TipoFase(){
+    public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public TipoFase(){
     }
 
     public String getDescricao() {

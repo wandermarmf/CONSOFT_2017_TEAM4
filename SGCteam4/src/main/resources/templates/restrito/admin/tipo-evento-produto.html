@@ -12,19 +12,72 @@
 <div id="integrantes" layout:fragment="content">
     <div class="container">
 
-        <h1>Adicionar tipo de evento/produto</h1>
+        <h1 th:text="${titleForm}"></h1>
+         <h3 th:text="${statusEdicao}" th:if="${statusEdicao != null}"></h3>
 
         <!-- mensagem de erro -->
-
-
+        <div th:if="${response == null}">
+            <p th:if="${statusEdicao != null}" class="alert alert-success" th:text="${statusEdicao}"></p>
+		</div>
+		
         <div th:if="${response != null}">
-            <p class="alert alert-success" th:if="${response == 'success'}">Tipo de evento/produto adicionado ! </p>
+            <p class="alert alert-success" th:if="${response == 'success'}">Registro salvo ! </p>
             <p class="alert alert-danger" th:if="${response != 'success'}"> <span th:text="${response}">Erro</span></p>
-
         </div>
 
-        <!-- ******* -->
+        <form method="post" th:action="@{/admin/tipo-evento-produto}" th:object="${obj}">
+            <div class="form-group">
+                <label for="descricao">Nome</label>
+                <input type="text" required="required" class="form-control" name="nome" id="nome" th:field="*{nome}" />
+                <label for="descricao">Informação</label>
+                <input type="text" required="required" class="form-control" name="informacao" id="informacao" th:field="*{informacao}" />
+                <label for="descricao">Modo seleção</label>
+                <input type="text" required="required" class="form-control" name="modoSelecao" id="modoSelecao" th:field="*{modoSelecao}" />
+                <label for="descricao">Ordem seleção</label>
+                <input type="text" required="required" class="form-control" name="ordemSelecao" id="ordemSelecao" th:field="*{ordemSelecao}" />
+                <input type="hidden" name="id" id="id" th:field="*{id}"/>
+            </div>
+            <button type="submit" class="btn btn-info">Enviar</button>
+        </form>
+    </div>
+	<b></b>
+	    
+    <div class="container" th:if="${listObjs != null}">
+		<b></b>
+        <h1 th:text="${titleList}"></h1>
+		<b></b>
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>Nome</th>
+						<th>Informação</th>
+						<th>Seleção</th>
+						<th>Ordem</th>
+						<th>Apagar</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="objFor: ${listObjs}">
+						<td th:text="${objFor.id}"></td>
+						<td th:text="${objFor.nome}"></td>
+						<td th:text="${objFor.informacao}"></td>
+						<td th:text="${objFor.modoSelecao}"></td>
+						<td th:text="${objFor.ordemSelecao}"></td>
+						<td> <a th:href="@{/admin/topico/editar(filterid=${objFor.id})}">Editar</a></td>
+						<td> <a th:href="@{/admin/topico/apagar(filterid=${objFor.id})}">Apagar</a></td>
+					</tr>
+				</tbody>
+				
+			</table>
+			
+	        <div th:if="${deletereg != null}">
+    	        <p class="alert alert-danger" th:if="${deletereg == 'ok'}"> <span>Registro apagado</span></p>
+        	</div>
 
+	</div>
+
+</div>
 
         <form method="post" th:action="@{/admin/tipo-evento-produto}">
             <div class="input-group">

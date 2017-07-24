@@ -1,102 +1,77 @@
 package br.gov.ufms.SGCteam04.controllers.admin;
 
-import br.gov.ufms.SGCteam04.models.CategoriaPreco;
-import br.gov.ufms.SGCteam04.repositories.CategoriaPrecoRepository;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
-import java.util.List;
+import br.gov.ufms.SGCteam04.models.CategoriaPreco;
+import br.gov.ufms.SGCteam04.repositories.CategoriaPrecoRepository;
 
 /**
  * Created by Marco Cardoso on 7/17/2017.
  */
 @Controller
 @RequestMapping("/admin/categoria-preco")
-public class CategoriaPrecoController {
+public class CategoriaPrecoController extends CustomController {
 
 
     @Autowired
     CategoriaPrecoRepository categoriaPrecoRepository;
 
-    @GetMapping
-    private String categoriaPreco(Model model)
-    {
-
-        List<CategoriaPreco> categoriaPrecoList = (List<CategoriaPreco>) categoriaPrecoRepository.findAll();
-        model.addAttribute("itens",categoriaPrecoList);
-        return "restrito/admin/categoria-preco";
+    public CategoriaPrecoController() {
+    	viewModel = "restrito/admin/categoria-preco";
+    	titleForm = "Cadastro de Categoria de preço";
+    	titleList = "Listagem de Categoria de preço";
+    	statusEdicao = "";
     }
+    
+	@Override
+    protected CategoriaPreco getObj() {
+		return new CategoriaPreco();
+	}
+	
+	@SuppressWarnings({ "hiding", "unchecked" })
+	@Override
+	protected <CategoriaPreco> Iterable<CategoriaPreco> getObjList(){
+		return (Iterable<CategoriaPreco>) categoriaPrecoRepository.findAll();
+	}
+	
+	@Override
+	protected void saveObj(Object obj) {
+		categoriaPrecoRepository.save((CategoriaPreco)obj);
+	}
+	
+	@Override
+	protected Object findObj(Integer id) {
+		return categoriaPrecoRepository.findOne(id);
+	}
+	
+	@Override
+	protected boolean deleteObj(Integer id) {
+		// Procura o objeto no banco de dados
+    	CategoriaPreco obj = categoriaPrecoRepository.findOne(id);
+    	
+    	// Se não conseguir encontrar o objeto exibe uma mensagem de erro
+    	if (obj == null) {
+    		return false;
+    	}
+    	else {
+    		categoriaPrecoRepository.delete(obj);
+    		return true;
+    	}
+	}
 
-    @PostMapping
-    private String categoriaPrecoPost(
-            Model model,
-            @Valid CategoriaPreco categoriaPreco,
-            RedirectAttributes redirectAttributes
-    )
-    {
-        String response = "";
-        try {
-            categoriaPrecoRepository.save(categoriaPreco);
-            response = "success";
-        }
-        catch(DataIntegrityViolationException d)
-        {
-            d.printStackTrace();
-            response = "Já existe uma categoria com a descrição fornecida !";
-        }
-        catch(Exception e )
-        {
-            response = "Um erro ocorreu !";
-        }
-        redirectAttributes.addFlashAttribute("response",response);
-        return "redirect:/admin/categoria-preco";
-    }
-
-    @DeleteMapping
-    private String categoriaPostDelete(
-            RedirectAttributes redirectAttributes,
-            @RequestParam(value = "id",required = true)Integer id
-    )
-    {
-        String response = "";
-        try{
-
-            categoriaPrecoRepository.delete(id);
-            response = "Deletado com sucesso";
-
-        }catch(Exception e)
-        {
-            e.printStackTrace();
-            response = "Um erro aconteceu !";
-        }
-        //redirectAttributes.addFlashAttribute("response",response);
-        return "redirect:/admin/categoria-preco";
-    }
-
-    @PutMapping
-    private String categoriaPostDelete(
-            RedirectAttributes redirectAttributes,
-            @Valid CategoriaPreco categoriaPreco
-    )
-    {
-        String response = "";
-        try{
-
-            categoriaPrecoRepository.save(categoriaPreco);
-            response = "Atualizado com sucesso";
-
-        }catch(Exception e)
-        {
-            e.printStackTrace();
-            response = "Um erro aconteceu !";
-        }
-        //redirectAttributes.addFlashAttribute("response",response);
-        return "redirect:/admin/categoria-preco";
-    }
-
+	@PostMapping
+	private ModelAndView doPostView(@Valid @ModelAttribute("obj") CategoriaPreco obj, 
+			      BindingResult result, Model model) {
+		 
+		return doPostMappingSave(obj, result, model);
+	}
 }

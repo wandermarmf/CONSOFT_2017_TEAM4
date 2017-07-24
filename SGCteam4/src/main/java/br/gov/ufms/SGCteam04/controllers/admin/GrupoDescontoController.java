@@ -1,95 +1,77 @@
 package br.gov.ufms.SGCteam04.controllers.admin;
 
-import br.gov.ufms.SGCteam04.models.GrupoDesconto;
-import br.gov.ufms.SGCteam04.models.OpcaoPagamento;
-import br.gov.ufms.SGCteam04.repositories.GrupoDescontoRepository;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
-import java.util.List;
+import br.gov.ufms.SGCteam04.models.GrupoDesconto;
+import br.gov.ufms.SGCteam04.repositories.GrupoDescontoRepository;
 
 /**
  * Created by Marco Cardoso on 7/17/2017.
  */
 @Controller
 @RequestMapping("/admin/grupo-desconto")
-public class GrupoDescontoController {
+public class GrupoDescontoController extends CustomController {
 
     @Autowired
     GrupoDescontoRepository grupoDescontoRepository;
 
-
-    @DeleteMapping
-    private String deleteGrupoDesconto(
-            @RequestParam(value = "id", required = true) Integer id,
-            RedirectAttributes redirectAttributes
-    )
-    {
-        String response = "";
-        try{
-            grupoDescontoRepository.delete(id);
-            response = "Deletado com sucesso !";
-
-        }catch(Exception e)
-        {
-            e.printStackTrace();
-            response = "Um erro ocorreu !";
-        }
-        //redirectAttributes.addFlashAttribute("response",response);
-        return "redirect:/admin/opcao-pagamento";
+    public GrupoDescontoController() {
+    	viewModel = "restrito/admin/grupo-desconto";
+    	titleForm = "Cadastro de Grupo de Descontos";
+    	titleList = "Listagem de Grupo de Descontos";
+    	statusEdicao = "";
     }
+    
+	@Override
+    protected GrupoDesconto getObj() {
+		return new GrupoDesconto();
+	}
+	
+	@SuppressWarnings({ "hiding", "unchecked" })
+	@Override
+	protected <GrupoDesconto> Iterable<GrupoDesconto> getObjList(){
+		return (Iterable<GrupoDesconto>) grupoDescontoRepository.findAll();
+	}
+	
+	@Override
+	protected void saveObj(Object obj) {
+		grupoDescontoRepository.save((GrupoDesconto)obj);
+	}
+	
+	@Override
+	protected Object findObj(Integer id) {
+		return grupoDescontoRepository.findOne(id);
+	}
+	
+	@Override
+	protected boolean deleteObj(Integer id) {
+		// Procura o objeto no banco de dados
+    	GrupoDesconto obj = grupoDescontoRepository.findOne(id);
+    	
+    	// Se não conseguir encontrar o objeto exibe uma mensagem de erro
+    	if (obj == null) {
+    		return false;
+    	}
+    	else {
+    		grupoDescontoRepository.delete(obj);
+    		return true;
+    	}
+	}
 
-    @GetMapping
-    private String grupoDesconto(Model model)
-    {
-        List<GrupoDesconto> grupoDescontoList = (List<GrupoDesconto>) grupoDescontoRepository.findAll();
-        model.addAttribute("itens",grupoDescontoList);
-        return "restrito/admin/grupo-desconto";
-    }
-
-    @PutMapping
-    private String opcaoPagamentoUpdate(Model model,
-                                        @Valid GrupoDesconto grupoDesconto)
-    {
-        try {
-            grupoDescontoRepository.save(grupoDesconto);
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return "restrito/admin/opcao-pagamento";
-    }
-
-
-    @PostMapping
-    private String grupoDescontoPost(
-            @Valid GrupoDesconto grupoDesconto,
-            Model model,
-            RedirectAttributes redirectAttributes
-    )
-    {
-        String response;
-        try {
-
-            grupoDescontoRepository.save(grupoDesconto);
-            response = "success";
-        }
-        catch(DataIntegrityViolationException d)
-        {
-            d.printStackTrace();
-            response = "Já existe um grupo de desconto com esta descrição !";
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-            response = "Ocorreu um erro!";
-        }
-        redirectAttributes.addFlashAttribute("response",response);
-        return "redirect:admin/grupo-desconto";
-    }
+	@PostMapping
+	private ModelAndView doPostView(@Valid @ModelAttribute("obj") GrupoDesconto obj, 
+			      BindingResult result, Model model) {
+		 
+		return doPostMappingSave(obj, result, model);
+	}
+	
 }

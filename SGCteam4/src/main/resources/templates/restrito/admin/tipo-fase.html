@@ -5,38 +5,69 @@
       layout:decorator="layouts/main">
 <head>
     <meta charset="UTF-8"/>
-    <title>SGC - Tipo de uma fase</title>
+    <title>SGC</title>
 </head>
 <body>
 
-    <div id="integrantes" layout:fragment="content">
-        <div class="container">
 
-            <h1>Adicionar tipo de fase</h1>
+<div id="integrantes" layout:fragment="content">
+    <div class="container">
 
-            <!-- mensagem de erro -->
+        <h1 th:text="${titleForm}"></h1>
+         <h3 th:text="${statusEdicao}" th:if="${statusEdicao != null}"></h3>
 
-
-            <div th:if="${response != null}">
-                <p class="alert alert-success" th:if="${response == 'success'}">Tipo de fase adicionada ! </p>
-                <p class="alert alert-danger" th:if="${response != 'success'}"> <span th:text="${response}">Erro</span></p>
-
-            </div>
-
-            <!-- ******* -->
-
-
-            <form method="post" th:action="@{/admin/tipo-fase}">
-                <div class="form-group">
-                    <label for="descricao">Descricao</label>
-                    <!-- TODO validar descricao da fase -->
-                    <input type="text" required="required" class="form-control" name="descricao" id="descricao"/>
-                </div>
-                <button type="submit" class="btn btn-info">Enviar</button>
-            </form>
+        <!-- mensagem de erro -->
+        <div th:if="${response == null}">
+            <p th:if="${statusEdicao != null}" class="alert alert-success" th:text="${statusEdicao}"></p>
+		</div>
+		
+        <div th:if="${response != null}">
+            <p class="alert alert-success" th:if="${response == 'success'}">Registro salvo ! </p>
+            <p class="alert alert-danger" th:if="${response != 'success'}"> <span th:text="${response}">Erro</span></p>
         </div>
 
+        <form method="post" th:action="@{/admin/tipo-fase}" th:object="${obj}">
+            <div class="form-group">
+                <label for="descricao">Descricao</label>
+                <input type="text" required="required" class="form-control" name="descricao" id="descricao" th:field="*{descricao}" />
+                <input type="hidden" name="id" id="id" th:field="*{id}"/>
+            </div>
+            <button type="submit" class="btn btn-info">Enviar</button>
+        </form>
     </div>
+	<b></b>
+	    
+    <div class="container" th:if="${listObjs != null}">
+		<b></b>
+        <h1 th:text="${titleList}"></h1>
+		<b></b>
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>Tipo Submissão</th>
+						<th>Editar</th>
+						<th>Apagar</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="objFor: ${listObjs}">
+						<td th:text="${objFor.id}"></td>
+						<td th:text="${objFor.descricao}"></td>
+						<td> <a th:href="@{/admin/tipo-fase/editar(filterid=${objFor.id})}">Editar</a></td>
+						<td> <a th:href="@{/admin/tipo-fase/apagar(filterid=${objFor.id})}">Apagar</a></td>
+					</tr>
+				</tbody>
+				
+			</table>
+			
+	        <div th:if="${deletereg != null}">
+    	        <p class="alert alert-danger" th:if="${deletereg == 'ok'}"> <span>Registro apagado</span></p>
+        	</div>
+
+	</div>
+
+</div>
 
 
 </body>

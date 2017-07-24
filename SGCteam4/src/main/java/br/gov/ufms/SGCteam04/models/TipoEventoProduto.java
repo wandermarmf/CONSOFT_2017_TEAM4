@@ -2,6 +2,8 @@ package br.gov.ufms.SGCteam04.models;
 
 import javax.persistence.*;
 
+import br.gov.ufms.SGCteam04.controllers.admin.CustomController;
+
 @Entity
 public class TipoEventoProduto {
 

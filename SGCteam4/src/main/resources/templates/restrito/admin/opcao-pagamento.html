@@ -5,74 +5,64 @@
       layout:decorator="layouts/main">
 <head>
     <meta charset="UTF-8"/>
-    <title>SGC - Opcao de Pagamento</title>
+    <title>SGC</title>
 </head>
 <body>
-
 <div id="integrantes" layout:fragment="content">
     <div class="container">
 
-        <div class="row">
-            <div class="col-md-6">
+        <h1 th:text="${titleForm}"></h1>
+         <h3 th:text="${statusEdicao}" th:if="${statusEdicao != null}"></h3>
 
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>Descricao</th>
-                        <th></th><!-- remove icon table header-->
-                        <th></th><!-- edit link table header-->
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="item : ${itens}" >
-                        <td th:text="${item.descricao}"></td>
-
-                        <td>
-                            <form th:method="delete" th:action="@{/admin/opcao-pagamento}">
-                                <input type="hidden" th:value="${item.id}" name="id"/>
-                                <button type="submit"><span><i class=" fa fa-times"></i></span></button>
-                            </form>
-                        </td>
-                        <td>
-                            <a >Edit</a>
-                        </td>
-
-
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-md-4">
-                <h1>Adicionar opção de pagamento</h1>
-
-                <!-- mensagem de erro -->
-
-
-                <div th:if="${response != null}">
-                    <p class="alert alert-success" th:if="${response == 'success'}">Opção de pagamento adicionada ! </p>
-                    <p class="alert alert-danger" th:if="${response != 'success'}"> <span th:text="${response}">Erro</span></p>
-
-                </div>
-
-                <!-- ******* -->
-
-
-                <form method="post" th:action="@{/admin/opcao-pagamento}">
-                    <div class="form-group">
-                        <label for="descricao">Descricao</label>
-                        <!-- TODO validar opção de pagamento -->
-                        <input type="text" required="required" class="form-control" name="descricao" id="descricao"/>
-                    </div>
-                    <button type="submit" class="btn btn-info">Enviar</button>
-                </form>
-            </div>
+        <!-- mensagem de erro -->
+        <div th:if="${response == null}">
+            <p th:if="${statusEdicao != null}" class="alert alert-success" th:text="${statusEdicao}"></p>
+		</div>
+		
+        <div th:if="${response != null}">
+            <p class="alert alert-success" th:if="${response == 'success'}">Registro salvo ! </p>
+            <p class="alert alert-danger" th:if="${response != 'success'}"> <span th:text="${response}">Erro</span></p>
         </div>
 
-
+        <form method="post" th:action="@{/admin/opcao-pagamento}" th:object="${obj}">
+            <div class="form-group">
+                <label for="descricao">Descrição</label>
+                <input type="text" required="required" class="form-control" name="descricao" id="descricao" th:field="*{descricao}" />
+                <input type="hidden" name="id" id="id" th:field="*{id}"/>
+            </div>
+            <button type="submit" class="btn btn-info">Enviar</button>
+        </form>
     </div>
-
+	<b></b>
+	    
+    <div class="container" th:if="${listObjs != null}">
+		<b></b>
+        <h1 th:text="${titleList}"></h1>
+		<b></b>
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>topico</th>
+						<th>Editar</th>
+						<th>Apagar</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="objFor: ${listObjs}">
+						<td th:text="${objFor.id}"></td>
+						<td th:text="${objFor.descricao}"></td>
+						<td> <a th:href="@{/admin/opcao-pagamento/editar(filterid=${objFor.id})}">Editar</a></td>
+						<td> <a th:href="@{/admin/opcao-pagamento/apagar(filterid=${objFor.id})}">Apagar</a></td>
+					</tr>
+				</tbody>
+				
+			</table>
+			
+	        <div th:if="${deletereg != null}">
+    	        <p class="alert alert-danger" th:if="${deletereg == 'ok'}"> <span>Registro apagado</span></p>
+        	</div>
+	</div>
 </div>
-
-
 </body>
 </html>

@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 /**
  * Created by Marco Cardoso on 7/9/2017.
  */
-public interface TipoFaseRepository extends CrudRepository<TipoFase,Long>{
+public interface TipoFaseRepository extends CrudRepository<TipoFase,Integer>{
 }
