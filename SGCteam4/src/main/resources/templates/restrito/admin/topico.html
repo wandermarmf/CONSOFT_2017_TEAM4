@@ -15,26 +15,47 @@
         <h1>Adicionar tipo de tópico</h1>
 
         <!-- mensagem de erro -->
-
-
         <div th:if="${response != null}">
             <p class="alert alert-success" th:if="${response == 'success'}">Tipo de tópico adicionado ! </p>
             <p class="alert alert-danger" th:if="${response != 'success'}"> <span th:text="${response}">Erro</span></p>
 
         </div>
 
-        <!-- ******* -->
-
-
-        <form method="post" th:action="@{/admin/topico}">
+        <form method="post" th:action="@{/admin/topico}" th:object="${obj}">
             <div class="form-group">
                 <label for="descricao">Descricao</label>
-                <!-- TODO validar topico -->
-                <input type="text" required="required" class="form-control" name="descricao" id="descricao"/>
+                <input type="text" required="required" class="form-control" name="topico" id="topico" th:field="*{topico}" />
+                <input type="hidden" name="id" id="id" th:field="*{id}"/>
             </div>
             <button type="submit" class="btn btn-info">Enviar</button>
         </form>
     </div>
+	<b></b>
+	    
+    <div class="container" th:if="${listObjs != null}">
+
+        <h1>Listagem de Tipo de tópico</h1>
+
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th th:text="id">id</th>
+						<th th:text="topico"></th>
+						<th th:text="Editar"></th>
+						<th th:text="Apagar"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="objFor: ${listObjs}">
+						<td th:text="${objFor.id}"></td>
+						<td th:text="${objFor.topico}"></td>
+						<td> <a th:href="@{/admin/topico/editar(filterid=${objFor.id})}">Editar</a></td>
+						<td> <a th:href="@{/admin/topico/apagar(filterid=${objFor.id})}">Apagar</a></td>
+					</tr>
+				</tbody>
+				
+			</table>
+	</div>
 
 </div>
 
