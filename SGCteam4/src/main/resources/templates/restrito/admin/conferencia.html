@@ -56,23 +56,17 @@
 						<table class="table table-hover table-bordered">
 							<thead>
 								<tr>
+									<th>Seleciona</th>
 									<th>Tipo do Arquivo</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="objArqFor: ${listArqObjs}">
+									<td>Seleciona</td>
 									<td th:text="${objArqFor.tipoArquivo}"></td>
-								</tr>
-								<tr th:if="${objArqFor == null}">
-									<td>Nenhum tipo de arquivo escolhido</td> 
-								</tr>
-								<tr th:if="${objArqFor == null}">
-									<td>Nenhum tipo de arquivo escolhido</td> 
 								</tr>
 							</tbody>
 						</table>
-						<b></b>
-						<button type="submit" class="btn btn-info" name="buttoncommand" id="buttoncommand" value="registraarq">Registrar Arquivos</button>
 						<b></b>
 						<p></p>
 					</div>
@@ -83,23 +77,17 @@
 						<table class="table table-hover table-bordered">
 							<thead>
 								<tr>
+									<th>Seleciona</th>
 									<th>Opções de Pagamento</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="objPgFor: ${listArqObjs}">
+								<tr th:each="objPgFor: ${listPgObjs}">
+									<td>Seleciona</td>
 									<td th:text="${objPgFor.descricao}"></td>
-								</tr>
-								<tr th:if="${objPgFor == null}">
-									<td>Nenhuma opção de pagamento escolhida</td> 
-								</tr>
-								<tr th:if="${objPgFor == null}">
-									<td>Nenhuma opção de pagamento escolhida</td> 
 								</tr>
 							</tbody>
 						</table>
-						<b></b>
-						<button type="submit" class="btn btn-info" name="buttoncommand" id="buttoncommand" value="registraop">Registrar Opções de Pagamento</button>
 						<b></b>
 						<p></p>
 					</div>

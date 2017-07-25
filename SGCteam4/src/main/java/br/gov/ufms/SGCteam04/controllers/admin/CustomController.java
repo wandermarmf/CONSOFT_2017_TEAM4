@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.gov.ufms.SGCteam04.models.Topico;
+
 public abstract class CustomController {
 	protected String viewModel;
 	protected String titleForm;
@@ -65,6 +67,9 @@ public abstract class CustomController {
         return mv;  	
 	}
 	
+	protected void doGetViewChilds(ModelAndView mv, Model model) {
+	}
+	
     @GetMapping 
 	public ModelAndView doGetView(Model model) {
     	ModelAndView mv = new ModelAndView(viewModel);
@@ -75,6 +80,8 @@ public abstract class CustomController {
     	model.addAttribute("titleList", titleList);
   		model.addAttribute("statusEdicao", "Incluir um novo registro");
     	
+  		// Adiciona eventuais objetos filhos ao formulário
+  		doGetViewChilds(mv, model);
     	return mv; 
     }
     
@@ -92,6 +99,9 @@ public abstract class CustomController {
     	}
     	mv.addObject("obj", obj);
     	mv.addObject("listObjs", getObjList());
+
+    	// Adiciona eventuais objetos filhos ao formulário
+  		doGetViewChilds(mv, model);
     	
     	model.addAttribute("titleForm", titleForm);
     	model.addAttribute("titleList", titleList);
@@ -119,6 +129,9 @@ public abstract class CustomController {
     	mv.addObject("obj", getObj());
     	mv.addObject("listObjs", getObjList());
     	
+    	// Adiciona eventuais objetos filhos ao formulário
+  		doGetViewChilds(mv, model);
+  		
     	model.addAttribute("titleForm", titleForm);
     	model.addAttribute("titleList", titleList);
     	model.addAttribute("statusEdicao", "Incluir um novo registro");

@@ -1,10 +1,16 @@
 package br.gov.ufms.SGCteam04.models;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Conferencia {
@@ -39,13 +45,20 @@ public class Conferencia {
 	   private String moedaConferencia;
 
 	   /*
+	   @ManyToMany(cascade = CascadeType.ALL)
+	   @JoinTable(name = "conferencia_opcao_pagamento", joinColumns = @JoinColumn(name = "conferencia_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "tipo_arquivo_id", referencedColumnName = "id"))
+	   private Set<OpcaoPagamento> opcaoPagamentoArrayList;
+*/
+		
+
+	   /*
 	   @ManyToMany
 	   private ArrayList<Topico> topicoArrayList;
 		*/
 
 	   /*
 	   @ManyToMany
-	   private ArrayList<OpcaoPagamento> opcaoPagamentoArrayList;
+	   
 		*/
 
 	   /*
@@ -57,7 +70,7 @@ public class Conferencia {
 	   /*
 	   TODO criar entidade e repositorio da fase da conferencia
 	   @OneToMany
-	   private ArrayList<ConferenciaFase> conferenciaFaseArrayList;
+		private ArrayList<ConferenciaFase> conferenciaFaseArrayList;
 		*/
 
 	   /*
@@ -89,13 +102,11 @@ public class Conferencia {
 	   @OneTo????
 	   private ....
 	    */
+	   //private ArrayList<TipoArquivo> tipoArquivoArrayList;
 
 	   /*
 	   @ManyToMany
 	   private ArrayList<TipoSubmissao> tipoSubmissaoArrayList;
-
-	   @ManyToMany
-	   private ArrayList<TipoArquivo> tipoArquivoArrayList;
 
 	   /*
 	   TODO criar entidade e repositorio do perfil
@@ -188,21 +199,23 @@ public class Conferencia {
 	public void setMoedaConferencia(String moedaConferencia) {
 		this.moedaConferencia = moedaConferencia;
 	}
-/*
+
+	/*
+	public Set<OpcaoPagamento> getOpcaoPagamentoArrayList() {
+		return opcaoPagamentoArrayList;
+	}
+
+	public void setOpcaoPagamentoArrayList(Set<OpcaoPagamento> opcaoPagamentoArrayList) {
+		this.opcaoPagamentoArrayList = opcaoPagamentoArrayList;
+	}
+
+	
 	public ArrayList<Topico> getTopicoArrayList() {
 		return topicoArrayList;
 	}
 
 	public void setTopicoArrayList(ArrayList<Topico> topicoArrayList) {
 		this.topicoArrayList = topicoArrayList;
-	}
-
-	public ArrayList<OpcaoPagamento> getOpcaoPagamentoArrayList() {
-		return opcaoPagamentoArrayList;
-	}
-
-	public void setOpcaoPagamentoArrayList(ArrayList<OpcaoPagamento> opcaoPagamentoArrayList) {
-		this.opcaoPagamentoArrayList = opcaoPagamentoArrayList;
 	}
 
 	*/   
