@@ -46,51 +46,72 @@
 	                <input type="text" required="required" class="form-control" name="moedaConferencia" id="moedaConferencia" th:field="*{moedaConferencia}" />
 	                <input type="hidden" name="id" id="id" th:field="*{id}"/>
 	            </div>
-	            <button type="submit" class="btn btn-info">Enviar</button>
-	        </form>
+				<b></b>
+			    
+			    <div class="row">
+				    <div class="col-sm-6 col-xs-6 col-md-6" style="background-color:lavender;">
+						<b></b>
+				        <h4>Arquivos aceitos</h4>
+						<b></b>
+						<table class="table table-hover table-bordered">
+							<thead>
+								<tr>
+									<th>Tipo do Arquivo</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="objArqFor: ${listArqObjs}">
+									<td th:text="${objArqFor.tipoArquivo}"></td>
+								</tr>
+								<tr th:if="${objArqFor == null}">
+									<td>Nenhum tipo de arquivo escolhido</td> 
+								</tr>
+								<tr th:if="${objArqFor == null}">
+									<td>Nenhum tipo de arquivo escolhido</td> 
+								</tr>
+							</tbody>
+						</table>
+						<b></b>
+						<button type="submit" class="btn btn-info" name="buttoncommand" id="buttoncommand" value="registraarq">Registrar Arquivos</button>
+						<b></b>
+						<p></p>
+					</div>
+				    <div class="col-sm-6 col-xs-6 col-md-6" style="background-color:lavender;">
+						<b></b>
+				        <h4>Opções de Pagamento</h4>
+						<b></b>
+						<table class="table table-hover table-bordered">
+							<thead>
+								<tr>
+									<th>Opções de Pagamento</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="objPgFor: ${listArqObjs}">
+									<td th:text="${objPgFor.descricao}"></td>
+								</tr>
+								<tr th:if="${objPgFor == null}">
+									<td>Nenhuma opção de pagamento escolhida</td> 
+								</tr>
+								<tr th:if="${objPgFor == null}">
+									<td>Nenhuma opção de pagamento escolhida</td> 
+								</tr>
+							</tbody>
+						</table>
+						<b></b>
+						<button type="submit" class="btn btn-info" name="buttoncommand" id="buttoncommand" value="registraop">Registrar Opções de Pagamento</button>
+						<b></b>
+						<p></p>
+					</div>
+				</div>
+				<b></b>
+				<p></p>
+				<p></p>
+				<button type="submit" class="btn btn-info"  name="buttoncommand" id="buttoncommand" value="conferencia">Enviar</button>
+				<b></b>
+				<b></b>
+		    </form>
 	    </div>
-		<b></b>
-		    
-	    <div class="container">
-		    <div class="col-4">
-				<b></b>
-		        <h1>Arquivos aceitos</h1>
-				<b></b>
-				<table class="table table-hover table-bordered">
-					<thead>
-						<tr>
-							<th>Tipo do Arquivo</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="objArqFor: ${listArqObjs}">
-							<td th:text="${objArqFor.tipoArquivo}"></td>
-						</tr>
-					</tbody>
-				</table>
-				<a th:href="@{/admin/conferencia-tipo-arquivo(filterid=${objFor.id})}">Registrar Arquivos</a>
-									
-			</div>
-		    <div class="col-4">
-				<b></b>
-		        <h1>Opções de Pagamento</h1>
-				<b></b>
-				<table class="table table-hover table-bordered">
-					<thead>
-						<tr>
-							<th>Opções de Pagamento</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="objPgFor: ${listArqObjs}">
-							<td th:text="${objPgFor.descricao}"></td>
-						</tr>
-					</tbody>
-				</table>
-				
-				<a th:href="@{/admin/conferencia-opcoes-pagamento(filterid=${objFor.id})}">Registrar Opções de Pagamento</a>
-			</div>
-		</div>
 	</div>
 </body>
 </html>

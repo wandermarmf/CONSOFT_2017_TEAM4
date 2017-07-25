@@ -12,6 +12,7 @@ public abstract class CustomController {
 	protected String titleForm;
 	protected String titleList;
 	protected String statusEdicao;
+	protected boolean continueInsert = true;
 	
 	protected abstract Object getObj();
 	protected abstract Object findObj(Integer id);
@@ -24,9 +25,10 @@ public abstract class CustomController {
 	}
 	
 	protected ModelAndView doPostMappingSave(Object obj, BindingResult result, Model model) {
+		
 		// cria uma nova visão
 		ModelAndView mv = new ModelAndView(viewModel);
-		
+
 		String response;
         try {
             // Se for um objecto válido
@@ -39,7 +41,8 @@ public abstract class CustomController {
         		response = "Objecto inválido";
         	
             // Cria um novo objeto para preparar a tela para um novo registro...
-        	obj = getObj();            
+        	if (continueInsert == true)
+        		obj = getObj();            
         }
         catch(DataIntegrityViolationException d)
         {
@@ -50,7 +53,7 @@ public abstract class CustomController {
             response = "Ocorreu um erro:" + e.getMessage();
         }
         
-        model.addAttribute("response",response);
+		model.addAttribute("response",response);
     	model.addAttribute("titleForm", titleForm);
     	model.addAttribute("titleList", titleList);
     	model.addAttribute("statusEdicao", "Incluir um novo registro");
