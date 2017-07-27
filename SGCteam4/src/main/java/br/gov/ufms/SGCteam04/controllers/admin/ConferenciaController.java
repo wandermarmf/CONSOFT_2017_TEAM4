@@ -1,9 +1,11 @@
 package br.gov.ufms.SGCteam04.controllers.admin;
 
-import java.util.List;
 import java.util.Enumeration;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -121,7 +123,7 @@ public class ConferenciaController extends CustomController{
 		currentConferencia.getOpcaoPagamentoList().clear();
 		
 		/* guarda o botão auxiliar, caso seja clicado */
-		Enumeration enumeration = request.getParameterNames();
+		Enumeration<String> enumeration = request.getParameterNames();
         while (enumeration.hasMoreElements()) {
         	paramName = (String) enumeration.nextElement();
         	paramValue = request.getParameter(paramName);

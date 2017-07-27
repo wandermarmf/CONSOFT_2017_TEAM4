@@ -1,21 +1,10 @@
 package br.gov.ufms.SGCteam04.controllers.admin;
 
-import java.util.List;
-import java.util.Enumeration;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import br.gov.ufms.SGCteam04.models.Conferencia;
-import br.gov.ufms.SGCteam04.models.OpcaoPagamento;
-import br.gov.ufms.SGCteam04.models.TipoArquivo;
 import br.gov.ufms.SGCteam04.repositories.ConferenciaRepository;
 import br.gov.ufms.SGCteam04.repositories.OpcaoPagamentoRepository;
 import br.gov.ufms.SGCteam04.repositories.TipoArquivoRepository;
