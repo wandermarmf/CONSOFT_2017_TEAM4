@@ -53,17 +53,17 @@
 						<b></b>
 				        <h4>Arquivos aceitos</h4>
 						<b></b>
-						<table class="table table-hover table-bordered">
-							<thead>
-								<tr>
-									<th>Seleciona</th>
-									<th>Tipo do Arquivo</th>
-								</tr>
-							</thead>
+						<table class="table table-hover">
 							<tbody>
-								<tr th:each="objArqFor: ${listArqObjs}">
-									<td>Seleciona</td>
-									<td th:text="${objArqFor.tipoArquivo}"></td>
+								<tr th:each="objArqFor, stat: ${listArqObjs}">
+									<td>
+								         <!-- th:checked="${currentClient.selected}" -->
+								         <input type="checkbox"
+								                th:name="|checklistarq${stat.index}|"
+								                th:value="${objArqFor.id}"
+								                th:checked="${objArqFor.selected}"/>
+								         <span th:text="${objArqFor.tipoArquivo}"></span> 
+	    						     </td>
 								</tr>
 							</tbody>
 						</table>
@@ -75,16 +75,16 @@
 				        <h4>Opções de Pagamento</h4>
 						<b></b>
 						<table class="table table-hover table-bordered">
-							<thead>
-								<tr>
-									<th>Seleciona</th>
-									<th>Opções de Pagamento</th>
-								</tr>
-							</thead>
 							<tbody>
-								<tr th:each="objPgFor: ${listPgObjs}">
-									<td>Seleciona</td>
-									<td th:text="${objPgFor.descricao}"></td>
+								<tr th:each="objPgFor, stat: ${listPgObjs}">
+									<td>
+								         <!--  -->
+								         <input type="checkbox"
+								                th:name="|checklistpg${stat.index}|"
+								                th:value="${objPgFor.id}"
+								                th:checked="${objPgFor.selected}"/>
+								         <span th:text="${objPgFor.descricao}"></span> 
+	    						     </td>
 								</tr>
 							</tbody>
 						</table>

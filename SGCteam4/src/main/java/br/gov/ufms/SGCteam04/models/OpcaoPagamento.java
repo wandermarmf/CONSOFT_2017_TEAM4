@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 /**
  * Created by Marco Cardoso on 7/10/2017.
@@ -19,6 +20,8 @@ public class OpcaoPagamento {
     @Column(unique = true)
     private String descricao;
 
+	@Transient
+	private boolean selected = false;
     /*
     @ManyToMany
     private ArrayList<Conferencia> conferenciaArrayList;
@@ -47,4 +50,15 @@ public class OpcaoPagamento {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
+	
 }

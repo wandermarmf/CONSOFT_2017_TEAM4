@@ -1,7 +1,7 @@
 package br.gov.ufms.SGCteam04.models;
 
-import java.util.Set;
-
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,11 +44,13 @@ public class Conferencia {
 	   @Column(nullable = false)
 	   private String moedaConferencia;
 
-	   /*
-	   @ManyToMany(cascade = CascadeType.ALL)
-	   @JoinTable(name = "conferencia_opcao_pagamento", joinColumns = @JoinColumn(name = "conferencia_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "tipo_arquivo_id", referencedColumnName = "id"))
-	   private Set<OpcaoPagamento> opcaoPagamentoArrayList;
-*/
+	   @ManyToMany(cascade = CascadeType.REMOVE)
+	   @JoinTable(name = "conferencia_opcao_pagamento", joinColumns = @JoinColumn(name = "conferencia_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "opcao_pagamento_id", referencedColumnName = "id"))
+	   private List<OpcaoPagamento> opcaoPagamentoList = new ArrayList<OpcaoPagamento>();
+		
+	   @ManyToMany(cascade = CascadeType.REMOVE)
+	   @JoinTable(name = "conferencia_tipo_arquivo", joinColumns = @JoinColumn(name = "conferencia_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "tipo_arquivo_id", referencedColumnName = "id"))
+	   private List<TipoArquivo> tipoArquivoList = new ArrayList<TipoArquivo>();
 		
 
 	   /*
@@ -96,13 +98,6 @@ public class Conferencia {
 	   @OneTo????
 	   private ....
 	    */
-
-	   /*
-	   TODO criar entidade e repositorio do administrador
-	   @OneTo????
-	   private ....
-	    */
-	   //private ArrayList<TipoArquivo> tipoArquivoArrayList;
 
 	   /*
 	   @ManyToMany
@@ -200,16 +195,51 @@ public class Conferencia {
 		this.moedaConferencia = moedaConferencia;
 	}
 
-	/*
-	public Set<OpcaoPagamento> getOpcaoPagamentoArrayList() {
-		return opcaoPagamentoArrayList;
+	public List<OpcaoPagamento> getOpcaoPagamentoList() {
+		return opcaoPagamentoList;
 	}
 
-	public void setOpcaoPagamentoArrayList(Set<OpcaoPagamento> opcaoPagamentoArrayList) {
-		this.opcaoPagamentoArrayList = opcaoPagamentoArrayList;
+	public void setOpcaoPagamentoList(List<OpcaoPagamento> opcaoPagamentoArrayList) {
+		this.opcaoPagamentoList = opcaoPagamentoArrayList;
 	}
 
 	
+	public List<TipoArquivo> getTipoArquivoList() {
+		return tipoArquivoList;
+	}
+
+	public void setTipoArquivoList(List<TipoArquivo> tipoArquivoList) {
+		this.tipoArquivoList = tipoArquivoList;
+	}
+
+	public void addTipoArquivo(Iterable<TipoArquivo> listArqObjs, String paramValue) {
+		
+		if (paramValue.equals("") == true)
+			return;
+		
+		for (TipoArquivo arq : listArqObjs) {
+			if (arq.getId().toString().equals(paramValue)) {
+				tipoArquivoList.add(arq);
+				return;				
+			}
+		}
+	}
+
+	public void addOpcaoPagamento(Iterable<OpcaoPagamento> listPgObjs, String paramValue) {
+		
+		if (paramValue.equals("") == true)
+			return;
+		
+		for (OpcaoPagamento opPg : listPgObjs) {
+			if (opPg.getId().toString().equals(paramValue)) {
+				opcaoPagamentoList.add(opPg);
+				return;				
+			}
+		}
+	}
+
+	
+	/*
 	public ArrayList<Topico> getTopicoArrayList() {
 		return topicoArrayList;
 	}

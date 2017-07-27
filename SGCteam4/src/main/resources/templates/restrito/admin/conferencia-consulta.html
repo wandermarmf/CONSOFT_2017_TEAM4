@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layouts/main">
+<head>
+    <meta charset="UTF-8"/>
+    <title>SGC</title>
+</head>
+<body>
+	<div id="integrantes" layout:fragment="content">
+	    <div class="container">
+	
+	        <h1 th:text="${titleForm}"></h1>
+	
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>Nome da Conferência</th>
+						<th>Cidade da Conferência</th>
+						<th>Visualizar</th>
+						<th>Apagar</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="objFor: ${listObjs}">
+						<td th:text="${objFor.id}"></td>
+						<td th:text="${objFor.nomeConferencia}"></td>
+						<td th:text="${objFor.cidadeConferencia}"></td>
+						<td> <a th:href="@{/admin/conferencia/editar(filterid=${objFor.id})}">Visualizar</a></td>
+						<td> <a th:href="@{/admin/conferencia-consulta/apagar(filterid=${objFor.id})}">Apagar</a></td>
+					</tr>
+				</tbody>
+				
+			</table>
+	        <div th:if="${deletereg != null}">
+    	        <p class="alert alert-danger" th:if="${deletereg == 'ok'}"> <span>Registro apagado</span></p>
+        	</div>
+			
+			 <a class="btn btn-info" th:href="@{/admin/conferencia(origin=fromlist)}">Adicionar Conferência</a>
+			 
+	    </div>
+	</div>
+</body>
+</html>

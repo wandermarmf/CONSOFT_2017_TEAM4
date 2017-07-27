@@ -64,6 +64,9 @@ public abstract class CustomController {
         mv.addObject("obj", obj);
     	mv.addObject("listObjs", getObjList());
     	
+    	// Adiciona eventuais objetos filhos ao formulário
+  		doGetViewChilds(mv, model);
+    	
         return mv;  	
 	}
 	
@@ -82,6 +85,7 @@ public abstract class CustomController {
     	
   		// Adiciona eventuais objetos filhos ao formulário
   		doGetViewChilds(mv, model);
+  		
     	return mv; 
     }
     
