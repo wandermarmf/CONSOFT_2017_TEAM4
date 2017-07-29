@@ -1,0 +1,19 @@
+body {
+
+    background-color : rgba(236,236,236,0.8);
+}
+
+.login-page {
+    position: relative;
+    top: 100px;
+}
+
+
+.login-form {
+    min-height: 50%;
+    width: 500px ;
+}
+
+#button-login {
+    width: 400px !important;
+}

@@ -1,35 +1,69 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml"
-      layout:decorator="layouts/main" xmlns:th="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.w3.org/1999/xhtml" layout:decorator="layouts/autenticacao">
 <head>
     <title>Login</title>
 </head>
-<body>
+<body ng-app="BlankApp" ng-controller="MainCtrl as main" >
 
-<div layout:fragment="content">
+    <div layout:fragment="content">
+        <div class="login-page">
+            <!-- titulo -->
+            <div layout="row" layout-align="center center">
+                <h2>Login - SGC</h2>
+            </div>
+
+            <!-- formulario de login-->
+            <section layout="column" layout-align="center center" >
+
+                <md-card >
+                    <md-card-content>
+                        <form class="form-login" name="formulario" th:action="@{/login}" method="post">
+
+                            <md-input-container class="md-block">
+                                <label>Email</label>
+                                <input type="email" name="email"  ng-model="main.email" ng-minlength="5" ng-maxlength="100"
+                                       required="required"  ng-pattern="/^.+@.+\..+$/" />
+                                <div class="help-block" ng-messages="formulario.email.$error">
+                                    <p ng-message="minlength">Email muito curto.</p>
+                                    <p ng-message="maxlength">Email muito longo.</p>
+                                    <p ng-message="required">É obrigatório colocar o seu email.</p>
+                                    <p ng-message="pattern">Você deve colocar um email acima !</p>
+                                </div>
+                            </md-input-container>
 
 
-    <form name="f" th:action="@{/login}" method="post" class="form-signin">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <div th:if="${param.error}" class="alert alert-danger">
-            Username ou senha invalidos
+                            <md-input-container class="md-block">
+                                <label>Senha</label>
+                                <input type="password" name="password"  ng-model="main.password" ng-minlength="5" ng-maxlength="100"
+                                       required="required"   />
+                                <div class="help-block" ng-messages="formulario.password.$error">
+                                    <p ng-message="minlength">Senha muito curta.</p>
+                                    <p ng-message="maxlength">Senha muito longa.</p>
+                                    <p ng-message="required">É obrigatório colocar a sua senha.</p>
+                                </div>
+                            </md-input-container>
+
+                            <md-checkbox aria-label="Relembrar meu login" id="remember-me" name="remember-me">
+                                Relembrar meu login
+                            </md-checkbox>
+
+                            <div layout="row" layout-align="center center">
+                                <md-button id="button-login" class="md-raised md-primary" type="submit">Logar</md-button>
+                            </div>
+
+
+                        </form>
+
+
+
+                    </md-card-content>
+                </md-card>
+            </section>
+
         </div>
-        <div th:if="${param.logout}" class="alert alert-success">
-           Você deslogou com sucesso !
-        </div>
-        <label for="email" class="sr-only">Username</label>
-        <input type="text" id="email" name="email" class="form-control" placeholder="Email Address" required="true" />
-        <label for="password" class="sr-only">Password</label>
-        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="true" />
-        <div class="checkbox">
-            <label>
-                <input id="remember-me" name="remember-me" type="checkbox" /> Remember me
-            </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    </form>
 
-</div>
+    </div>
 
 </body>
 </html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}"/>
+
+
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Main Layout</title>
+
+    <link rel="stylesheet"   th:href="@{/css/style.css}"/>
+
+    <!-- Bootstrap file -->
+    <link rel="stylesheet"   th:href="@{/css/bootstrap.min.css}"/>
+
+    <!-- font awesome file -->
+    <link rel="stylesheet"   th:href="@{/css/font-awesome.min.css}"/>
+
+
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css"/>
+</head>
+<body ng-app="BlankApp" ng-controller="MainCtrl as main" >
+
+    <div layout:fragment="content">
+    </div>
+
+
+
+    <!-- Angular Material requires Angular.js Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+    <script type="text/javascript">
+        angular
+            .module('BlankApp', ['ngMaterial', 'ngMessages'])
+            .controller('MainCtrl', MainCtrl);
+
+        function MainCtrl() {}
+    </script>
+</body>
+</html>
