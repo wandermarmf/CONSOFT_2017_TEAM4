@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml" layout:decorator="layouts/autenticacao">
+<head>
+    <title>Registro - SGC</title>
+</head>
+<body ng-app="BlankApp" ng-controller="MainCtrl as main" >
+
+<div layout:fragment="content">
+    <div class="login-page">
+        <!-- titulo -->
+        <div layout="row" layout-align="center center">
+            <h2>Registro - SGC</h2>
+        </div>
+
+        <!-- formulario de login-->
+        <section layout="column" layout-align="center center" >
+
+            <md-card >
+                <md-card-content>
+                    <form class="form-login" name="formulario" th:action="@{/register}" method="post">
+
+
+                        <div layout="row">
+                            <md-input-container class="md-block">
+                                <label>Nome</label>
+                                <input type="text" name="nome"  ng-model="main.nome" ng-minlength="5" ng-maxlength="100"
+                                       required="required"  />
+                                <div class="help-block" ng-messages="formulario.nome.$error">
+                                    <p ng-message="minlength">Nome muito curto.</p>
+                                    <p ng-message="maxlength">Nome muito longo.</p>
+                                    <p ng-message="required">É obrigatório colocar o seu nome.</p>
+                                </div>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>Sobrenome</label>
+                                <input type="text" name="sobrenome"  ng-model="main.sobrenome" ng-minlength="5" ng-maxlength="100"
+                                       required="required" />
+                                <div class="help-block" ng-messages="formulario.sobrenome.$error">
+                                    <p ng-message="minlength">Sobrenome muito curto.</p>
+                                    <p ng-message="maxlength">Sobrenome muito longo.</p>
+                                    <p ng-message="required">É obrigatório colocar o seu sobrenome.</p>
+                                </div>
+                            </md-input-container>
+
+                        </div>
+
+                        <md-input-container class="md-block">
+                            <label>Email</label>
+                            <input type="email" name="email"  ng-model="main.email" ng-minlength="5" ng-maxlength="100"
+                                   required="required"  ng-pattern="/^.+@.+\..+$/" />
+                            <div class="help-block" ng-messages="formulario.email.$error">
+                                <p ng-message="minlength">Email muito curto.</p>
+                                <p ng-message="maxlength">Email muito longo.</p>
+                                <p ng-message="required">É obrigatório colocar o seu email.</p>
+                                <p ng-message="pattern">Você deve colocar um email acima !</p>
+                            </div>
+                        </md-input-container>
+
+
+                        <md-input-container class="md-block">
+                            <label>Senha</label>
+                            <input type="password" name="senha"  ng-model="main.password" ng-minlength="5" ng-maxlength="100"
+                                   required="required"   />
+                            <div class="help-block" ng-messages="formulario.password.$error">
+                                <p ng-message="minlength">Senha muito curta.</p>
+                                <p ng-message="maxlength">Senha muito longa.</p>
+                                <p ng-message="required">É obrigatório colocar a sua senha.</p>
+                            </div>
+                        </md-input-container>
+
+                        <md-input-container class="md-block">
+                            <Label>Data de aniversário</Label>
+                            <input type="date" name="aniversario"  ng-model="main.aniversario" ng-minlength="5" ng-maxlength="100"
+                                   required="required"   />
+                        </md-input-container>
+
+                        <md-input-container class="md-block">
+                            <label>Website</label>
+                            <input type="text" name="website"  ng-model="main.website" ng-minlength="5" ng-maxlength="100"
+                                      />
+                            <div class="help-block" ng-messages="formulario.website.$error">
+                                <p ng-message="minlength">Website muito curto.</p>
+                                <p ng-message="maxlength">Website muito longo.</p>
+                            </div>
+                        </md-input-container>
+
+                        <md-input-container class="md-block">
+                            <label>Nacionalidade</label>
+                            <input type="text" name="nacionalidade"  ng-model="main.nacionalidade" ng-minlength="5" ng-maxlength="100" required="required"
+                            />
+                            <div class="help-block" ng-messages="formulario.nacionalidade.$error">
+                                <p ng-message="minlength">muito curto.</p>
+                                <p ng-message="maxlength">muito longo.</p>
+                                <p ng-message="required">Campo obrigatorio !</p>
+                            </div>
+                        </md-input-container>
+
+                        <md-input-container class="md-block">
+                            <label>Telefone</label>
+                            <input type="text" name="telefone"  ng-model="main.telefone" ng-minlength="5" ng-maxlength="100"
+                            required="required" ng-pattern="/^(\(11\) [9][0-9]{4}-[0-9]{4})|(\(1[2-9]\) [5-9][0-9]{3}-[0-9]{4})|(\([2-9][1-9]\) [5-9][0-9]{3}-[0-9]{4})$/"/>
+                            <div class="help-block" ng-messages="formulario.telefone.$error">
+                                <p ng-message="minlength">muito curto.</p>
+                                <p ng-message="maxlength">muito longo.</p>
+                                <p ng-message="pattern">Você deve colocar um telefone acima ! Ex (99) 9999-9999</p>
+                                <p ng-message="required">Campo obrigatorio !</p>
+                            </div>
+                        </md-input-container>
+
+
+                        <h4>Endereço</h4>
+
+                        <div layout="row">
+
+                            <md-input-container class="md-block">
+                                <label>Pais</label>
+                                <input type="text" name="pais"  ng-model="main.pais" ng-minlength="3" ng-maxlength="100" required="required"
+                                />
+                                <div class="help-block" ng-messages="formulario.pais.$error">
+                                    <p ng-message="minlength">muito curto.</p>
+                                    <p ng-message="maxlength">muito longo.</p>
+                                    <p ng-message="required">Campo obrigatorio !</p>
+                                </div>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>Sigla UF</label>
+                                <input type="text" name="estado"  ng-model="main.estado" ng-length="2" required="required" ng-pattern="/^[A-Z][A-Z]$/"
+                                />
+                                <div class="help-block" ng-messages="formulario.estado.$error">
+                                    <p ng-message="required">Campo obrigatorio !</p>
+                                    <p ng-message="pattern">Coloque a sigla do estado !  Ex : SP</p>
+                                    <p ng-message="length">Coloque a sigla do estado !  Ex : SP</p>
+                                </div>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>Cidade</label>
+                                <input type="text" name="cidade"  ng-model="main.cidade" ng-minlength="4" ng-maxlength="100" required="required"
+                                />
+                                <div class="help-block" ng-messages="formulario.cidade.$error">
+                                    <p ng-message="minlength">muito curto.</p>
+                                    <p ng-message="maxlength">muito longo.</p>
+                                    <p ng-message="required">Campo obrigatorio !</p>
+                                </div>
+                            </md-input-container>
+
+
+                        </div>
+
+                        <div layout="row">
+
+                            <md-input-container class="md-block">
+                                <label>CEP</label>
+                                <input type="text" name="cep"  ng-model="main.cep" ng-minlength="4" ng-maxlength="20" required="required"
+                                    ng-pattern="/[0-9]{5}-[0-9]{3}/"/>
+                                <div class="help-block" ng-messages="formulario.cep.$error">
+                                    <p ng-message="minlength">muito curto.</p>
+                                    <p ng-message="maxlength">muito longo.</p>
+                                    <p ng-message="required">Campo obrigatorio !</p>
+                                    <p ng-message="pattern">CEP invalido ! Insira algo como : 99999-999 !</p>
+                                </div>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>Bairro</label>
+                                <input type="text" name="bairro"  ng-model="main.bairro" ng-minlength="4" ng-maxlength="100" required="required"
+                                />
+                                <div class="help-block" ng-messages="formulario.bairro.$error">
+                                    <p ng-message="minlength">muito curto.</p>
+                                    <p ng-message="maxlength">muito longo.</p>
+                                    <p ng-message="required">Campo obrigatorio !</p>
+                                </div>
+                            </md-input-container>
+
+
+                        </div>
+
+
+                        <div layout="row">
+                            <md-input-container class="md-block">
+                                <label>Endereço</label>
+                                <input type="text" name="endereco"  ng-model="main.endereco" ng-minlength="4" ng-maxlength="100" required="required"
+                                />
+                                <div class="help-block" ng-messages="formulario.endereco.$error">
+                                    <p ng-message="minlength">muito curto.</p>
+                                    <p ng-message="maxlength">muito longo.</p>
+                                    <p ng-message="required">Campo obrigatorio !</p>
+                                </div>
+                            </md-input-container>
+
+
+                            <md-input-container class="md-block">
+                                <label>Complemento</label>
+                                <input type="text" name="complemento"  ng-model="main.complemento" ng-minlength="4" ng-maxlength="100"
+                                />
+                                <div class="help-block" ng-messages="formulario.complemento.$error">
+                                    <p ng-message="minlength">muito curto.</p>
+                                    <p ng-message="maxlength">muito longo.</p>
+                                    <p ng-message="required">Campo obrigatorio !</p>
+                                </div>
+                            </md-input-container>
+
+
+
+                        </div>
+
+
+
+                        <div layout="row" layout-align="center center">
+                            <md-button id="button-login" class="md-raised md-primary" type="submit">Registrar</md-button>
+                        </div>
+
+
+                    </form>
+
+
+
+
+                </md-card-content>
+            </md-card>
+        </section>
+
+    </div>
+
+</div>
+
+</body>
+</html>

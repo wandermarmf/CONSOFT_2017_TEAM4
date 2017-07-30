@@ -46,13 +46,22 @@
 
     <!-- Angular Material Library -->
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js"></script>
     <script type="text/javascript">
         angular
             .module('BlankApp', ['ngMaterial', 'ngMessages'])
             .controller('MainCtrl', MainCtrl);
 
-        function MainCtrl() {}
+        function MainCtrl($scope) {
+            $scope.myDate = new Date();
+        }
+
+        angular.module('BlankApp').config(function($mdDateLocaleProvider) {
+            $mdDateLocaleProvider.formatDate = function(date) {
+                return moment(date).format('DD-MM-YYYY');
+            };
+        });
+
     </script>
 </body>
 </html>

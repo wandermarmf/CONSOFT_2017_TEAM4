@@ -27,6 +27,12 @@ public class Usuario {
     @Length(min = 5 , max = 50)
     private String nome;
 
+
+    @NotNull
+    @Length(min = 5 , max = 50)
+    private String sobrenome;
+
+
     @NotNull
     @Length(min = 5,max = 50)
     private String senha;
@@ -37,8 +43,7 @@ public class Usuario {
     private String email;
 
     @NotNull
-    @Min(value = 0) @Max(value = 150)
-    private Integer idade;
+    private String aniversario;
 
     @NotNull
     @URL
@@ -47,14 +52,15 @@ public class Usuario {
     @NotNull
     private String nacionalidade;
 
-    @NotNull
-    @ColumnDefault(value = "true")
-    private Boolean usuarioAtivo;
+    private Boolean usuarioAtivo = true;
 
     @NotNull
     private String telefone;
 
     private String diretorioImagem;
+
+    @Embedded
+    private Endereco local;
 
     @OneToMany(mappedBy = "usuario")
     private List<Role> roles;
@@ -64,6 +70,22 @@ public class Usuario {
         GETTERS E SETTERS
 
      */
+
+    public Endereco getLocal() {
+        return local;
+    }
+
+    public void setLocal(Endereco local) {
+        this.local = local;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
 
     public List<Role> getRoles() {
         return roles;
@@ -105,12 +127,12 @@ public class Usuario {
         this.email = email;
     }
 
-    public Integer getIdade() {
-        return idade;
+    public String getAniversario() {
+        return aniversario;
     }
 
-    public void setIdade(Integer idade) {
-        this.idade = idade;
+    public void setAniversario(String aniversario) {
+        this.aniversario = aniversario;
     }
 
     public String getWebsite() {

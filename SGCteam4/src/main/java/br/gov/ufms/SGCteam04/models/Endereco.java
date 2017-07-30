@@ -15,13 +15,13 @@ public class Endereco {
 
     private String cidade;
 
-    private Long cep;
+    private String cep;
 
     private String bairro;
 
     private String complemento;
 
-    private String endereço;
+    private String endereco;
 
     public String getPais() {
         return pais;
@@ -47,11 +47,11 @@ public class Endereco {
         this.cidade = cidade;
     }
 
-    public Long getCep() {
+    public String getCep() {
         return cep;
     }
 
-    public void setCep(Long cep) {
+    public void setCep(String cep) {
         this.cep = cep;
     }
 
@@ -72,10 +72,10 @@ public class Endereco {
     }
 
     public String getEndereço() {
-        return endereço;
+        return endereco;
     }
 
     public void setEndereço(String endereço) {
-        this.endereço = endereço;
+        this.endereco = endereço;
     }
 }
