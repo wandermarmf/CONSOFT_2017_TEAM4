@@ -8,7 +8,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Marco Cardoso on 7/28/2017.
@@ -62,8 +64,8 @@ public class Usuario {
     @Embedded
     private Endereco local;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Role> roles;
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
+    private Set<Role> roles ;
 
 
     /*
@@ -87,11 +89,11 @@ public class Usuario {
         this.sobrenome = sobrenome;
     }
 
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
