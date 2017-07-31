@@ -61,7 +61,7 @@ public abstract class CustomController {
         // Carrega o objeto atual (em branco) e a lista de objetos para a view apresentar 
         mv.addObject("obj", obj);
     	mv.addObject("listObjs", getObjList());
-    	
+    	mv.addObject("response",response);
     	// Adiciona eventuais objetos filhos ao formulário
   		doGetViewChilds(mv, model);
     	

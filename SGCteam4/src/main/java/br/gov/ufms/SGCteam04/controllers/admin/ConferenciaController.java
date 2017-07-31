@@ -21,6 +21,7 @@ import br.gov.ufms.SGCteam04.models.TipoArquivo;
 import br.gov.ufms.SGCteam04.repositories.ConferenciaRepository;
 import br.gov.ufms.SGCteam04.repositories.OpcaoPagamentoRepository;
 import br.gov.ufms.SGCteam04.repositories.TipoArquivoRepository;
+import org.springframework.web.servlet.View;
 
 @Controller
 @RequestMapping("/admin/conferencia")
@@ -106,7 +107,7 @@ public class ConferenciaController extends CustomController{
 	}
 	
 	@PostMapping
-	private ModelAndView doPostView(@Valid @ModelAttribute("obj") Conferencia obj, 
+	private ModelAndView doPostView(@Valid @ModelAttribute("obj") Conferencia obj,
 			      BindingResult result, Model model, HttpServletRequest request) {
 		
 		// guarda o objeto da conferencia que está sendo manipulado
@@ -137,7 +138,19 @@ public class ConferenciaController extends CustomController{
             	currentConferencia.addOpcaoPagamento(listPgObjs, paramValue);
             }            	
         }
-			
-        return doPostMappingSave(obj, result, model);
+
+        ModelAndView modelAndView = doPostMappingSave(obj, result, model);
+        String response = (String) modelAndView.getModel().get("response");
+        if(response.equals("success"))
+		{
+			String diretorioFasesConferencia = "restrito/admin/fases-conferencia";
+			modelAndView.getModel().put("obj",obj);
+			modelAndView.getModel().put("adc","conferencia");
+			return new ModelAndView(diretorioFasesConferencia,modelAndView.getModel());
+		}
+		else
+		{
+			return modelAndView;
+		}
 	}
 }

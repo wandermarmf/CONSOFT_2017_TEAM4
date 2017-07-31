@@ -27,21 +27,54 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css"/>
 </head>
-<body>
+<body ng-app="BlankApp" ng-controller="MainCtrl as main" >
 
 
 
-<div layout:replace="fragments/header">
-</div>
+    <div layout:replace="fragments/header">
+    </div>
 
 
-<div layout:fragment="content">
-</div>
+    <div layout:fragment="content">
+    </div>
 
 
-<div layout:replace="fragments/footer">
-</div>
+    <div layout:replace="fragments/footer">
+    </div>
+
+
+    <!-- Angular Material requires Angular.js Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js"></script>
+
+
+    <script type="text/javascript">
+        angular
+            .module('BlankApp', ['ngMaterial', 'ngMessages'])
+            .controller('MainCtrl', MainCtrl);
+
+        function MainCtrl($scope) {
+            $scope.myDate = new Date();
+        }
+
+        angular.module('BlankApp').config(function($mdDateLocaleProvider) {
+            $mdDateLocaleProvider.formatDate = function(date) {
+                return moment(date).format('DD-MM-YYYY');
+            };
+        });
+
+    </script>
 
 </body>
 </html>

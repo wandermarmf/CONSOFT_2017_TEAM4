@@ -23,11 +23,9 @@ public class Sessao {
     private String nome;
 
     @NotNull
-    @Column(unique = true)
     @Length(min = 4 , max = 20)
     private String abreviacao;
 
-    @NotNull
     @ManyToOne
     private Usuario quemCriou;
 
@@ -39,9 +37,16 @@ public class Sessao {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date fim;
 
-    @NotNull
     @ManyToOne
     private Conferencia conferencia;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layouts/main" xmlns:td="http://www.w3.org/1999/xlink">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Fases da conferencia - SGC</title>
+</head>
+<body>
+
+    <div id="integrantes" layout:fragment="content">
+
+
+            <!-- formulario de login-->
+            <section layout="column" layout-align="center center" >
+                <md-card >
+                    <md-card-content>
+
+                        <h1>Fases da conferencia </h1>
+                        <h1 th:text="${obj.nomeConferencia}"></h1>
+                        <div th:if="${fases != null and #lists.size(fases) != 0}">
+                            <table class="table table-hover">
+                                <thead>
+                                <th>
+                                    <p>nome</p>
+                                </th>
+                                <th>
+                                    <p>inicio</p>
+                                </th>
+                                <th>
+                                    <p>fim</p>
+                                </th>
+                                </thead>
+                                <tbody>
+                                <tr th:each="fase : ${fases}">
+                                    <td>
+                                        <p th:text="${fase.nome}"></p>
+                                    </td>
+                                    <td>
+                                        <p th:text="${fase.inicio}"></p>
+                                    </td>
+                                    <td>
+                                        <p th:text="${fase.fim}"></p>
+                                    </td>
+                                    <td>
+
+                                        <form th:method="delete" th:action="@{/admin/fases-conferencia}">
+                                            <input type="hidden" th:value="${fase.id}" name="fase_id"/>
+                                            <input type="hidden" th:value="${obj.id}" name="conferencia_id"/>
+
+                                            <div th:if="${adc != null}">
+                                                <input name="adc" type="hidden" th:value="${adc}"/>
+                                            </div>
+                                            <md-button type="submit" class="md-fab md-mini" aria-label="Remover">
+                                                <span> <i class="fa fa-close"></i> </span>
+                                            </md-button>
+                                        </form>
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+                        <form name="formulario" method="post" th:action="@{/admin/fases-conferencia}">
+
+                            <input name="conferencia_id" type="hidden" th:value="${obj.id}"/>
+                            <md-input-container class="md-block">
+                                <label>Nome da fase</label>
+                                <input type="text" name="nome"  ng-model="main.nome" ng-minlength="5" ng-maxlength="100"
+                                       required="required"  />
+                                <div class="help-block" ng-messages="formulario.nome.$error">
+                                    <p ng-message="minlength">Nome muito curto.</p>
+                                    <p ng-message="maxlength">Nome muito longo.</p>
+                                    <p ng-message="required">É obrigatório colocar o nome.</p>
+                                </div>
+                            </md-input-container>
+
+                            <div layout="row">
+                                <md-input-container class="md-block">
+                                    <label>Inicio da fase</label>
+                                    <input type="datetime-local" name="inicio"  ng-model="main.inicio"
+                                           required="required"  />
+                                    <div class="help-block" ng-messages="formulario.inicio.$error">
+                                        <p ng-message="required">É obrigatório colocar o inico da fase.</p>
+                                    </div>
+                                </md-input-container>
+
+                                <md-input-container class="md-block">
+                                    <label>Fim da fase</label>
+                                    <input type="datetime-local" name="fim"  ng-model="main.fim"
+                                           required="required"  />
+                                    <div class="help-block" ng-messages="formulario.fim.$error">
+                                        <p ng-message="required">É obrigatório colocar o fim da fase.</p>
+                                    </div>
+                                </md-input-container>
+                            </div>
+
+
+                            <div th:if="${adc != null}">
+                                <input name="adc" type="hidden" th:value="${adc}"/>
+                            </div>
+                            <div layout="row">
+
+
+                                <md-button type="submit" class="md-raised md-primary">Adicionar fase</md-button>
+
+                            </div>
+
+
+                        </form>
+                        <div th:if="${adc != null}">
+                            <form method="get" th:action="@{/admin/sessoes-conferencia}">
+                                <input name="adc" type="hidden" th:value="${adc}"/>
+                                <input name="id" type="hidden" th:value="${obj.id}"/>
+
+                                <md-button type="submit" class="md-raised">Adicionar sessões</md-button>
+                            </form>
+                        </div>
+
+
+                    </md-card-content>
+                </md-card>
+            </section>
+        </div>
+
+
+
+</body>
+</html>

@@ -23,6 +23,20 @@
 	            <p class="alert alert-success" th:if="${response == 'success'}">Registro salvo ! </p>
 	            <p class="alert alert-danger" th:if="${response != 'success'}"> <span th:text="${response}">Erro</span></p>
 	        </div>
+
+			<div layout="row">
+				<form method="get" th:action="@{/admin/fases-conferencia}">
+					<input name="id" type="hidden" th:value="${obj.id}"/>
+					<md-button type="submit" class="md-raised md-primary">Editar fases</md-button>
+				</form>
+
+				<form method="get" th:action="@{/admin/sessoes-conferencia}">
+					<input name="id" type="hidden" th:value="${obj.id}"/>
+					<md-button type="submit" class="md-raised md-primary">Editar sessoes</md-button>
+				</form>
+			</div>
+
+
 	
 	        <form method="post" th:action="@{/admin/conferencia}" th:object="${obj}">
 	            <div class="form-group">

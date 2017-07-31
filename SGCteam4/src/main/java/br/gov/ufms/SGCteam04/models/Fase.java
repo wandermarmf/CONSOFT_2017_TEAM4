@@ -30,13 +30,17 @@ public class Fase {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date fim;
 
-    @NotNull
     @ManyToOne
     private Conferencia conferencia;
 
-    @NotNull
-    @ManyToOne
-    private Usuario usuario;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
@@ -70,11 +74,4 @@ public class Fase {
         this.conferencia = conferencia;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
 }

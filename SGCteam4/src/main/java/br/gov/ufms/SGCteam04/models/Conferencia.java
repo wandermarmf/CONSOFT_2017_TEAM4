@@ -1,118 +1,122 @@
 package br.gov.ufms.SGCteam04.models;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import java.util.Set;
+import javax.persistence.*;
 
 @Entity
 public class Conferencia {
 
-	   @Id
-	   @GeneratedValue(strategy = GenerationType.AUTO)
-	   private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 
-	   @Column(unique=true, nullable = false)
-	   private String nomeAbreviado;
+	@Column(unique=true, nullable = false)
+	private String nomeAbreviado;
 
-	   @Column(unique = true, nullable = false)
-	   private String nomeConferencia;
+	@Column(unique = true, nullable = false)
+	private String nomeConferencia;
 
-	   @Column(nullable = false)
-	   private String subTitulo;
+	@Column(nullable = false)
+	private String subTitulo;
 
-	   private String subTituloSecundario;
+	private String subTituloSecundario;
 
-	   private String paginaWeb;
+	private String paginaWeb;
 
-	   @Column(nullable = false)
-	   private String cidadeConferencia;
+	@Column(nullable = false)
+	private String cidadeConferencia;
 
-	   @Column(nullable = false)
-	   private String cidadeEmissaoFatura;
+	@Column(nullable = false)
+	private String cidadeEmissaoFatura;
 
-	   @Column(nullable = false)
-	   private Double valorTaxaInscricao;
+	@Column(nullable = false)
+	private Double valorTaxaInscricao;
 
-	   @Column(nullable = false)
-	   private String moedaConferencia;
+	@Column(nullable = false)
+	private String moedaConferencia;
 
-	   @ManyToMany(cascade = CascadeType.REMOVE)
-	   @JoinTable(name = "conferencia_opcao_pagamento", joinColumns = @JoinColumn(name = "conferencia_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "opcao_pagamento_id", referencedColumnName = "id"))
-	   private List<OpcaoPagamento> opcaoPagamentoList = new ArrayList<OpcaoPagamento>();
-		
-	   @ManyToMany(cascade = CascadeType.REMOVE)
-	   @JoinTable(name = "conferencia_tipo_arquivo", joinColumns = @JoinColumn(name = "conferencia_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "tipo_arquivo_id", referencedColumnName = "id"))
-	   private List<TipoArquivo> tipoArquivoList = new ArrayList<TipoArquivo>();
-		
+	@ManyToMany(cascade = CascadeType.REMOVE)
+	@JoinTable(name = "conferencia_opcao_pagamento", joinColumns = @JoinColumn(name = "conferencia_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "opcao_pagamento_id", referencedColumnName = "id"))
+	private List<OpcaoPagamento> opcaoPagamentoList = new ArrayList<OpcaoPagamento>();
 
-	   /*
-	   @ManyToMany
-	   private ArrayList<Topico> topicoArrayList;
-		*/
+	@ManyToMany(cascade = CascadeType.REMOVE)
+	@JoinTable(name = "conferencia_tipo_arquivo", joinColumns = @JoinColumn(name = "conferencia_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "tipo_arquivo_id", referencedColumnName = "id"))
+	private List<TipoArquivo> tipoArquivoList = new ArrayList<TipoArquivo>();
 
-	   /*
-	   @ManyToMany
-	   
-		*/
 
-	   /*
-	   TODO criar entidade e repositorio da sessao
-	   @OneToMany
-	   private ArrayList<Sessao> sessaoArrayList;
-		*/
+/*
+@ManyToMany
+private ArrayList<Topico> topicoArrayList;
+*/
 
-	   /*
-	   TODO criar entidade e repositorio da fase da conferencia
-	   @OneToMany
-		private ArrayList<ConferenciaFase> conferenciaFaseArrayList;
-		*/
+/*
+@ManyToMany
 
-	   /*
-	   TODO criar entidade e repositorio do evento/produto da conferencia
-	   @OneToMany
-	   private ArrayList<ConferenciaEventoProduto> conferenciaEventoProdutoArrayList;
-		*/
+*/
 
-	   /*
-	   	TODO criar entidade e repositorio do intervalo desconto da conferencia
-	   	@OneTo?????
-	   	private ArrayList<IntervaloDescontoConferencia> ...
-	    */
-
-	   /*
-	   	TODO criar entidade e repositorio da inscricao
-	   	@OneToMany
-	   	private ArrayList<Inscricao> inscricaoArrayList;
-	    */
-
-	   /*
-	   TODO criar entidade e repositorio do coordenador
-	   @OneTo????
-	   private ....
-	    */
-
-	   /*
-	   @ManyToMany
-	   private ArrayList<TipoSubmissao> tipoSubmissaoArrayList;
-
-	   /*
-	   TODO criar entidade e repositorio do perfil
-	   @ManyToMany
-	   private ArrayList<Perfil> perfilArrayList;
-	    */
+	//TODO criar entidade e repositorio da sessao completed
+	@OneToMany(mappedBy = "conferencia", fetch = FetchType.LAZY)
+	private Set<Sessao> sessaoArrayList  = new HashSet<Sessao>();
 
 
 
-	public Conferencia() {
-		// TODO Auto-generated constructor stub
+	//TODO criar entidade e repositorio da fase da conferencia completed
+	@OneToMany(mappedBy = "conferencia", fetch = FetchType.LAZY)
+	private Set<Fase> conferenciaFaseArrayList = new HashSet<Fase>();
+
+
+/*
+TODO criar entidade e repositorio do evento/produto da conferencia
+@OneToMany
+private ArrayList<ConferenciaEventoProduto> conferenciaEventoProdutoArrayList;
+*/
+
+/*
+TODO criar entidade e repositorio do intervalo desconto da conferencia
+@OneTo?????
+private ArrayList<IntervaloDescontoConferencia> ...
+*/
+
+/*
+TODO criar entidade e repositorio da inscricao
+@OneToMany
+private ArrayList<Inscricao> inscricaoArrayList;
+*/
+
+/*
+TODO criar entidade e repositorio do coordenador
+@OneTo????
+private ....
+*/
+
+/*
+@ManyToMany
+private ArrayList<TipoSubmissao> tipoSubmissaoArrayList;
+
+/*
+TODO criar entidade e repositorio do perfil
+@ManyToMany
+private ArrayList<Perfil> perfilArrayList;
+*/
+
+
+	public Set<Sessao> getSessaoArrayList() {
+		return sessaoArrayList;
+	}
+
+	public void setSessaoArrayList(Set<Sessao> sessaoArrayList) {
+		this.sessaoArrayList = sessaoArrayList;
+	}
+
+	public Set<Fase> getConferenciaFaseArrayList() {
+		return conferenciaFaseArrayList;
+	}
+
+	public void setConferenciaFaseArrayList(Set<Fase> conferenciaFaseArrayList) {
+		this.conferenciaFaseArrayList = conferenciaFaseArrayList;
 	}
 
 	public Integer getId() {
@@ -203,7 +207,7 @@ public class Conferencia {
 		this.opcaoPagamentoList = opcaoPagamentoArrayList;
 	}
 
-	
+
 	public List<TipoArquivo> getTipoArquivoList() {
 		return tipoArquivoList;
 	}
@@ -213,40 +217,40 @@ public class Conferencia {
 	}
 
 	public void addTipoArquivo(Iterable<TipoArquivo> listArqObjs, String paramValue) {
-		
+
 		if (paramValue.equals("") == true)
 			return;
-		
+
 		for (TipoArquivo arq : listArqObjs) {
 			if (arq.getId().toString().equals(paramValue)) {
 				tipoArquivoList.add(arq);
-				return;				
+				return;
 			}
 		}
 	}
 
 	public void addOpcaoPagamento(Iterable<OpcaoPagamento> listPgObjs, String paramValue) {
-		
+
 		if (paramValue.equals("") == true)
 			return;
-		
+
 		for (OpcaoPagamento opPg : listPgObjs) {
 			if (opPg.getId().toString().equals(paramValue)) {
 				opcaoPagamentoList.add(opPg);
-				return;				
+				return;
 			}
 		}
 	}
 
-	
-	/*
-	public ArrayList<Topico> getTopicoArrayList() {
-		return topicoArrayList;
-	}
 
-	public void setTopicoArrayList(ArrayList<Topico> topicoArrayList) {
-		this.topicoArrayList = topicoArrayList;
-	}
+/*
+public ArrayList<Topico> getTopicoArrayList() {
+return topicoArrayList;
+}
 
-	*/   
+public void setTopicoArrayList(ArrayList<Topico> topicoArrayList) {
+this.topicoArrayList = topicoArrayList;
+}
+
+*/
 }
