@@ -33,6 +33,16 @@ public class Fase {
     @ManyToOne
     private Conferencia conferencia;
 
+    @ManyToOne
+    private TipoFase tipoFase;
+
+    public TipoFase getTipoFase() {
+        return tipoFase;
+    }
+
+    public void setTipoFase(TipoFase tipoFase) {
+        this.tipoFase = tipoFase;
+    }
 
     public Long getId() {
         return id;

@@ -14,11 +14,13 @@ import java.util.Set;
 /**
  * Created by Marco Cardoso on 7/29/2017.
  */
+
 public class UserDetailsImpl implements UserDetails {
 
-    private static final long serialVersionUID = 3185970362329652822L;
+    private static final long serialVersionUID = 1L;
 
     private Usuario usuario;
+
 
     public UserDetailsImpl(Usuario user){
         this.usuario = user;
@@ -42,7 +44,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return usuario.getEmail();
+        return usuario.getName();
     }
 
     @Override

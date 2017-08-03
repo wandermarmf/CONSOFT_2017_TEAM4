@@ -24,21 +24,24 @@
 	            <p class="alert alert-danger" th:if="${response != 'success'}"> <span th:text="${response}">Erro</span></p>
 	        </div>
 
-			<div layout="row">
-				<form method="get" th:action="@{/admin/fases-conferencia}">
-					<input name="id" type="hidden" th:value="${obj.id}"/>
-					<md-button type="submit" class="md-raised md-primary">Editar fases</md-button>
-				</form>
+			<div th:if="${obj.id != null}">
+				<div layout="row">
+					<form method="get" th:action="@{/admin/fases-conferencia}">
+						<input name="id" type="hidden" th:value="${obj.id}"/>
+						<md-button type="submit" class="md-raised md-primary">Editar fases</md-button>
+					</form>
 
-				<form method="get" th:action="@{/admin/sessoes-conferencia}">
-					<input name="id" type="hidden" th:value="${obj.id}"/>
-					<md-button type="submit" class="md-raised md-primary">Editar sessoes</md-button>
-				</form>
+					<form method="get" th:action="@{/admin/sessoes-conferencia}">
+						<input name="id" type="hidden" th:value="${obj.id}"/>
+						<md-button type="submit" class="md-raised md-primary">Editar sessoes</md-button>
+					</form>
+				</div>
 			</div>
 
 
+
 	
-	        <form method="post" th:action="@{/admin/conferencia}" th:object="${obj}">
+	        <form id="formulario" method="post" th:action="@{/admin/conferencia}" th:object="${obj}">
 	            <div class="form-group">
 	                <label for="nomeConferencia">Nome da Conferência</label>
 	                <input type="text" required="required" class="form-control" name="nomeConferencia" id="nomeConferencia" th:field="*{nomeConferencia}" />
@@ -61,7 +64,10 @@
 	                <input type="hidden" name="id" id="id" th:field="*{id}"/>
 	            </div>
 				<b></b>
-			    
+
+
+
+
 			    <div class="row">
 				    <div class="col-sm-6 col-xs-6 col-md-6" style="background-color:lavender;">
 						<b></b>
@@ -105,10 +111,32 @@
 						<b></b>
 						<p></p>
 					</div>
+
+
+
+
 				</div>
 				<b></b>
 				<p></p>
 				<p></p>
+
+				<div th:if="*{id == null}">
+					<div class="row">
+						<div class="form-group" th:if="${usuarios != null and #lists.size(usuarios) != 0}">
+							<label for="uslt">Administrador :</label>
+							<select  class="form-control" name="uslt" form="formulario">
+								<div th:each="usuario : ${usuarios}">
+									<option  th:value="${usuario.id}">
+										<span th:text="${usuario.name}"></span>
+									</option>
+								</div>
+							</select>
+						</div>
+					</div>
+				</div>
+
+
+
 				<button type="submit" class="btn btn-info"  name="buttoncommand" id="buttoncommand" value="conferencia">Enviar</button>
 				<b></b>
 				<b></b>

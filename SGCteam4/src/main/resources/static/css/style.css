@@ -22,3 +22,33 @@ body {
     width: 10px;
     height: 10px;
 }
+
+md-sidenav, md-backdrop {
+    position: fixed !important;
+}
+
+
+
+a:hover {
+    text-decoration: none !important;
+}
+
+a:focus {
+    text-decoration: none !important;
+}
+
+
+
+.panel-heading {
+
+    background: transparent !important;
+    transition: box-shadow .4s cubic-bezier(.25,.8,.25,1),background-color .4s cubic-bezier(.25,.8,.25,1);
+}
+
+.panel-heading:hover {
+    background-color: rgba(158,158,158,0.2) !important;
+}
+
+footer {
+    padding-top: 50px;
+}

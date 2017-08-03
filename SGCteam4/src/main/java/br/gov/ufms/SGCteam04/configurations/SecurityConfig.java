@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import static org.hibernate.criterion.Restrictions.and;
+
 /**
  * Created by Marco Cardoso on 7/28/2017.
  */
@@ -21,6 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 
     @Autowired
     private UserDetailsService userService;
+
 
     @Autowired
     public void configureAuth(AuthenticationManagerBuilder auth) throws Exception{

@@ -24,9 +24,9 @@
                         <div layout="row">
                             <md-input-container class="md-block">
                                 <label>Nome</label>
-                                <input type="text" name="nome"  ng-model="main.nome" ng-minlength="5" ng-maxlength="100"
+                                <input type="text" name="name"  ng-model="main.name" ng-minlength="5" ng-maxlength="100"
                                        required="required"  />
-                                <div class="help-block" ng-messages="formulario.nome.$error">
+                                <div class="help-block" ng-messages="formulario.name.$error">
                                     <p ng-message="minlength">Nome muito curto.</p>
                                     <p ng-message="maxlength">Nome muito longo.</p>
                                     <p ng-message="required">É obrigatório colocar o seu nome.</p>

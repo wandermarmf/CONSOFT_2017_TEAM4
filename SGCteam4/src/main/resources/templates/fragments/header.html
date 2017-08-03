@@ -1,119 +1,165 @@
 <!--  Header  -->
-<header xmlns:th="http://www.w3.org/1999/xhtml">
+<header  xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" th:href="@{/}">Gestão de Conferência</a>
+
+    <md-sidenav class="md-sidenav-left md-whiteframe-4d" md-component-id="left"
+                 md-whiteframe="4">
+        <md-toolbar class="md-theme-indigo">
+            <div layout="column" layout-align="center center">
+                <h2>SGC</h2>
+
+                <img class="img-circle"
+                     th:src="@{/images/perfil.png}"
+                     style="width: 180px;height: 150px;"
+                />
+
+
+
+                <a th:href="@{/logout}">
+                <md-button style="color: white;"
+                        class="md-primary">Sair <i class="fa fa-sign-out "></i></md-button>
+                </a>
             </div>
+        </md-toolbar>
+
+        <md-menu>
+            <a th:href="@{/}">
+                <md-menu-item>
+                    <md-button>
+                        <i class="fa fa-home"></i>
+                        Home
+                    </md-button>
+                </md-menu-item></a>
+        </md-menu>
 
 
-            <ul class="nav navbar-nav">
-                <li><a th:href="@{/}">Home</a></li>
 
-                <!-- USUARIO -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Usuário
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li class="disabled"><a href="#">Dados do usuário</a></li>
-                        <li class="disabled"><a href="#">Visualizar emails</a></li>
-                        <li class="disabled"><a href="#">Inscrever na conferência</a></li>
-                        <li class="disabled"><a href="#">Solicitar Confirmação de inscrição</a></li>
-                    </ul>
-                </li>
+        <uib-accordion  close-others="oneAtATime">
+            <div uib-accordion-group=""   is-open="status.open">
+                <uib-accordion-heading ng-click="this.focus()" class="overlay">
+                    <i class="fa fa-user"></i>
+                    Usuário <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                </uib-accordion-heading>
 
-                <!-- CONFERENCIA -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Conferência
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a th:href="@{/admin/conferencia-consulta}">Consultar Conferência</a></li>
-                        <li><a th:href="@{/admin/conferencia}">Cadastrar Conferência</a></li>
-                        <li class="disabled"><a href="#">Visualizar Conferência</a></li>
-                        <li class="disabled"><a href="#">Sessão da Conferência</a></li>
-                        <li class="disabled"><a href="#">Eventos/Produtos da Conferência</a></li>
-                        <li class="disabled"><a href="#">Cadastrar intervalos de Desconto</a></li>
-                        <li class="disabled"><a href="#">Consultar Participantes/Usuarios</a></li>
-                        <li class="disabled"><a href="#">Cadastrar Participante</a></li>
-                        <li class="disabled"><a href="#">Fazer Inscrição de Participante</a></li>
-                        <li class="disabled"><a href="#">Enviar Email</a></li>
-                    </ul>
-                </li>
+                <md-menu>
+                    <md-menu-item>
+                        <md-button disabled="true">Dados do usuário</md-button>
+                    </md-menu-item>
+                    <md-menu-item><md-button disabled="true">Visualizar emails</md-button></md-menu-item>
+                    <md-menu-item><md-button disabled="true">Inscrever na conferencia</md-button></md-menu-item>
+                    <md-menu-item><md-button disabled="true">Solicitar confirmação de inscrição</md-button></md-menu-item>
+
+                </md-menu>
+
+            </div>
+        </uib-accordion>
+
+        <uib-accordion  close-others="oneAtATime">
+            <div uib-accordion-group=""   is-open="status.open">
+                <uib-accordion-heading class="overlay">
+                    <i class="fa fa-microphone"></i>
+                    Conferência <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                </uib-accordion-heading>
+                <a th:href="@{/admin/conferencia-consulta}"><md-menu-item><md-button>Consultar conferência</md-button></md-menu-item></a>
+                <a th:href="@{/admin/conferencia}"><md-menu-item><md-button>Cadastrar conferência</md-button></md-menu-item></a>
+                <md-menu-item><md-button disabled="true">Visualizar conferência</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Sessão da conferência</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Eventos/Produtos da conferência</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Cadastrar intervalos de Desconto</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Consultar Participantes/Usuarios</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Cadastrar Participante</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Fazer Inscrição de Participante</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Enviar Email</md-button></md-menu-item>
+            </div>
+        </uib-accordion>
+
+        <uib-accordion close-others="oneAtATime">
+            <div uib-accordion-group=""   is-open="status.open">
+                <uib-accordion-heading class="overlay">
+                    <i class="fa fa-group"></i>
+                    Comitê <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                </uib-accordion-heading>
+                <md-menu-item><md-button disabled="true">Cadastrar Programa de Comitê</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Cadastrar Membros do Comitê</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Cadastrar Meta-Revisor</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Cadastrar Revisor</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Cadastrar Apresentador</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Cadastrar Tópicos do Revisor</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Consultar Membros do Comitê</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Consultar Autores/Co-Autores</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Consultar Revisores</md-button></md-menu-item>
+            </div>
+        </uib-accordion>
+
+        <uib-accordion class="decoration" close-others="oneAtATime">
+            <div uib-accordion-group=""   is-open="status.open">
+                <uib-accordion-heading class="overlay">
+                    <i class="fa fa-hand-paper-o"></i>
+                    Publicações <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                </uib-accordion-heading>
+                <md-menu-item><md-button disabled="true">Enviar/Submeter Trabalho</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Consultar Submissões</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Consultar Revisões</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Atribuir Revisor</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Atribuir meta-revisor</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Definir Sessao para Submissão</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Indicar co-autor</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Convidar Apresentador</md-button></md-menu-item>
+            </div>
+        </uib-accordion>
+
+        <uib-accordion class="decoration" close-others="oneAtATime">
+            <div uib-accordion-group=""   is-open="status.open">
+                <uib-accordion-heading class="overlay">
+                    <i class="fa fa-forumbee"></i>
+                    Fórum <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                </uib-accordion-heading>
+                <md-menu-item><md-button disabled="true">Cadastrar Fórum da Conferência</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Consultar Forum</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Visualizar Fórum</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Enviar mensagem ao Fórum</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Enviar votação ao Fórum</md-button></md-menu-item>
+            </div>
+        </uib-accordion>
 
 
-                <!-- COMITÊ-->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Comitê
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li class="disabled"><a href="#">Cadastrar Programa de Comitê</a></li>
-                        <li class="disabled"><a href="#">Cadastrar Membros do Comitê</a></li>
-                        <li class="disabled"><a href="#">Cadastrar Meta-Revisor</a></li>
-                        <li class="disabled"><a href="#">Cadastrar Revisor</a></li>
-                        <li class="disabled"><a href="#">Cadastrar Apresentador</a></li>
-                        <li class="disabled"><a href="#">Cadastrar Tópicos do Revisor</a></li>
-                        <li class="disabled"><a href="#">Consultar Membros do Comitê</a></li>
-                        <li class="disabled"><a href="#">Consultar Autores/Co-Autores</a></li>
-                        <li class="disabled"><a href="#">Consultar Revisores</a></li>
-                    </ul>
-                </li>
+        <uib-accordion class="decoration" close-others="oneAtATime">
+            <div uib-accordion-group=""   is-open="status.open">
+                <uib-accordion-heading class="overlay">
+                    <i class="fa fa-star"></i>
+                    Administração <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                </uib-accordion-heading>
+                <md-menu-item><md-button disabled="true">Imprimir faturas</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Registrar pagamentos</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Estatisticas por tópico</md-button></md-menu-item>
+                <md-menu-item><md-button disabled="true">Estatisticas por tipo de submissao</md-button></md-menu-item>
+                <a th:href="@{/admin/tipo-fase}"> <md-menu-item><md-button>Cadastrar tipo de fase</md-button></md-menu-item></a>
+                <a th:href="@{/admin/tipo-submissao}"><md-menu-item><md-button>Cadastrar tipo de submissão</md-button></md-menu-item></a>
+                <a th:href="@{/admin/topico}"><md-menu-item><md-button>Cadastrar tipo de tópicos</md-button></md-menu-item></a>
+                <a th:href="@{/admin/tipo-arquivo}"><md-menu-item><md-button>Cadastrar tipo de arquivo</md-button></md-menu-item></a>
+                <a th:href="@{/admin/opcao-pagamento}"><md-menu-item><md-button>Cadastrar opção de pagamento</md-button></md-menu-item></a>
+                <a th:href="@{/admin/grupo-participante}"><md-menu-item><md-button>Cadastrar grupo de participantes</md-button></md-menu-item></a>
+                <a th:href="@{/admin/categoria-preco}"><md-menu-item><md-button>Cadastrar categoria de preço</md-button></md-menu-item></a>
+                <a th:href="@{/admin/tipo-evento-produto}"><md-menu-item><md-button>Cadastrar tipo de evento/produto</md-button></md-menu-item></a>
+                <a th:href="@{/admin/grupo-desconto}"><md-menu-item><md-button>Cadastrar grupo de desconto</md-button></md-menu-item></a>
+            </div>
+        </uib-accordion>
 
 
-                <!-- PUBLICACOES -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Publicações
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li class="disabled"><a href="#">Enviar/Submeter Trabalho</a></li>
-                        <li class="disabled"><a href="#">Consultar Submissoes</a></li>
-                        <li class="disabled"><a href="#">Consultar Revisões</a></li>
-                        <li class="disabled"><a href="#">Atribuir Revisor</a></li>
-                        <li class="disabled"><a href="#">Atribuir meta-revisor</a></li>
-                        <li class="disabled"><a href="#">Definir Sessao para Submissão</a></li>
-                        <li class="disabled"><a href="#">Indicar co-autor</a></li>
-                        <li class="disabled"><a href="#">Convidar Apresentador</a></li>
-                    </ul>
-                </li>
 
 
-                <!-- FORUM-->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Fórum
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li class="disabled"><a href="#">Cadastrar Fórum da Conferência</a></li>
-                        <li class="disabled"><a href="#">Consultar Fórum</a></li>
-                        <li class="disabled"><a href="#">Visualizar Fórum</a></li>
-                        <li class="disabled"><a href="#">Enviar mensagem ao Fórum</a></li>
-                        <li class="disabled"><a href="#">Enviar votação ao Fórum</a></li>
-                    </ul>
-                </li>
 
-                <!-- ADMINISTRACAO-->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administração
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li class="disabled"><a href="#">Imprimir faturas</a></li>
-                        <li class="disabled"><a href="#">Registrar Pagamentos</a></li>
-                        <li class="disabled"><a href="#">Estatisticas por topico</a></li>
-                        <li class="disabled"><a href="#">Estatisticas por tipo de submissão</a></li>
-                        <li><a th:href="@{/admin/tipo-fase}">Cadastrar tipo de fase</a></li>
-                        <li><a th:href="@{/admin/tipo-submissao}">Cadastrar tipo de submissão</a></li>
-                        <li><a th:href="@{/admin/topico}">Cadastrar tipo de tópicos</a></li>
-                        <li><a th:href="@{/admin/tipo-arquivo}">Cadastrar tipo de arquivo</a></li>
-                        <li><a th:href="@{/admin/opcao-pagamento}">Cadastrar opção de pagamento</a></li>
-                        <li><a th:href="@{/admin/grupo-participante}">Cadastrar grupo de participantes</a></li>
-                        <li><a th:href="@{/admin/categoria-preco}">Cadastrar categoria de preço</a></li>
-                        <li><a th:href="@{/admin/tipo-evento-produto}">Cadastrar tipo evento/produto</a></li>
-                        <li><a th:href="@{/admin/grupo-desconto}">Cadastrar grupo de desconto</a></li>
-                    </ul>
-                </li>
 
-            </ul>
-        </div>
-    </nav>
+
+
+    </md-sidenav>
+
+    <md-button
+            style="position:fixed;"
+            ng-click="toggleLeft()" class="md-fab md-mini" aria-label="menu lateral">
+        <span> <i class="fa fa-navicon"></i> </span>
+    </md-button>
+
 
 </header><!-- Header /end -->

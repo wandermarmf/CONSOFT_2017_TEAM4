@@ -47,6 +47,9 @@ public class Conferencia {
 	private List<TipoArquivo> tipoArquivoList = new ArrayList<TipoArquivo>();
 
 
+	@OneToOne
+	private Usuario administrador;
+
 /*
 @ManyToMany
 private ArrayList<Topico> topicoArrayList;
@@ -102,6 +105,14 @@ TODO criar entidade e repositorio do perfil
 private ArrayList<Perfil> perfilArrayList;
 */
 
+
+	public Usuario getAdministrador() {
+		return administrador;
+	}
+
+	public void setAdministrador(Usuario administrador) {
+		this.administrador = administrador;
+	}
 
 	public Set<Sessao> getSessaoArrayList() {
 		return sessaoArrayList;

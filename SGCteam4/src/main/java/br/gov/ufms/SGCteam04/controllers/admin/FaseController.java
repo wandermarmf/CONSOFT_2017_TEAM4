@@ -2,8 +2,10 @@ package br.gov.ufms.SGCteam04.controllers.admin;
 
 import br.gov.ufms.SGCteam04.models.Conferencia;
 import br.gov.ufms.SGCteam04.models.Fase;
+import br.gov.ufms.SGCteam04.models.TipoFase;
 import br.gov.ufms.SGCteam04.repositories.ConferenciaRepository;
 import br.gov.ufms.SGCteam04.repositories.FaseRepository;
+import br.gov.ufms.SGCteam04.repositories.TipoFaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -32,15 +35,22 @@ public class FaseController {
     @Autowired
     ConferenciaRepository conferenciaRepository;
 
+    @Autowired
+    TipoFaseRepository tipoFaseRepository;
+
     @GetMapping
     private ModelAndView faseConferenciaPage(@RequestParam(value = "id",required = true)Integer idConferencia,
                                              @RequestParam(value = "adc",required = false)String adc)
     {
         Conferencia conferencia = conferenciaRepository.findOne(idConferencia);
+        List<TipoFase> tipos = (ArrayList<TipoFase>) tipoFaseRepository.findAll();
+
+
         Set<Fase> fases = conferencia.getConferenciaFaseArrayList();
         ModelAndView modelAndView  = new ModelAndView("restrito/admin/fases-conferencia");
         modelAndView.addObject("fases",fases);
         modelAndView.addObject("obj",conferencia);
+        modelAndView.addObject("tipos",tipos);
 
         if(adc != null)
         {
@@ -65,9 +75,12 @@ public class FaseController {
     @PostMapping
     private ModelAndView adicionarFaseAConferencia(
             @RequestParam(value = "adc",required = false) String adc,
-            @RequestParam(value = "conferencia_id",required = true)Integer conferenciaId, @Valid Fase fase)
+            @RequestParam(value = "conferencia_id",required = true)Integer conferenciaId, @Valid Fase fase,
+            @RequestParam(value = "tipolst")Integer idTipoFase)
     {
         Conferencia conferencia = conferenciaRepository.findOne(conferenciaId);
+        TipoFase tipoFase = tipoFaseRepository.findOne(idTipoFase);
+        fase.setTipoFase(tipoFase);
         fase.setConferencia(conferencia);
         faseRepository.save(fase);
         Set<Fase> fases = conferencia.getConferenciaFaseArrayList();

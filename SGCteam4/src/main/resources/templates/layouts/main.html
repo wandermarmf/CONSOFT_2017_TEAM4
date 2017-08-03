@@ -4,6 +4,33 @@
       xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
 
+    <!-- Angular Material requires Angular.js Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js"></script>
+
+    <script th:src="@{/js/ui-bootstrap.js}"/>
+
+    <script type="text/javascript">
+        angular
+            .module('BlankApp', ['ngMaterial', 'ngMessages','ui.bootstrap'])
+            .controller('MainCtrl', function ($scope, $timeout, $mdSidenav) {
+                $scope.toggleLeft = buildToggler('left');
+                $scope.toggleRight = buildToggler('right');
+
+                function buildToggler(componentId) {
+                    return function() {
+                        $mdSidenav(componentId).toggle();
+                    };
+                }
+            });
+    </script>
+
     <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}"/>
 
 
@@ -36,6 +63,8 @@
 
 
 
+
+
     <div layout:replace="fragments/header">
     </div>
 
@@ -48,33 +77,8 @@
     </div>
 
 
-    <!-- Angular Material requires Angular.js Libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
-
-    <!-- Angular Material Library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js"></script>
 
 
-    <script type="text/javascript">
-        angular
-            .module('BlankApp', ['ngMaterial', 'ngMessages'])
-            .controller('MainCtrl', MainCtrl);
-
-        function MainCtrl($scope) {
-            $scope.myDate = new Date();
-        }
-
-        angular.module('BlankApp').config(function($mdDateLocaleProvider) {
-            $mdDateLocaleProvider.formatDate = function(date) {
-                return moment(date).format('DD-MM-YYYY');
-            };
-        });
-
-    </script>
 
 </body>
 </html>

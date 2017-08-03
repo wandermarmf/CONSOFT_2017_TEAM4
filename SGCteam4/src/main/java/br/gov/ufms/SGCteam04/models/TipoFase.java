@@ -3,6 +3,8 @@ package br.gov.ufms.SGCteam04.models;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Marco Cardoso on 7/9/2017.
@@ -18,6 +20,9 @@ public class TipoFase {
     @Column(unique=true)
     private String descricao;
 
+    @OneToMany
+    private Set<Fase> fases  = new HashSet<Fase>();
+
     public Integer getId() {
 		return id;
 	}
@@ -27,6 +32,14 @@ public class TipoFase {
 	}
 
 	public TipoFase(){
+    }
+
+    public Set<Fase> getFases() {
+        return fases;
+    }
+
+    public void setFases(Set<Fase> fases) {
+        this.fases = fases;
     }
 
     public String getDescricao() {

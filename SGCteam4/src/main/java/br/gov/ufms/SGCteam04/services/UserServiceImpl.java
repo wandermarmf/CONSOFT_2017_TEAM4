@@ -15,12 +15,18 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements  UserService,UserDetailsService{
 
 
+
+    private final UsuarioRepository userRepository;
+
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    public UserServiceImpl(UsuarioRepository userRepository){
+        this.userRepository = userRepository;
+    }
+
 
     @Override
     public Usuario findByEmail(String email) {
-        return usuarioRepository.findByEmail(email);
+        return userRepository.findByEmail(email);
     }
 
     @Override

@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import br.gov.ufms.SGCteam04.models.Usuario;
+import br.gov.ufms.SGCteam04.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.gov.ufms.SGCteam04.models.Conferencia;
@@ -33,6 +36,9 @@ public class ConferenciaController extends CustomController{
 	TipoArquivoRepository tipoArquivoRepository;
 	@Autowired
 	OpcaoPagamentoRepository opcaoPagamentoRepository;
+
+	@Autowired
+	UsuarioRepository usuarioRepository;
 	
 	// atributos para mainipulação de eventos...
 	private Conferencia currentConferencia;
@@ -90,6 +96,7 @@ public class ConferenciaController extends CustomController{
 		// Busca as listas que serão apresentadas na página
 		Iterable<TipoArquivo> listArqObjs = tipoArquivoRepository.findAll();
 		Iterable<OpcaoPagamento> listPgObjs = opcaoPagamentoRepository.findAll();
+		Iterable<Usuario> usuarios  = usuarioRepository.findAll();
 		
 		// Pega as lista já configuradas da conferencia
 		List<TipoArquivo> listArqConferencia = currentConferencia.getTipoArquivoList();
@@ -103,15 +110,21 @@ public class ConferenciaController extends CustomController{
 			opPg.setSelected(listOpPgConferencia.indexOf(opPg) != -1);
 		
 		mv.addObject("listArqObjs", listArqObjs);
-    	mv.addObject("listPgObjs", listPgObjs);    	
+    	mv.addObject("listPgObjs", listPgObjs);
+    	mv.addObject("usuarios",usuarios);
 	}
 	
 	@PostMapping
-	private ModelAndView doPostView(@Valid @ModelAttribute("obj") Conferencia obj,
+	private ModelAndView doPostView(@Valid @ModelAttribute("obj") Conferencia obj, @RequestParam(value = "uslt") Long idUsuario,
 			      BindingResult result, Model model, HttpServletRequest request) {
 		
 		// guarda o objeto da conferencia que está sendo manipulado
 		currentConferencia = obj;
+
+		Usuario administrador = usuarioRepository.findOne(idUsuario);
+		if(administrador != null)
+			obj.setAdministrador(administrador);
+
 
 		// Pega as listas do banco de dados...
 		Iterable<TipoArquivo> listArqObjs = tipoArquivoRepository.findAll();

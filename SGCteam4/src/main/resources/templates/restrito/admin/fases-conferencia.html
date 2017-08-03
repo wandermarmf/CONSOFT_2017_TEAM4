@@ -99,6 +99,21 @@
                                 </md-input-container>
                             </div>
 
+                            <div th:if="*{id == null}">
+                                <h1>testing</h1>
+                                <div class="row">
+                                    <div class="form-group" th:if="${tipos != null and #lists.size(tipos) != 0}">
+                                        <label for="uslt">Tipo da fase :</label>
+                                        <select  class="form-control" name="tipolst" form="formulario">
+                                            <div th:each="tipo : ${tipos}">
+                                                <option  th:value="${tipo.id}">
+                                                    <span th:text="${tipo.descricao}"></span>
+                                                </option>
+                                            </div>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div th:if="${adc != null}">
                                 <input name="adc" type="hidden" th:value="${adc}"/>

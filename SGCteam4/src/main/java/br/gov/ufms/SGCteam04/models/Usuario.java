@@ -27,7 +27,7 @@ public class Usuario {
 
     @NotNull
     @Length(min = 5 , max = 50)
-    private String nome;
+    private String name;
 
 
     @NotNull
@@ -67,18 +67,37 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
     private Set<Role> roles ;
 
+    public Usuario() {}
 
-    /*
-        GETTERS E SETTERS
-
-     */
-
-    public Endereco getLocal() {
-        return local;
+    public Usuario(String name, String sobrenome, String senha, String email, String aniversario, String website, String nacionalidade, Boolean usuarioAtivo, String telefone, String diretorioImagem, Endereco local, Set<Role> roles) {
+        this.name = name;
+        this.sobrenome = sobrenome;
+        this.senha = senha;
+        this.email = email;
+        this.aniversario = aniversario;
+        this.website = website;
+        this.nacionalidade = nacionalidade;
+        this.usuarioAtivo = usuarioAtivo;
+        this.telefone = telefone;
+        this.diretorioImagem = diretorioImagem;
+        this.local = local;
+        this.roles = roles;
     }
 
-    public void setLocal(Endereco local) {
-        this.local = local;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getSobrenome() {
@@ -87,30 +106,6 @@ public class Usuario {
 
     public void setSobrenome(String sobrenome) {
         this.sobrenome = sobrenome;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getSenha() {
@@ -161,11 +156,35 @@ public class Usuario {
         this.usuarioAtivo = usuarioAtivo;
     }
 
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
     public String getDiretorioImagem() {
         return diretorioImagem;
     }
 
     public void setDiretorioImagem(String diretorioImagem) {
         this.diretorioImagem = diretorioImagem;
+    }
+
+    public Endereco getLocal() {
+        return local;
+    }
+
+    public void setLocal(Endereco local) {
+        this.local = local;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
