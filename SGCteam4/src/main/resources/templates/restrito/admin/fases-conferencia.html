@@ -31,6 +31,9 @@
                                 <th>
                                     <p>fim</p>
                                 </th>
+                                <th>
+                                    tipo da fase
+                                </th>
                                 </thead>
                                 <tbody>
                                 <tr th:each="fase : ${fases}">
@@ -42,6 +45,9 @@
                                     </td>
                                     <td>
                                         <p th:text="${fase.fim}"></p>
+                                    </td>
+                                    <td>
+                                        <p th:text="${fase.tipoFase.descricao}"></p>
                                     </td>
                                     <td>
 
@@ -65,7 +71,7 @@
 
 
 
-                        <form name="formulario" method="post" th:action="@{/admin/fases-conferencia}">
+                        <form id="formulario" name="formulario" method="post" th:action="@{/admin/fases-conferencia}">
 
                             <input name="conferencia_id" type="hidden" th:value="${obj.id}"/>
                             <md-input-container class="md-block">
