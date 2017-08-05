@@ -18,6 +18,13 @@
 
             <md-card >
                 <md-card-content>
+
+                    <div th:if="${erro != null}">
+                        <div class="alert alert-danger">
+                            <span th:text="${erro}"/>
+                        </div>
+                    </div>
+
                     <form class="form-login" name="formulario" th:action="@{/register}" method="post">
 
 
@@ -100,11 +107,10 @@
                         <md-input-container class="md-block">
                             <label>Telefone</label>
                             <input type="text" name="telefone"  ng-model="main.telefone" ng-minlength="5" ng-maxlength="100"
-                            required="required" ng-pattern="/^(\(11\) [9][0-9]{4}-[0-9]{4})|(\(1[2-9]\) [5-9][0-9]{3}-[0-9]{4})|(\([2-9][1-9]\) [5-9][0-9]{3}-[0-9]{4})$/"/>
+                            required="required"/>
                             <div class="help-block" ng-messages="formulario.telefone.$error">
                                 <p ng-message="minlength">muito curto.</p>
                                 <p ng-message="maxlength">muito longo.</p>
-                                <p ng-message="pattern">Você deve colocar um telefone acima ! Ex (99) 9999-9999</p>
                                 <p ng-message="required">Campo obrigatorio !</p>
                             </div>
                         </md-input-container>
@@ -127,7 +133,7 @@
 
                             <md-input-container class="md-block">
                                 <label>Sigla UF</label>
-                                <input type="text" name="estado"  ng-model="main.estado" ng-length="2" required="required" ng-pattern="/^[A-Z][A-Z]$/"
+                                <input type="text" name="estado"  ng-model="main.estado" ng-length="2" required="required" ng-pattern="/^[A-Za-z][A-Za-z]$/"
                                 />
                                 <div class="help-block" ng-messages="formulario.estado.$error">
                                     <p ng-message="required">Campo obrigatorio !</p>

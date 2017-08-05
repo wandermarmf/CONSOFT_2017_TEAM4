@@ -6,6 +6,8 @@ import br.gov.ufms.SGCteam04.models.Usuario;
 import br.gov.ufms.SGCteam04.repositories.RoleRepository;
 import br.gov.ufms.SGCteam04.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +41,8 @@ public class GlobalController {
     public String registerUser(
             @Valid Usuario usuario,
             @Valid Endereco local,
-            Model model
+            Model model,
+            RedirectAttributes redirectAttributes
     )
     {
         try{
@@ -46,13 +50,22 @@ public class GlobalController {
             usuarioRepository.save(usuario);
 
             Role role = new Role();
-            role.setRole("user");
+            role.setRole("ROLE_ADMIN");
             role.setUsuario(usuario);
             roleRepository.save(role);
+            redirectAttributes.addFlashAttribute("register","Você foi registrado com sucesso");
+            return "redirect:/login";
+        }
+        catch(DataIntegrityViolationException d)
+        {
+            d.printStackTrace();
+            model.addAttribute("erro","Já existe um registro com estes dados !");
         }
         catch(Exception e)
         {
             e.printStackTrace();
+            model.addAttribute("erro","Não foi possivel efetuar o registro !");
+
         }
         return "/default/register";
     }

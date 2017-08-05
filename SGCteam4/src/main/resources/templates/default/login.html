@@ -18,6 +18,14 @@
 
                 <md-card >
                     <md-card-content>
+
+                        <div th:if="${register != null}">
+                            <div class="alert alert-success">
+                                <span th:text="${register}"/>
+                            </div>
+                        </div>
+
+
                         <form class="form-login" name="formulario" th:action="@{/login}" method="post">
 
                             <md-input-container class="md-block">

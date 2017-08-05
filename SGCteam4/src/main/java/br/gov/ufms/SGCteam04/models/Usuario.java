@@ -36,7 +36,7 @@ public class Usuario {
 
 
     @NotNull
-    @Length(min = 5,max = 50)
+    @Length(min = 4,max = 50)
     private String senha;
 
     @NotNull
@@ -48,7 +48,6 @@ public class Usuario {
     private String aniversario;
 
     @NotNull
-    @URL
     private String website;
 
     @NotNull
