@@ -1,13 +1,14 @@
 package br.gov.ufms.SGCteam04.controllers.admin;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import br.gov.ufms.SGCteam04.models.Usuario;
-import br.gov.ufms.SGCteam04.repositories.UsuarioRepository;
+import br.gov.ufms.SGCteam04.models.*;
+import br.gov.ufms.SGCteam04.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.gov.ufms.SGCteam04.models.Conferencia;
-import br.gov.ufms.SGCteam04.models.OpcaoPagamento;
-import br.gov.ufms.SGCteam04.models.TipoArquivo;
-import br.gov.ufms.SGCteam04.repositories.ConferenciaRepository;
-import br.gov.ufms.SGCteam04.repositories.OpcaoPagamentoRepository;
-import br.gov.ufms.SGCteam04.repositories.TipoArquivoRepository;
 import org.springframework.web.servlet.View;
 
 @Controller
@@ -39,6 +34,9 @@ public class ConferenciaController extends CustomController{
 
 	@Autowired
 	UsuarioRepository usuarioRepository;
+
+	@Autowired
+	TipoFaseRepository tipoFaseRepository;
 	
 	// atributos para mainipulação de eventos...
 	private Conferencia currentConferencia;
@@ -116,7 +114,8 @@ public class ConferenciaController extends CustomController{
 	
 	@PostMapping
 	private ModelAndView doPostView(@Valid @ModelAttribute("obj") Conferencia obj, @RequestParam(value = "uslt") Long idUsuario,
-			      BindingResult result, Model model, HttpServletRequest request) {
+			      @RequestParam(value = "editar",required = false)String editar,
+									BindingResult result, Model model, HttpServletRequest request) {
 		
 		// guarda o objeto da conferencia que está sendo manipulado
 		currentConferencia = obj;
@@ -154,10 +153,12 @@ public class ConferenciaController extends CustomController{
 
         ModelAndView modelAndView = doPostMappingSave(obj, result, model);
         String response = (String) modelAndView.getModel().get("response");
-        if(response.equals("success"))
+        if(editar == null && response.equals("success"))
 		{
+			ArrayList<TipoFase> arrayList =(ArrayList<TipoFase>) tipoFaseRepository.findAll();
 			String diretorioFasesConferencia = "restrito/admin/fases-conferencia";
 			modelAndView.getModel().put("obj",obj);
+			modelAndView.getModel().put("tipos",arrayList);
 			modelAndView.getModel().put("adc","conferencia");
 			return new ModelAndView(diretorioFasesConferencia,modelAndView.getModel());
 		}

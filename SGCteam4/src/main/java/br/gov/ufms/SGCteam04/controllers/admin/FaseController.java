@@ -73,17 +73,34 @@ public class FaseController {
     }
 
     @PostMapping
-    private ModelAndView adicionarFaseAConferencia(
+    private String adicionarFaseAConferencia(Model model,
+                                             RedirectAttributes redirectAttributes,
             @RequestParam(value = "adc",required = false) String adc,
+                                             @RequestParam(value = "modo",required=false)String modo,
+                                             @RequestParam(value = "id_fase",required = false)Long faseId,
             @RequestParam(value = "conferencia_id",required = true)Integer conferenciaId, @Valid Fase fase,
-            @RequestParam(value = "tipolst")Integer idTipoFase)
+            @RequestParam(value = "tipolst",required = true)Integer idTipoFase)
     {
         Conferencia conferencia = conferenciaRepository.findOne(conferenciaId);
         TipoFase tipoFase = tipoFaseRepository.findOne(idTipoFase);
         fase.setTipoFase(tipoFase);
         fase.setConferencia(conferencia);
         faseRepository.save(fase);
-        Set<Fase> fases = conferencia.getConferenciaFaseArrayList();
+        if(modo!= null)
+        {
+            redirectAttributes.addAttribute("filterid",conferenciaId);
+            return "redirect:/admin/conferencia/editar";
+        }
+        else
+        {
+            Set<Fase> fases = conferencia.getConferenciaFaseArrayList();
+            model.addAttribute("fases",fases);
+            model.addAttribute("obj",conferencia);
+            model.addAttribute("adc",adc);
+            return "restrito/admin/fases-conferencia";
+        }
+
+        /*
         ModelAndView modelAndView = new ModelAndView("restrito/admin/fases-conferencia");
         modelAndView.addObject("fases",fases);
         modelAndView.addObject("obj",conferencia);
@@ -91,7 +108,7 @@ public class FaseController {
         if(adc != null)
             modelAndView.addObject("adc",adc);
 
-        return modelAndView;
+        return modelAndView;*/
     }
 
 }

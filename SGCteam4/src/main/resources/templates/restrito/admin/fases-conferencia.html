@@ -9,134 +9,195 @@
 </head>
 <body>
 
-    <div id="integrantes" layout:fragment="content">
-        <div class="container">
+<div id="integrantes" layout:fragment="content">
+
+
+    <div class="container">
+        <div th:if="${origem == null}">
             <h1>Fases da conferencia </h1>
-            <h1 th:text="${obj.nomeConferencia}"></h1>
-            <div th:if="${fases != null and #lists.size(fases) != 0}">
-                <table class="table table-hover">
-                    <thead>
-                    <th>
-                        <p>nome</p>
-                    </th>
-                    <th>
-                        <p>inicio</p>
-                    </th>
-                    <th>
-                        <p>fim</p>
-                    </th>
-                    <th>
-                        tipo da fase
-                    </th>
-                    </thead>
-                    <tbody>
-                    <tr th:each="fase : ${fases}">
-                        <td>
-                            <p th:text="${fase.nome}"></p>
-                        </td>
-                        <td>
-                            <p th:text="${fase.inicio}"></p>
-                        </td>
-                        <td>
-                            <p th:text="${fase.fim}"></p>
-                        </td>
-                        <td>
+        </div>
+        <div th:if="${origem != null}">
+            <h1>Editar fase da conferencia</h1>
+        </div>
+
+        <h1 th:text="${obj.nomeConferencia}"></h1>
+        <div th:if="${fases != null and #lists.size(fases) != 0}">
+            <table class="table table-hover">
+                <thead>
+                <th>
+                    <p>nome</p>
+                </th>
+                <th>
+                    <p>inicio</p>
+                </th>
+                <th>
+                    <p>fim</p>
+                </th>
+                <th>
+                    tipo da fase
+                </th>
+                </thead>
+                <tbody>
+                <tr th:each="fase : ${fases}">
+                    <td>
+                        <p th:text="${fase.nome}"></p>
+                    </td>
+                    <td>
+                        <p th:text="${fase.inicio}"></p>
+                    </td>
+                    <td>
+                        <p th:text="${fase.fim}"></p>
+                    </td>
+                    <td>
+                        <div th:if="${fase.tipoFase != null}">
                             <p th:text="${fase.tipoFase.descricao}"></p>
-                        </td>
-                        <td>
+                        </div>
+                    </td>
+                    <td>
+                        <form th:method="get" th:action="@{/admin/fase/edit}">
+                            <input type="hidden" th:value="${fase.id}" name="id"/>
+                            <input type="hidden" th:value="${obj.id}" name="conferencia_id"/>
+                            <button type="submit" class="btn btn-info">Editar</button>
+                        </form>
+                    </td>
+                    <td>
 
-                            <form th:method="delete" th:action="@{/admin/fases-conferencia}">
-                                <input type="hidden" th:value="${fase.id}" name="fase_id"/>
-                                <input type="hidden" th:value="${obj.id}" name="conferencia_id"/>
+                        <form th:method="delete" th:action="@{/admin/fases-conferencia}">
+                            <input type="hidden" th:value="${fase.id}" name="fase_id"/>
+                            <input type="hidden" th:value="${obj.id}" name="conferencia_id"/>
+                            <div th:if="${adc != null}">
+                                <input name="adc" type="hidden" th:value="${adc}"/>
+                            </div>
 
-                                <div th:if="${adc != null}">
-                                    <input name="adc" type="hidden" th:value="${adc}"/>
+                            <button type="submit" class="btn btn-danger">
+                                Remover
+                            </button>
+                        </form>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <form  id="formulario" name="formulario" method="post" th:action="@{/admin/fases-conferencia}">
+
+            <div class="form-group">
+
+                <div th:if="${fase != null}">
+                    <input type="hidden" th:value="${fase.id}" name="id"/>
+                    <label for="nome">Nome</label>
+                    <input type="text" name="nome" class="form-control" required="required" th:field="${fase.nome}"/>
+                    <label for="inicio">Inicio</label>
+                    <input type="text" name="inicio" class="form-control" required="required" th:field="${fase.inicio}" />
+                    <label for="fim">Fim</label>
+                    <input type="text" name="fim"  class="form-control"  required="required"  th:field="${fase.fim}" />
+
+                </div>
+                <div th:if="${fase == null}">
+                    <label for="nome">Nome</label>
+                    <input type="text" name="nome" class="form-control" required="required" />
+                    <label for="abreviacao">Abreviacao</label>
+                    <input type="text" name="abreviacao"  class="form-control" required="required" />
+                    <label for="inicio">Inicio</label>
+                    <input type="date" name="inicio" class="form-control" required="required"/>
+                    <label for="fim">Fim</label>
+                    <input type="date" name="fim"  class="form-control" ng-model="main.fim" required="required"   />
+
+                </div>
+
+
+                <div class="row">
+                    <div class="form-group" th:if="${tipos != null and #lists.size(tipos) != 0}">
+                        <label for="tipolst">Tipo da fase :</label>
+                        <select  class="form-control" name="tipolst" id="tipolst" form="formulario">
+                            <div th:each="tipo : ${tipos}">
+
+                                <div th:if="${fase == null}">
+                                    <option  th:value="${tipo.id}">
+                                        <span th:text="${tipo.descricao}"/>
+                                    </option>
                                 </div>
-                                <md-button type="submit" class="md-primary" aria-label="Remover">
-                                    Remover
-                                </md-button>
-                            </form>
+                                <div th:if="${fase != null}">
+                                    <div th:if="${fase.tipoFase != null and tipo != null}">
+                                        <div th:if="${fase.tipoFase.id == tipo.id}">
+                                            <option selected="selected" th:value="${tipo.id}">
+                                                <span th:text="${tipo.descricao}"/>
+                                            </option>
+                                        </div>
+                                    </div>
 
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                                    <div th:if="${fase.tipoFase == null or fase.tipoFase.id != tipo.id}">
+                                        <option th:value="${tipo.id}">
+                                            <span th:text="${tipo.descricao}"/>
+                                        </option>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </select>
+                    </div>
+                </div>
+
+                <input name="id_conferencia" class="form-control" type="hidden" th:value="${obj.id}"/>
+                <input name="conferencia_id" class="form-control" type="hidden" th:value="${obj.id}"/>
+            </div>
+
+
+            <div layout="row">
+
+
+
+                <div th:if="${origem != null}">
+                    <input type="hidden" name="modo" th:value="editar"/>
+                    <input type="hidden" name="id_conferencia" th:value="${obj.id}"/>
+                    <input type="hidden" name="id_sessao" th:value="${fase.id}"/>
+                    <button type="submit" class="btn btn-primary">Editar</button>
+                </div>
+                <div th:if="${origem == null}">
+                    <button  type="submit" class="btn btn-primary">Adicionar fase</button>
+                </div>
+
+            </div>
+
+
+            <div th:if="${adc != null}">
+                <input name="adc" type="hidden" th:value="${adc}"/>
             </div>
 
 
 
-            <form id="formulario" name="formulario" method="post" th:action="@{/admin/fases-conferencia}">
+        </form>
 
-                <input name="conferencia_id" type="hidden" th:value="${obj.id}"/>
-                <md-input-container class="md-block">
-                    <label>Nome da fase</label>
-                    <input type="text" name="nome"  ng-model="main.nome" ng-minlength="5" ng-maxlength="100"
-                           required="required"  />
-                    <div class="help-block" ng-messages="formulario.nome.$error">
-                        <p ng-message="minlength">Nome muito curto.</p>
-                        <p ng-message="maxlength">Nome muito longo.</p>
-                        <p ng-message="required">É obrigatório colocar o nome.</p>
-                    </div>
-                </md-input-container>
+        <div th:if="${adc == null}">
+            <form style="margin-top: 20px" type="get" th:action="@{/admin/conferencia/editar}" >
+                <input type="hidden" th:value="${obj.id}" name="filterid"/>
+                <button type="submit" class="btn btn-danger" >Cancelar</button>
+            </form>
+        </div>
+        <div th:if="${adc != null}">
+            <form method="get" th:action="@{/admin/sessoes-conferencia}">
+                <input name="adc" type="hidden" th:value="${adc}"/>
+                <input name="id" type="hidden" th:value="${obj.id}"/>
 
-                <div layout="row">
-                    <md-input-container class="md-block">
-                        <label>Inicio da fase</label>
-                        <input type="datetime-local" name="inicio"  ng-model="main.inicio"
-                               required="required"  />
-                        <div class="help-block" ng-messages="formulario.inicio.$error">
-                            <p ng-message="required">É obrigatório colocar o inico da fase.</p>
-                        </div>
-                    </md-input-container>
-
-                    <md-input-container class="md-block">
-                        <label>Fim da fase</label>
-                        <input type="datetime-local" name="fim"  ng-model="main.fim"
-                               required="required"  />
-                        <div class="help-block" ng-messages="formulario.fim.$error">
-                            <p ng-message="required">É obrigatório colocar o fim da fase.</p>
-                        </div>
-                    </md-input-container>
-                </div>
-
-                <div th:if="*{id == null}">
-                    <h1>testing</h1>
-                    <div class="row">
-                        <div class="form-group" th:if="${tipos != null and #lists.size(tipos) != 0}">
-                            <label for="uslt">Tipo da fase :</label>
-                            <select  class="form-control" name="tipolst" form="formulario">
-                                <div th:each="tipo : ${tipos}">
-                                    <option  th:value="${tipo.id}">
-                                        <span th:text="${tipo.descricao}"></span>
-                                    </option>
-                                </div>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div th:if="${adc != null}">
-                    <input name="adc" type="hidden" th:value="${adc}"/>
-                </div>
-                <div layout="row">
-
-
-                    <button type="submit" class="btn btn-primary">Adicionar fase</button>
-
-                </div>
+                <button style="margin-top: 10px"
+                        type="submit" class="btn btn-success">Adicionar sessões</button>
 
 
             </form>
-            <div th:if="${adc != null}">
-                <form method="get" th:action="@{/admin/sessoes-conferencia}">
-                    <input name="adc" type="hidden" th:value="${adc}"/>
-                    <input name="id" type="hidden" th:value="${obj.id}"/>
-
-                    <md-button type="submit" class="md-raised">Adicionar sessões</md-button>
-                </form>
-            </div>
         </div>
+
     </div>
+
+
+
+
+
+
+</div>
 
 
 

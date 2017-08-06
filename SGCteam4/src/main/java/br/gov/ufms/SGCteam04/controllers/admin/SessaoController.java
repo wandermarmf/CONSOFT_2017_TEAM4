@@ -64,7 +64,7 @@ public class SessaoController {
     }
 
     @PostMapping
-    private String adicionarFaseAConferencia(
+    private String adicionarSessao(
             Model model,
             RedirectAttributes redirectAttributes,
             @RequestParam(value = "adc",required = false) String adc,
@@ -74,16 +74,14 @@ public class SessaoController {
     {
         Conferencia conferencia = conferenciaRepository.findOne(conferenciaId);
         sessao.setConferencia(conferencia);
+        sessaoRepository.save(sessao);
         if(modo != null)
         {
-            sessaoRepository.save(sessao);
             redirectAttributes.addAttribute("filterid",conferenciaId);
             return "redirect:/admin/conferencia/editar";
         }
         else
         {
-
-            sessaoRepository.save(sessao);
             Set<Sessao> sessoes = conferencia.getSessaoArrayList();
             model.addAttribute("sessoes",sessoes);
             model.addAttribute("obj",conferencia);

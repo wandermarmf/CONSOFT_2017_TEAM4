@@ -28,6 +28,9 @@
                     <p>nome</p>
                 </th>
                 <th>
+                    <p>abreviacao</p>
+                </th>
+                <th>
                     <p>inicio</p>
                 </th>
                 <th>
@@ -38,6 +41,9 @@
                 <tr th:each="sessao : ${sessoes}">
                     <td>
                         <p th:text="${sessao.nome}"></p>
+                    </td>
+                    <td>
+                        <p th:text="${sessao.abreviacao}"></p>
                     </td>
                     <td>
                         <p th:text="${sessao.inicio}"></p>
@@ -109,13 +115,7 @@
 
             <div layout="row">
 
-                <div th:if="${adc != null}">
-                    <input name="adc" type="hidden" th:value="${adc}"/>
 
-                    <a th:href="@{/admin/conferencia-consulta}" >
-                        <button class="btn btn-primary">Conferencias</button>
-                    </a>
-                </div>
 
                 <div th:if="${origem != null}">
                     <input type="hidden" name="modo" th:value="editar"/>
@@ -130,6 +130,12 @@
             </div>
 
 
+            <div th:if="${adc != null}">
+                <input name="adc" type="hidden" th:value="${adc}"/>
+
+
+            </div>
+
         </form>
 
         <div th:if="${adc == null}">
@@ -138,6 +144,15 @@
                 <button type="submit" class="btn btn-danger" >Cancelar</button>
             </form>
         </div>
+        <div th:if="${adc != null}">
+            <a th:href="@{/admin/conferencia-consulta}" >
+                <button style="margin-top: 20px"
+                        class="btn btn-success">Finalizar</button>
+            </a>
+        </div>
+
+
+
 
     </div>
 
