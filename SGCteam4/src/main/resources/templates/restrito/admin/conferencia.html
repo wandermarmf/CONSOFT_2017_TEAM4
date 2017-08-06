@@ -120,18 +120,28 @@
 				<p></p>
 				<p></p>
 
-				<div th:if="*{id == null}">
-					<div class="row">
-						<div class="form-group" th:if="${usuarios != null and #lists.size(usuarios) != 0}">
-							<label for="uslt">Administrador :</label>
-							<select  class="form-control" name="uslt" form="formulario">
-								<div th:each="usuario : ${usuarios}">
-									<option  th:value="${usuario.id}">
-										<span th:text="${usuario.name}"></span>
+				<div class="row">
+					<div class="form-group" th:if="${usuarios != null and #lists.size(usuarios) != 0}">
+						<label for="uslt">Administrador :</label>
+						<select  class="form-control" name="uslt" form="formulario">
+							<div th:each="usuario : ${usuarios}">
+
+								<div th:if="${obj.administrador != null and usuario != null}">
+									<div th:if="${obj.administrador.id == usuario.id}">
+										<option selected="selected" th:value="${usuario.id}">
+											<span th:text="${usuario.name + ' ' +  usuario.sobrenome}"/>
+										</option>
+									</div>
+								</div>
+
+								<div th:if="${obj.administrador == null or obj.administrador.id != usuario.id}">
+									<option th:value="${usuario.id}">
+										<span th:text="${usuario.name + ' ' + usuario.sobrenome}"/>
 									</option>
 								</div>
-							</select>
-						</div>
+
+							</div>
+						</select>
 					</div>
 				</div>
 
