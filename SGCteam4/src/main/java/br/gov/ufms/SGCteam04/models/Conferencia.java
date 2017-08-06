@@ -106,6 +106,8 @@ private ArrayList<Perfil> perfilArrayList;
 */
 
 
+
+
 	public Usuario getAdministrador() {
 		return administrador;
 	}

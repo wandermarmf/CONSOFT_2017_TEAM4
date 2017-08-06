@@ -64,22 +64,43 @@ public class SessaoController {
     }
 
     @PostMapping
-    private ModelAndView adicionarFaseAConferencia(
+    private String adicionarFaseAConferencia(
+            Model model,
+            RedirectAttributes redirectAttributes,
             @RequestParam(value = "adc",required = false) String adc,
-            @RequestParam(value = "conferencia_id",required = true)Integer conferenciaId, @Valid Sessao sessao)
+            @RequestParam(value = "modo",required=false)String modo,
+            @RequestParam(value = "id_sessao",required = false)Long sessaoId,
+            @RequestParam(value = "id_conferencia",required = true)Integer conferenciaId, @Valid Sessao sessao)
     {
         Conferencia conferencia = conferenciaRepository.findOne(conferenciaId);
         sessao.setConferencia(conferencia);
-        sessaoRepository.save(sessao);
-        Set<Sessao> sessoes = conferencia.getSessaoArrayList();
-        ModelAndView modelAndView = new ModelAndView("restrito/admin/sessoes-conferencia");
-        modelAndView.addObject("sessoes",sessoes);
-        modelAndView.addObject("obj",conferencia);
+        if(modo != null)
+        {
+            sessaoRepository.save(sessao);
+            redirectAttributes.addAttribute("filterid",conferenciaId);
+            return "redirect:/admin/conferencia/editar";
+        }
+        else
+        {
 
-        if(adc != null)
-            modelAndView.addObject("adc",adc);
+            sessaoRepository.save(sessao);
+            Set<Sessao> sessoes = conferencia.getSessaoArrayList();
+            model.addAttribute("sessoes",sessoes);
+            model.addAttribute("obj",conferencia);
+            if(adc != null)
+                model.addAttribute("adc",adc);
+            return "restrito/admin/sessoes-conferencia";
+            /*
+            ModelAndView modelAndView = new ModelAndView("restrito/admin/sessoes-conferencia");
+            modelAndView.addObject("sessoes",sessoes);
+            modelAndView.addObject("obj",conferencia);
 
-        return modelAndView;
+            if(adc != null)
+                modelAndView.addObject("adc",adc);
+
+
+            return modelAndView;*/
+        }
     }
 
 }

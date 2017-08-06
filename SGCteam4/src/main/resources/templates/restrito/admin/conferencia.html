@@ -24,23 +24,9 @@
 	            <p class="alert alert-danger" th:if="${response != 'success'}"> <span th:text="${response}">Erro</span></p>
 	        </div>
 
-			<div th:if="${obj.id != null}">
-				<div layout="row">
-					<form method="get" th:action="@{/admin/fases-conferencia}">
-						<input name="id" type="hidden" th:value="${obj.id}"/>
-						<md-button type="submit" class="md-raised md-primary">Editar fases</md-button>
-					</form>
-
-					<form method="get" th:action="@{/admin/sessoes-conferencia}">
-						<input name="id" type="hidden" th:value="${obj.id}"/>
-						<md-button type="submit" class="md-raised md-primary">Editar sessoes</md-button>
-					</form>
-				</div>
-			</div>
 
 
 
-	
 	        <form id="formulario" method="post" th:action="@{/admin/conferencia}" th:object="${obj}">
 	            <div class="form-group">
 	                <label for="nomeConferencia">Nome da Conferência</label>
@@ -145,13 +131,110 @@
 					</div>
 				</div>
 
-
-
-				<button type="submit" class="btn btn-info"  name="buttoncommand" id="buttoncommand" value="conferencia">Enviar</button>
-				<b></b>
+					<b></b>
 				<b></b>
 		    </form>
-	    </div>
+
+			<button	style="margin-top: 20px"
+					   form="formulario" type="submit" class="btn btn-info"  name="buttoncommand" id="buttoncommand" value="conferencia">Atualizar</button>
+
+
+
+			<h2>Fases da conferência</h2>
+			<div th:if="${obj.conferenciaFaseArrayList != null and #lists.size(obj.conferenciaFaseArrayList) != 0}">
+				<div class="row">
+					<table class="table table-hover">
+						<thead>
+						<tr>
+							<th>Nome</th>
+							<th>Inicio</th>
+							<th>Fim</th>
+							<th>Tipo da fase</th>
+						</tr>
+						</thead>
+						<tbody>
+						<div th:each="fase : ${obj.conferenciaFaseArrayList}">
+							<tr>
+								<td><span th:text="${fase.nome}"/> </td>
+								<td><span th:text="${fase.inicio}"/></td>
+								<td><span th:text="${fase.fim}"/></td>
+								<td><span th:text="${fase.tipoFase.descricao}"/></td>
+								<td>
+									<form th:method="put" th:action="@{admin/fase-conferencia}" >
+										<input type="hidden" th:value="${fase.id}" name="id"/>
+										<button class="btn btn-info" type="submit" >Editar</button>
+									</form>
+								</td>
+								<td>
+									<form th:method="delete" th:action="@{admin/fase-conferencia}" >
+										<input type="hidden" th:value="${fase.id}" name="id"/>
+										<button class="btn btn-danger" type="submit" >Remover</button>
+									</form>
+								</td>
+							</tr>
+						</div>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div th:if="${obj != null}">
+				<form method="get" th:action="@{/admin/fases-conferencia}">
+					<input name="id" type="hidden" th:value="${obj.id}"/>
+					<button  type="submit" class="btn btn-primary">Adicionar fases</button>
+				</form>
+			</div>
+
+
+			<h2>Sessões da conferência</h2>
+			<div th:if="${obj.sessaoArrayList != null and #lists.size(obj.sessaoArrayList) != 0}">
+				<div class="row">
+					<table class="table table-hover">
+						<thead>
+						<tr>
+							<th>Nome</th>
+							<th>Abreviação</th>
+							<th>Inicio</th>
+							<th>Fim</th>
+						</tr>
+						</thead>
+						<tbody>
+						<div th:each="sessao : ${obj.sessaoArrayList}">
+							<tr>
+								<td><span th:text="${sessao.nome}"/> </td>
+								<td><span th:text="${sessao.abreviacao}"/></td>
+								<td><span th:text="${sessao.inicio}"/></td>
+								<td><span th:text="${sessao.fim}"/></td>
+								<td>
+									<form th:method="get" th:action="@{/admin/sessao/edit}">
+										<input type="hidden" th:value="${sessao.id}" name="id"/>
+										<input type="hidden" th:value="${obj.id}" name="conferencia_id"/>
+										<button type="submit" class="btn btn-info">Editar</button>
+									</form>
+
+								</td>
+								<td>
+									<form th:method="delete" th:action="@{/admin/sessao}">
+										<input type="hidden" th:value="${sessao.id}" name="id"/>
+										<input type="hidden" th:value="${obj.id}" name="conferencia_id"/>
+										<button type="submit" class="btn btn-danger">Remover</button>
+									</form>
+
+								</td>
+							</tr>
+						</div>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div th:if="${obj != null}">
+				<form method="get" th:action="@{/admin/sessoes-conferencia}">
+					<input name="id" type="hidden" th:value="${obj.id}"/>
+					<button  type="submit" class="btn btn-primary">Adicionar sessões</button>
+				</form>
+			</div>
+
+
+		</div>
 	</div>
 </body>
 </html>
