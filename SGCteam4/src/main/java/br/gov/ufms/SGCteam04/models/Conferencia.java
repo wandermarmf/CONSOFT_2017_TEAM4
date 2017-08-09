@@ -46,6 +46,18 @@ public class Conferencia {
 	@JoinTable(name = "conferencia_tipo_arquivo", joinColumns = @JoinColumn(name = "conferencia_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "tipo_arquivo_id", referencedColumnName = "id"))
 	private List<TipoArquivo> tipoArquivoList = new ArrayList<TipoArquivo>();
 
+	@ManyToMany(cascade = CascadeType.REMOVE)
+	@JoinTable(name = "conferencia_tipo_submissao", joinColumns = @JoinColumn(name = "conferencia_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "tipo_submissao_id", referencedColumnName = "id"))
+	private List<TipoSubmissao> tipoSubmissaoList = new ArrayList<TipoSubmissao>();
+
+	@ManyToMany(cascade = CascadeType.REMOVE)
+	@JoinTable(name = "conferencia_grupo_participante", joinColumns = @JoinColumn(name = "conferencia_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "grupo_participante_id", referencedColumnName = "id"))
+	private List<GrupoParticipante> grupoParticipanteList = new ArrayList<GrupoParticipante>();
+
+	@ManyToMany(cascade = CascadeType.REMOVE)
+	@JoinTable(name = "conferencia_topico", joinColumns = @JoinColumn(name = "conferencia_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "topico_id", referencedColumnName = "id"))
+	private List<Topico> topicoList = new ArrayList<Topico>();
+
 
 	@OneToOne
 	private Usuario administrador;
@@ -229,6 +241,31 @@ private ArrayList<Perfil> perfilArrayList;
 		this.tipoArquivoList = tipoArquivoList;
 	}
 
+	public List<TipoSubmissao> getTipoSubmissaoList() {
+		return tipoSubmissaoList;
+	}
+
+	public void setTipoSubmissaoList(List<TipoSubmissao> tipoSubmissaoList) {
+		this.tipoSubmissaoList = tipoSubmissaoList;
+	}
+
+	public List<GrupoParticipante> getGrupoParticipanteList() {
+		return grupoParticipanteList;
+	}
+
+	public void setGrupoParticipanteList(List<GrupoParticipante> grupoParticipanteList) {
+		this.grupoParticipanteList = grupoParticipanteList;
+	}
+
+	public List<Topico> getTopicoList() {
+		return topicoList;
+	}
+
+	public void setTopicoList(List<Topico> grupotopicoList) {
+		this.topicoList = grupotopicoList;
+	}
+	
+	
 	public void addTipoArquivo(Iterable<TipoArquivo> listArqObjs, String paramValue) {
 
 		if (paramValue.equals("") == true)
@@ -255,6 +292,46 @@ private ArrayList<Perfil> perfilArrayList;
 		}
 	}
 
+	public void addTipoSubmissao(Iterable<TipoSubmissao> listObjs, String paramValue) {
+
+		if (paramValue.equals("") == true)
+			return;
+
+		for (TipoSubmissao obj : listObjs) {
+			if (obj.getId().toString().equals(paramValue)) {
+				tipoSubmissaoList.add(obj);
+				return;
+			}
+		}
+	}
+
+	public void addGrupoParticipante(Iterable<GrupoParticipante> listObjs, String paramValue) {
+
+		if (paramValue.equals("") == true)
+			return;
+
+		for (GrupoParticipante obj : listObjs) {
+			if (obj.getId().toString().equals(paramValue)) {
+				grupoParticipanteList.add(obj);
+				return;
+			}
+		}
+	}
+
+	public void addTopico(Iterable<Topico> listObjs, String paramValue) {
+
+		if (paramValue.equals("") == true)
+			return;
+
+		for (Topico obj : listObjs) {
+			if (obj.getId().toString().equals(paramValue)) {
+				topicoList.add(obj);
+				return;
+			}
+		}
+	}
+
+	
 
 /*
 public ArrayList<Topico> getTopicoArrayList() {

@@ -11,6 +11,9 @@ public class GrupoParticipante {
 	@Column(unique = true)
 	private String grupo;	
 
+	@Transient
+	private boolean selected = false;
+
 	public Integer getId() {
 		return id;
 	}
@@ -31,4 +34,12 @@ public class GrupoParticipante {
 		// TODO Auto-generated constructor stub
 	}
 
+	public boolean isSelected() {
+		return selected;
+	}
+
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
 }

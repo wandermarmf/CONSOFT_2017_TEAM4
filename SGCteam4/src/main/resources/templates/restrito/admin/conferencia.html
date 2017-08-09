@@ -57,9 +57,77 @@
 				<b></b>
 
 
+			    <div class="row">
+				    <div class="col-sm-6 col-xs-6 col-md-6" style="background-color:lavender;">
+						<b></b>
+				        <h4>Tópicos Gerais</h4>
+						<b></b>
+						<table class="table table-hover">
+							<tbody>
+								<tr th:each="objTop, stat: ${listTopicoObjs}">
+									<td>
+								         <!-- th:checked="${currentClient.selected}" -->
+								         <input type="checkbox"
+								                th:name="|checklisttopico${stat.index}|"
+								                th:value="${objTop.id}"
+								                th:checked="${objTop.selected}"/>
+								         <span th:text="${objTop.topico}"></span> 
+	    						     </td>
+								</tr>
+							</tbody>
+						</table>
+						<b></b>
+						<p></p>
+					</div>
+				    <div class="col-sm-6 col-xs-6 col-md-6" style="background-color:lavender;">
+						<b></b>
+				        <h4>Grupo de Participantes</h4>
+						<b></b>
+						<table class="table table-hover">
+							<tbody>
+								<tr th:each="objPart, stat: ${listParticipanteObjs}">
+									<td>
+								         <!-- th:checked="${currentClient.selected}" -->
+								         <input type="checkbox"
+								                th:name="|checklistparticip${stat.index}|"
+								                th:value="${objPart.id}"
+								                th:checked="${objPart.selected}"/>
+								         <span th:text="${objPart.grupo}"></span> 
+	    						     </td>
+								</tr>
+							</tbody>
+						</table>
+						<b></b>
+						<p></p>
+					</div>
+				</div>
+				<b></b>
+				<p></p>
+				<p></p>
 
 
 			    <div class="row">
+				    <div class="col-sm-6 col-xs-6 col-md-6" style="background-color:lavender;">
+						<b></b>
+				        <h4>Tipos de Submissão</h4>
+						<b></b>
+						<table class="table table-hover">
+							<tbody>
+								<tr th:each="objTipoSub, stat: ${listTipoSubmissaoObjs}">
+									<td>
+								         <!-- th:checked="${currentClient.selected}" -->
+								         <input type="checkbox"
+								                th:name="|checklisttiposub${stat.index}|"
+								                th:value="${objTipoSub.id}"
+								                th:checked="${objTipoSub.selected}"/>
+								         <span th:text="${objTipoSub.tipoSubmissao}"></span> 
+	    						     </td>
+								</tr>
+							</tbody>
+						</table>
+						<b></b>
+						<p></p>
+					</div>
 				    <div class="col-sm-6 col-xs-6 col-md-6" style="background-color:lavender;">
 						<b></b>
 				        <h4>Arquivos aceitos</h4>
@@ -81,6 +149,12 @@
 						<b></b>
 						<p></p>
 					</div>
+				</div>
+				<b></b>
+				<p></p>
+				<p></p>
+				
+			    <div class="row">
 				    <div class="col-sm-6 col-xs-6 col-md-6" style="background-color:lavender;">
 						<b></b>
 				        <h4>Opções de Pagamento</h4>
@@ -102,10 +176,6 @@
 						<b></b>
 						<p></p>
 					</div>
-
-
-
-
 				</div>
 				<b></b>
 				<p></p>

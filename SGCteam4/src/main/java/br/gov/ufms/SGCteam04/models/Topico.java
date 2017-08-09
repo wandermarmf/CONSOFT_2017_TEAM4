@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Topico {
@@ -13,6 +14,9 @@ public class Topico {
 	private Integer id;
 	@Column(unique = true)
 	private String topico;
+
+	@Transient
+	private boolean selected = false;
 
 	/*
 	@ManyToMany
@@ -48,4 +52,12 @@ public class Topico {
 		// TODO Auto-generated constructor stub
 	}
 
+	public boolean isSelected() {
+		return selected;
+	}
+
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
 }
