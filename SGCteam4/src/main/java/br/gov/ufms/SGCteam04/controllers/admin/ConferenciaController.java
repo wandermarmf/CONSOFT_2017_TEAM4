@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import org.springframework.web.servlet.View;
-
 @Controller
 @RequestMapping("/admin/conferencia")
 public class ConferenciaController extends CustomController{
@@ -172,15 +170,15 @@ public class ConferenciaController extends CustomController{
             if ((paramName == null) || (paramName.length() < 11))
             	continue;
             
-            if (paramName.substring(0, 12).toLowerCase().equals("checklistarq") == true) {
+            if (CheckOption.isField(paramName, "checklistarq") == true) {
             	currentConferencia.addTipoArquivo(listArqObjs, paramValue);
-            } else if (paramName.substring(0, 11).toLowerCase().equals("checklistpg") == true) {
+            } else if (CheckOption.isField(paramName, "checklistpg") == true) {
             	currentConferencia.addOpcaoPagamento(listPgObjs, paramValue);
-            } else if (paramName.substring(0, 15).toLowerCase().equals("checklisttopico") == true) {
+            } else if (CheckOption.isField(paramName, "checklisttopico") == true) {
             	currentConferencia.addTopico(listTopicoObjs, paramValue);
-            } else if (paramName.substring(0, 17).toLowerCase().equals("checklistparticip") == true) {
+            } else if (CheckOption.isField(paramName, "checklistparticip") == true) {
             	currentConferencia.addGrupoParticipante(listParticipanteObjs, paramValue);
-            } else if (paramName.substring(0, 16).toLowerCase().equals("checklisttiposub") == true) {
+            } else if (CheckOption.isField(paramName, "checklisttiposub") == true) {
             	currentConferencia.addTipoSubmissao(listTipoSubmissaoObjs, paramValue);
             }            	
         }
@@ -188,18 +186,25 @@ public class ConferenciaController extends CustomController{
         ModelAndView modelAndView = doPostMappingSave(obj, result, model);
         String response = (String) modelAndView.getModel().get("response");
         
-        if(editar == null && response.equals("success"))
-		{
-			ArrayList<TipoFase> arrayList =(ArrayList<TipoFase>) tipoFaseRepository.findAll();
-			String diretorioFasesConferencia = "restrito/admin/fases-conferencia";
-			modelAndView.getModel().put("obj",obj);
-			modelAndView.getModel().put("tipos",arrayList);
-			modelAndView.getModel().put("adc","conferencia");
-			return new ModelAndView(diretorioFasesConferencia,modelAndView.getModel());
+        if (response.equals("success")) {
+        	paramValue = request.getParameter("buttoncommand");
+        	
+        	if (CheckOption.isField(paramValue, "fase") == true) {
+            	ArrayList<TipoFase> arrayList =(ArrayList<TipoFase>) tipoFaseRepository.findAll();
+    			String diretorioFasesConferencia = "restrito/admin/fases-conferencia";
+    			modelAndView.getModel().put("obj",obj);
+    			modelAndView.getModel().put("tipos",arrayList);
+    			modelAndView.getModel().put("adc","conferencia");
+    			return new ModelAndView(diretorioFasesConferencia,modelAndView.getModel());
+        	}
+        	else if (CheckOption.isField(paramValue, "sessao") == true) {
+    			String diretorioFasesConferencia = "restrito/admin/sessoes-conferencia";
+    			modelAndView.getModel().put("obj",obj);
+    			modelAndView.getModel().put("adc","conferencia");
+    			return new ModelAndView(diretorioFasesConferencia,modelAndView.getModel());
+        	}
 		}
-		else
-		{
-			return modelAndView;
-		}
+        
+		return modelAndView;
 	}
 }
