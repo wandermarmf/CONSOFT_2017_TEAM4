@@ -52,8 +52,8 @@
 					<tr th:each="objFor: ${listObjs}">
 						<td th:text="${objFor.id}"></td>
 						<td th:text="${objFor.descricao}"></td>
-						<td> <a th:href="@{/admin/opcao-pagamento/editar(filterid=${objFor.id})}">Editar</a></td>
-						<td> <a th:href="@{/admin/opcao-pagamento/apagar(filterid=${objFor.id})}">Apagar</a></td>
+						<td width="120" align="center"><a class="btn btn-info" th:href="@{/admin/opcao-pagamento/editar(filterid=${objFor.id})}">Editar</a></td>
+						<td width="120" align="center"> <a class="btn btn-danger" th:href="@{/admin/opcao-pagamento/apagar(filterid=${objFor.id})}">Apagar</a></td>
 					</tr>
 				</tbody>
 				

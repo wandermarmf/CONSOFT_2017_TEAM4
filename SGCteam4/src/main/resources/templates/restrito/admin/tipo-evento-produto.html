@@ -65,8 +65,8 @@
 						<td th:text="${objFor.informacao}"></td>
 						<td th:text="${objFor.modoSelecao}"></td>
 						<td th:text="${objFor.ordemSelecao}"></td>
-						<td> <a th:href="@{/admin/tipo-evento-produto/editar(filterid=${objFor.id})}">Editar</a></td>
-						<td> <a th:href="@{/admin/tipo-evento-produto/apagar(filterid=${objFor.id})}">Apagar</a></td>
+						<td width="120" align="center"> <a class="btn btn-info" th:href="@{/admin/tipo-evento-produto/editar(filterid=${objFor.id})}">Editar</a></td>
+						<td width="120" align="center"> <a class="btn btn-danger" th:href="@{/admin/tipo-evento-produto/apagar(filterid=${objFor.id})}">Apagar</a></td>
 					</tr>
 				</tbody>
 				
