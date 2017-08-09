@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import org.springframework.web.servlet.View;
-
 @Controller
 @RequestMapping("/admin/conferencia")
 public class ConferenciaController extends CustomController{
@@ -31,6 +29,12 @@ public class ConferenciaController extends CustomController{
 	TipoArquivoRepository tipoArquivoRepository;
 	@Autowired
 	OpcaoPagamentoRepository opcaoPagamentoRepository;
+	@Autowired
+	TipoSubmissaoRepository tipoSubmissaoRepository;
+	@Autowired
+	GrupoParticipanteRepository grupoParticipanteRepository;
+	@Autowired
+	TopicoRepository topicoRepository;
 
 	@Autowired
 	UsuarioRepository usuarioRepository;
@@ -92,21 +96,40 @@ public class ConferenciaController extends CustomController{
 	@Override
 	protected void doGetViewChilds(ModelAndView mv, Model model) {
 		// Busca as listas que serão apresentadas na página
+		Iterable<TipoSubmissao> listTipoSubmissaoObjs = tipoSubmissaoRepository.findAll();
+		Iterable<GrupoParticipante> listParticipanteObjs = grupoParticipanteRepository.findAll();
+		Iterable<Topico> listTopicoObjs = topicoRepository.findAll();
 		Iterable<TipoArquivo> listArqObjs = tipoArquivoRepository.findAll();
 		Iterable<OpcaoPagamento> listPgObjs = opcaoPagamentoRepository.findAll();
 		Iterable<Usuario> usuarios  = usuarioRepository.findAll();
 		
 		// Pega as lista já configuradas da conferencia
+		List<TipoSubmissao> listTipoSubmissaoConferencia = currentConferencia.getTipoSubmissaoList();
+		List<GrupoParticipante> listGrupoParticipanteConferencia = currentConferencia.getGrupoParticipanteList();
+		List<Topico> listTipocoConferencia = currentConferencia.getTopicoList();
+
 		List<TipoArquivo> listArqConferencia = currentConferencia.getTipoArquivoList();
 		List<OpcaoPagamento> listOpPgConferencia = currentConferencia.getOpcaoPagamentoList();
 		
 		// Sinaliza quais estão selecionadas para esta conferencia...
-		for (TipoArquivo tipoArq : listArqObjs) 
-			tipoArq.setSelected(listArqConferencia.indexOf(tipoArq) != -1);
+		for (TipoSubmissao obj : listTipoSubmissaoObjs) 
+			obj.setSelected(listTipoSubmissaoConferencia.indexOf(obj) != -1);
 		
-		for (OpcaoPagamento opPg : listPgObjs) 
-			opPg.setSelected(listOpPgConferencia.indexOf(opPg) != -1);
+		for (GrupoParticipante obj : listParticipanteObjs) 
+			obj.setSelected(listGrupoParticipanteConferencia.indexOf(obj) != -1);
 		
+		for (Topico obj : listTopicoObjs) 
+			obj.setSelected(listTipocoConferencia.indexOf(obj) != -1);
+
+		for (TipoArquivo obj : listArqObjs) 
+			obj.setSelected(listArqConferencia.indexOf(obj) != -1);
+		
+		for (OpcaoPagamento obj : listPgObjs) 
+			obj.setSelected(listOpPgConferencia.indexOf(obj) != -1);
+		
+		mv.addObject("listTipoSubmissaoObjs", listTipoSubmissaoObjs);
+		mv.addObject("listParticipanteObjs", listParticipanteObjs);
+		mv.addObject("listTopicoObjs", listTopicoObjs);		
 		mv.addObject("listArqObjs", listArqObjs);
     	mv.addObject("listPgObjs", listPgObjs);
     	mv.addObject("usuarios",usuarios);
@@ -128,6 +151,9 @@ public class ConferenciaController extends CustomController{
 		// Pega as listas do banco de dados...
 		Iterable<TipoArquivo> listArqObjs = tipoArquivoRepository.findAll();
 		Iterable<OpcaoPagamento> listPgObjs = opcaoPagamentoRepository.findAll();
+		Iterable<TipoSubmissao> listTipoSubmissaoObjs = tipoSubmissaoRepository.findAll();
+		Iterable<GrupoParticipante> listParticipanteObjs = grupoParticipanteRepository.findAll();
+		Iterable<Topico> listTopicoObjs = topicoRepository.findAll();
 		
 		String paramName, paramValue;
 		
@@ -144,27 +170,41 @@ public class ConferenciaController extends CustomController{
             if ((paramName == null) || (paramName.length() < 11))
             	continue;
             
-            if (paramName.substring(0, 12).toLowerCase().equals("checklistarq") == true) {
+            if (CheckOption.isField(paramName, "checklistarq") == true) {
             	currentConferencia.addTipoArquivo(listArqObjs, paramValue);
-            } else if (paramName.substring(0, 11).toLowerCase().equals("checklistpg") == true) {
+            } else if (CheckOption.isField(paramName, "checklistpg") == true) {
             	currentConferencia.addOpcaoPagamento(listPgObjs, paramValue);
+            } else if (CheckOption.isField(paramName, "checklisttopico") == true) {
+            	currentConferencia.addTopico(listTopicoObjs, paramValue);
+            } else if (CheckOption.isField(paramName, "checklistparticip") == true) {
+            	currentConferencia.addGrupoParticipante(listParticipanteObjs, paramValue);
+            } else if (CheckOption.isField(paramName, "checklisttiposub") == true) {
+            	currentConferencia.addTipoSubmissao(listTipoSubmissaoObjs, paramValue);
             }            	
         }
 
         ModelAndView modelAndView = doPostMappingSave(obj, result, model);
         String response = (String) modelAndView.getModel().get("response");
-        if(editar == null && response.equals("success"))
-		{
-			ArrayList<TipoFase> arrayList =(ArrayList<TipoFase>) tipoFaseRepository.findAll();
-			String diretorioFasesConferencia = "restrito/admin/fases-conferencia";
-			modelAndView.getModel().put("obj",obj);
-			modelAndView.getModel().put("tipos",arrayList);
-			modelAndView.getModel().put("adc","conferencia");
-			return new ModelAndView(diretorioFasesConferencia,modelAndView.getModel());
+        
+        if (response.equals("success")) {
+        	paramValue = request.getParameter("buttoncommand");
+        	
+        	if (CheckOption.isField(paramValue, "fase") == true) {
+            	ArrayList<TipoFase> arrayList =(ArrayList<TipoFase>) tipoFaseRepository.findAll();
+    			String diretorioFasesConferencia = "restrito/admin/fases-conferencia";
+    			modelAndView.getModel().put("obj",obj);
+    			modelAndView.getModel().put("tipos",arrayList);
+    			modelAndView.getModel().put("adc","conferencia");
+    			return new ModelAndView(diretorioFasesConferencia,modelAndView.getModel());
+        	}
+        	else if (CheckOption.isField(paramValue, "sessao") == true) {
+    			String diretorioFasesConferencia = "restrito/admin/sessoes-conferencia";
+    			modelAndView.getModel().put("obj",obj);
+    			modelAndView.getModel().put("adc","conferencia");
+    			return new ModelAndView(diretorioFasesConferencia,modelAndView.getModel());
+        	}
 		}
-		else
-		{
-			return modelAndView;
-		}
+        
+		return modelAndView;
 	}
 }
