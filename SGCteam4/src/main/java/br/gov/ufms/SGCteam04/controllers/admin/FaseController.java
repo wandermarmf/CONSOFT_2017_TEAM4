@@ -81,6 +81,7 @@ public class FaseController {
             @RequestParam(value = "conferencia_id",required = true)Integer conferenciaId, @Valid Fase fase,
             @RequestParam(value = "tipolst",required = true)Integer idTipoFase)
     {
+
         Conferencia conferencia = conferenciaRepository.findOne(conferenciaId);
         TipoFase tipoFase = tipoFaseRepository.findOne(idTipoFase);
         fase.setTipoFase(tipoFase);
@@ -93,10 +94,12 @@ public class FaseController {
         }
         else
         {
+            model.addAttribute("fase",null);
             Set<Fase> fases = conferencia.getConferenciaFaseArrayList();
             model.addAttribute("fases",fases);
             model.addAttribute("obj",conferencia);
             model.addAttribute("adc",adc);
+            model.addAttribute("tipos",tipoFaseRepository.findAll());
             return "restrito/admin/fases-conferencia";
         }
 

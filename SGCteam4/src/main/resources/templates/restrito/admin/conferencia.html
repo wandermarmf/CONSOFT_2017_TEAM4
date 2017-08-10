@@ -238,7 +238,7 @@
 										<td><span th:text="${fase.fim}"/></td>
 										<td><span th:text="${fase.tipoFase.descricao}"/></td>
 										<td>
-											<form th:method="get" th:action="@{/admin/fase/edit}" >
+											<form target="_blank" th:method="get" th:action="@{/admin/fase/edit}" >
 												<input type="hidden" th:value="${fase.id}" name="id"/>
 												<input type="hidden" th:value="${obj.id}" name="conferencia_id"/>
 												<button class="btn btn-info" type="submit" >Editar</button>
@@ -282,7 +282,7 @@
 										<td><span th:text="${sessao.inicio}"/></td>
 										<td><span th:text="${sessao.fim}"/></td>
 										<td>
-											<form th:method="get" th:action="@{/admin/sessao/edit}">
+											<form target="_blank" th:method="get" th:action="@{/admin/sessao/edit}">
 												<input type="hidden" th:value="${sessao.id}" name="id"/>
 												<input type="hidden" th:value="${obj.id}" name="conferencia_id"/>
 												<button type="submit" class="btn btn-info">Editar</button>

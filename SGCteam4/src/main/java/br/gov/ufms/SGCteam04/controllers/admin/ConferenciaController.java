@@ -41,6 +41,12 @@ public class ConferenciaController extends CustomController{
 
 	@Autowired
 	TipoFaseRepository tipoFaseRepository;
+
+	@Autowired
+	FaseRepository faseRepository;
+
+	@Autowired
+	SessaoRepository sessaoRepository;
 	
 	// atributos para mainipulação de eventos...
 	private Conferencia currentConferencia;
@@ -142,7 +148,7 @@ public class ConferenciaController extends CustomController{
 		
 		// guarda o objeto da conferencia que está sendo manipulado
 		currentConferencia = obj;
-
+		obj = conferenciaRepository.findOne(obj.getId());
 		Usuario administrador = usuarioRepository.findOne(idUsuario);
 		if(administrador != null)
 			obj.setAdministrador(administrador);
@@ -195,12 +201,14 @@ public class ConferenciaController extends CustomController{
     			modelAndView.getModel().put("obj",obj);
     			modelAndView.getModel().put("tipos",arrayList);
     			modelAndView.getModel().put("adc","conferencia");
+    			modelAndView.getModel().put("fases",obj.getConferenciaFaseArrayList());
     			return new ModelAndView(diretorioFasesConferencia,modelAndView.getModel());
         	}
         	else if (CheckOption.isField(paramValue, "sessao") == true) {
     			String diretorioFasesConferencia = "restrito/admin/sessoes-conferencia";
     			modelAndView.getModel().put("obj",obj);
     			modelAndView.getModel().put("adc","conferencia");
+				modelAndView.getModel().put("sessoes",obj.getSessaoArrayList());
     			return new ModelAndView(diretorioFasesConferencia,modelAndView.getModel());
         	}
 		}

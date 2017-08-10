@@ -54,7 +54,7 @@
                         </div>
                     </td>
                     <td>
-                        <form th:method="get" th:action="@{/admin/fase/edit}">
+                        <form target="_blank" th:method="get" th:action="@{/admin/fase/edit}">
                             <input type="hidden" th:value="${fase.id}" name="id"/>
                             <input type="hidden" th:value="${obj.id}" name="conferencia_id"/>
                             <button type="submit" class="btn btn-info">Editar</button>
@@ -87,6 +87,7 @@
             <div class="form-group">
 
                 <div th:if="${fase != null}">
+                    <h1>teste</h1>
                     <input type="hidden" th:value="${fase.id}" name="id"/>
                     <label for="nome">Nome</label>
                     <input type="text" name="nome" class="form-control" required="required" th:field="${fase.nome}"/>
@@ -97,6 +98,7 @@
 
                 </div>
                 <div th:if="${fase == null}">
+                    <h1>teste2</h1>
                     <label for="nome">Nome</label>
                     <input type="text" name="nome" class="form-control" required="required" />
                     <label for="abreviacao">Abreviacao</label>
@@ -172,23 +174,10 @@
 
         </form>
 
-        <div th:if="${adc == null}">
-            <form style="margin-top: 20px" type="get" th:action="@{/admin/conferencia/editar}" >
-                <input type="hidden" th:value="${obj.id}" name="filterid"/>
-                <button type="submit" class="btn btn-danger" >Cancelar</button>
-            </form>
-        </div>
-        <div th:if="${adc != null}">
-            <form method="get" th:action="@{/admin/sessoes-conferencia}">
-                <input name="adc" type="hidden" th:value="${adc}"/>
-                <input name="id" type="hidden" th:value="${obj.id}"/>
-
-                <button style="margin-top: 10px"
-                        type="submit" class="btn btn-success">Adicionar sessões</button>
-
-
-            </form>
-        </div>
+        <form style="margin-top: 20px" type="get" th:action="@{/admin/conferencia/editar}" >
+            <input type="hidden" th:value="${obj.id}" name="filterid"/>
+            <button type="submit" class="btn btn-danger" >Visualizar conferencia</button>
+        </form>
 
     </div>
 
