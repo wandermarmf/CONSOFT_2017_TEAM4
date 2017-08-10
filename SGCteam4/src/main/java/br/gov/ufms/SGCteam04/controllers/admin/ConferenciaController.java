@@ -148,7 +148,12 @@ public class ConferenciaController extends CustomController{
 		
 		// guarda o objeto da conferencia que está sendo manipulado
 		currentConferencia = obj;
-		obj = conferenciaRepository.findOne(obj.getId());
+
+		//NAO APAGAR ESTE IF
+		if(obj.getId() != null)
+			obj = conferenciaRepository.findOne(obj.getId());
+
+
 		Usuario administrador = usuarioRepository.findOne(idUsuario);
 		if(administrador != null)
 			obj.setAdministrador(administrador);

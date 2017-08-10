@@ -28,7 +28,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/controllers/admin/ConferenciaController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="173">
-              <caret line="204" column="0" lean-forward="false" selection-start-line="204" selection-start-column="0" selection-end-line="204" selection-end-column="0" />
+              <caret line="209" column="0" lean-forward="false" selection-start-line="209" selection-start-column="0" selection-end-line="209" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -47,8 +47,8 @@
       <file leaf-file-name="FaseController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/controllers/admin/FaseController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
-              <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+            <state relative-caret-position="140">
+              <caret line="101" column="0" lean-forward="false" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -60,6 +60,18 @@
             <state relative-caret-position="46">
               <caret line="240" column="66" lean-forward="false" selection-start-line="240" selection-start-column="66" selection-end-line="240" selection-end-column="66" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="header.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/fragments/header.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="80">
+              <caret line="26" column="36" lean-forward="false" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
+              <folding>
+                <element signature="n#style#0;n#a#0;n#md-menu#0;n#md-sidenav#0;n#header#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -88,7 +100,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SessaoController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SessaoController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/controllers/admin/SessaoController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="91">
@@ -129,11 +141,12 @@
       <find>Adicionar</find>
       <find>tipolst</find>
       <find>sessões</find>
-      <find>fases</find>
       <find>_blank</find>
       <find>Editar</find>
       <find>Visualizar</find>
       <find>Finalizar</find>
+      <find>fases</find>
+      <find>HOME</find>
     </findStrings>
     <replaceStrings>
       <replace>fases</replace>
@@ -180,7 +193,6 @@
         <option value="$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/configurations/SecurityConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/services/UserDetailsImpl.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/fragments/header.html" />
         <option value="$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/models/Fase.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/models/TipoFase.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/default/register.html" />
@@ -193,11 +205,12 @@
         <option value="$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/controllers/admin/FaseControllerEdit.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/controllers/admin/CustomController.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/controllers/admin/FaseController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/controllers/admin/ConferenciaController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/restrito/admin/conferencia.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/restrito/admin/fases-conferencia.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/restrito/admin/sessoes-conferencia.html" />
         <option value="$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/controllers/admin/SessaoController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/controllers/admin/ConferenciaController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/fragments/header.html" />
       </list>
     </option>
   </component>
@@ -1132,12 +1145,12 @@
       <workItem from="1501816991781" duration="1361000" />
       <workItem from="1501957852696" duration="2956000" />
       <workItem from="1501982115123" duration="20480000" />
-      <workItem from="1502333547617" duration="5754000" />
+      <workItem from="1502333547617" duration="6237000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="193979000" />
+    <option name="totallyTimeSpent" value="194462000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1319,25 +1332,25 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/controllers/admin/ConferenciaController.java</url>
-          <line>200</line>
+          <line>205</line>
           <properties />
           <option name="timeStamp" value="67" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/controllers/admin/ConferenciaController.java</url>
-          <line>199</line>
+          <line>204</line>
           <properties />
           <option name="timeStamp" value="68" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/controllers/admin/ConferenciaController.java</url>
-          <line>203</line>
+          <line>208</line>
           <properties />
           <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/controllers/admin/ConferenciaController.java</url>
-          <line>204</line>
+          <line>209</line>
           <properties />
           <option name="timeStamp" value="70" />
         </line-breakpoint>
@@ -1553,13 +1566,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/fragments/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/controllers/admin/ConferenciaConsultaController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -1688,14 +1694,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/controllers/admin/CustomController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/controllers/admin/FaseControllerEdit.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="74">
@@ -1703,30 +1701,6 @@
           <folding>
             <element signature="imports" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/controllers/admin/ConferenciaController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="204" column="0" lean-forward="false" selection-start-line="204" selection-start-column="0" selection-end-line="204" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/controllers/admin/FaseController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/restrito/admin/conferencia.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="240" column="66" lean-forward="false" selection-start-line="240" selection-start-column="66" selection-end-line="240" selection-end-column="66" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1755,6 +1729,48 @@
         <state relative-caret-position="91">
           <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/controllers/admin/CustomController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/controllers/admin/ConferenciaController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="209" column="0" lean-forward="false" selection-start-line="209" selection-start-column="0" selection-end-line="209" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/gov/ufms/SGCteam04/controllers/admin/FaseController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="101" column="0" lean-forward="false" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/restrito/admin/conferencia.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="240" column="66" lean-forward="false" selection-start-line="240" selection-start-column="66" selection-end-line="240" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/fragments/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="26" column="36" lean-forward="false" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#md-menu#0;n#md-sidenav#0;n#header#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
