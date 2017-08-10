@@ -82,6 +82,7 @@ public class SessaoController {
         }
         else
         {
+            model.addAttribute("sessao",null);
             Set<Sessao> sessoes = conferencia.getSessaoArrayList();
             model.addAttribute("sessoes",sessoes);
             model.addAttribute("obj",conferencia);

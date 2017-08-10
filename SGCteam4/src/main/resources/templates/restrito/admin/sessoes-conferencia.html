@@ -52,7 +52,7 @@
                         <p th:text="${sessao.fim}"></p>
                     </td>
                     <td>
-                        <form th:method="get" th:action="@{/admin/sessao/edit}">
+                        <form target="_blank" th:method="get" th:action="@{/admin/sessao/edit}">
                             <input type="hidden" th:value="${sessao.id}" name="id"/>
                             <input type="hidden" th:value="${obj.id}" name="conferencia_id"/>
                             <button type="submit" class="btn btn-info">Editar</button>
@@ -138,18 +138,10 @@
 
         </form>
 
-        <div th:if="${adc == null}">
-            <form style="margin-top: 20px" type="get" th:action="@{/admin/conferencia/editar}" >
-                <input type="hidden" th:value="${obj.id}" name="filterid"/>
-                <button type="submit" class="btn btn-danger" >Cancelar</button>
-            </form>
-        </div>
-        <div th:if="${adc != null}">
-            <a th:href="@{/admin/conferencia-consulta}" >
-                <button style="margin-top: 20px"
-                        class="btn btn-success">Finalizar</button>
-            </a>
-        </div>
+        <form style="margin-top: 20px" type="get" th:action="@{/admin/conferencia/editar}" >
+            <input type="hidden" th:value="${obj.id}" name="filterid"/>
+            <button type="submit" class="btn btn-danger" >Visualizar conferencia</button>
+        </form>
 
 
 
