@@ -178,6 +178,27 @@
 				<p></p>
 				
 			    <div class="row">
+					<div class="col-sm-6 col-xs-6 col-md-6" style="background-color:lavender;">
+						<b></b>
+				        <h4>Comites da Conferência</h4>
+						<b></b>
+						<table class="table table-hover table-bordered">
+							<tbody>
+								<tr th:each="objPgFor, stat: ${listPgObjs}">
+									<td>
+								         <!--  -->
+								         <input type="checkbox"
+								                th:name="|checklistpg${stat.index}|"
+								                th:value="${objPgFor.id}"
+								                th:checked="${objPgFor.selected}"/>
+								         <span th:text="${objPgFor.descricao}"></span> 
+	    						     </td>
+								</tr>
+							</tbody>
+						</table>
+						<b></b>
+						<p></p>
+					</div>
 				    <div class="col-sm-6 col-xs-6 col-md-6" style="background-color:lavender;">
 						<b></b>
 				        <h4>Opções de Pagamento</h4>
@@ -296,10 +317,11 @@
 				
 				<button	type="submit" class="btn btn-info"  name="buttoncommand" id="buttoncommand" value="conferencia">Atualizar</button>
 
-				<button  type="submit" class="btn btn-info" name="buttoncommand" id="buttoncommand" value="fase">Adicionar fases</button>
+				<button  type="submit" class="btn btn-info" name="buttoncommand" id="buttoncommand" value="fase">Adicionar Fases</button>
 				
-				<button  type="submit" class="btn btn-info" name="buttoncommand" id="buttoncommand" value="sessao">Adicionar sessões</button>
+				<button  type="submit" class="btn btn-info" name="buttoncommand" id="buttoncommand" value="sessao">Adicionar Sessões</button>
 				
+				<button  type="submit" class="btn btn-info" name="buttoncommand" id="buttoncommand" value="comite">Adicionar Comitê</button>
 		    </form>
 		</div>
 	</div>

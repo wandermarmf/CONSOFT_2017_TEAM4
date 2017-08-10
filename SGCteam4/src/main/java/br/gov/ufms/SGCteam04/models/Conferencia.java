@@ -57,20 +57,12 @@ public class Conferencia {
 	@ManyToMany(cascade = CascadeType.REMOVE)
 	@JoinTable(name = "conferencia_topico", joinColumns = @JoinColumn(name = "conferencia_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "topico_id", referencedColumnName = "id"))
 	private List<Topico> topicoList = new ArrayList<Topico>();
-
+	
+	@OneToMany(mappedBy = "conferencia", cascade = CascadeType.ALL)
+	private List<ConferenciaComite> comiteList;
 
 	@OneToOne
 	private Usuario administrador;
-
-/*
-@ManyToMany
-private ArrayList<Topico> topicoArrayList;
-*/
-
-/*
-@ManyToMany
-
-*/
 
 	//TODO criar entidade e repositorio da sessao completed
 	@OneToMany(mappedBy = "conferencia", fetch = FetchType.LAZY)
@@ -81,44 +73,6 @@ private ArrayList<Topico> topicoArrayList;
 	//TODO criar entidade e repositorio da fase da conferencia completed
 	@OneToMany(mappedBy = "conferencia", fetch = FetchType.LAZY)
 	private Set<Fase> conferenciaFaseArrayList = new HashSet<Fase>();
-
-
-/*
-TODO criar entidade e repositorio do evento/produto da conferencia
-@OneToMany
-private ArrayList<ConferenciaEventoProduto> conferenciaEventoProdutoArrayList;
-*/
-
-/*
-TODO criar entidade e repositorio do intervalo desconto da conferencia
-@OneTo?????
-private ArrayList<IntervaloDescontoConferencia> ...
-*/
-
-/*
-TODO criar entidade e repositorio da inscricao
-@OneToMany
-private ArrayList<Inscricao> inscricaoArrayList;
-*/
-
-/*
-TODO criar entidade e repositorio do coordenador
-@OneTo????
-private ....
-*/
-
-/*
-@ManyToMany
-private ArrayList<TipoSubmissao> tipoSubmissaoArrayList;
-
-/*
-TODO criar entidade e repositorio do perfil
-@ManyToMany
-private ArrayList<Perfil> perfilArrayList;
-*/
-
-
-
 
 	public Usuario getAdministrador() {
 		return administrador;
@@ -265,6 +219,13 @@ private ArrayList<Perfil> perfilArrayList;
 		this.topicoList = grupotopicoList;
 	}
 	
+	public List<ConferenciaComite> getComiteList() {
+		return comiteList;
+	}
+
+	public void setComiteList(List<ConferenciaComite> comiteList) {
+		this.comiteList = comiteList;
+	}
 	
 	public void addTipoArquivo(Iterable<TipoArquivo> listArqObjs, String paramValue) {
 
@@ -330,6 +291,23 @@ private ArrayList<Perfil> perfilArrayList;
 			}
 		}
 	}
+	
+	
+	public void addComite(Iterable<ConferenciaComite> listObjs, String paramValue) {
+
+		if (paramValue.equals("") == true)
+			return;
+
+		for (ConferenciaComite obj : listObjs) {
+			if (obj.getId().toString().equals(paramValue)) {
+				comiteList.add(obj);
+				return;
+			}
+		}
+	}
+	
+	
+	
 
 	
 
